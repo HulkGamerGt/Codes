@@ -100,6 +100,20 @@ int suma_diagonales(int matriz[][N], int n){
     return 1;
 }
 
+void resultado(int matriz[][N], int n, int status){
+    if (status == 1){
+        printf("La matriz es un cuadrado magico:\n");
+        for (int i = 0; i < n; i++){
+            for (int j = 0; j < n; j++){
+                printf("%3d ", matriz[i][j]);
+            }
+            printf("\n");
+        }
+    }
+    else{
+        printf("La matriz no es un cuadrado magico.\n");
+    }
+}
 /* 4 9 2
    3 5 7
    8 1 6 
