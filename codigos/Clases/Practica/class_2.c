@@ -4,7 +4,7 @@
 int pregunta(char *);
 void Frecuencia(char *, int);
 
-int main(){//
+int main(){
     int Longitud;
     char texto[2000];
     Longitud = pregunta(texto);
