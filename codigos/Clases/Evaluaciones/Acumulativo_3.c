@@ -7,10 +7,12 @@ Tema:
 
 #define cant 10
 
+/* Prototipos de funciones */
 void Ordenar(int matriz[][cant], int Filas);
 void Intercambio(int *v1, int *v2);
 void Mostrar(int matriz[][cant], int Filas);
 
+/* Función principal */
 int main() {
     int Matriz[cant][cant] = {
         {64, 12, 95, 38, 71, 4, 27, 83, 56, 19},
@@ -30,6 +32,7 @@ int main() {
     return 0;
 }
 
+/* Función para ordenar la matriz */
 void Ordenar(int matriz[][cant], int Filas) {
     int a, b, c;
 
@@ -54,6 +57,7 @@ void Intercambio(int *v1, int *v2) {
     *v2 = temp;
 }
 
+/* Función para mostrar la matriz */
 void Mostrar(int matriz[][cant], int Filas) {
     int i, j;
     /* Impresión de la matriz */
