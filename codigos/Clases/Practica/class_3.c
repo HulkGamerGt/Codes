@@ -105,7 +105,7 @@ void proceso(int matriz[][N], int n, int *status){
 void resultado(int matriz[][N], int n, int status){
     int i, j;
     if (status == 1){
-        printf("La matriz es un cuadrado magico:\n");
+        printf("Esta matriz es un cuadrado magico:\n");
         for (i = 0; i < n; i++){
             for (j = 0; j < n; j++){
                 printf("%3d ", matriz[i][j]);
