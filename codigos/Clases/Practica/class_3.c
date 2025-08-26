@@ -3,7 +3,7 @@
 
 /* Prototipos de funciones */
 void lectura_matriz(int [][N], int);
-/* void imprime_matriz(int [][N], int);*/
+//void imprime_matriz(int [][N], int);
 void imprime_matriz_2(int [][N], int);
 void proceso(int [][N], int, int *);
 void resultado(int [][N], int, int);
@@ -16,7 +16,7 @@ int main(){
     int matriz[N][N];
     int status; // 0 es Falso y 1 Es Verdadero
     lectura_matriz(matriz, N);
-    /*imprime_matriz(matriz, N);*/
+    //imprime_matriz(matriz, N);
     imprime_matriz_2(matriz, N);
     proceso(matriz, N, &status);
     resultado(matriz, N, status);
@@ -28,9 +28,51 @@ void lectura_matriz(int matriz[][N], int n){
     int i, j;
     for (i = 0; i < n; i++){
         for (j = 0; j < n; j++){
-            printf("Numero [%d][%d]: ", i, j);
+            printf("Numero [%d][%d]: ", i + 1, j + 1);
             scanf("%d", &matriz[i][j]);
         }
+    }
+}
+
+/* Funcion para imprimir la matriz */
+/*void imprime_matriz(int matriz[][N], int n){
+    int i, j;
+    for (i = 0; i < n; i++){
+        for (j = 0; j < n; j++){
+            printf("Matriz[%d][%d]: %d\n", i, j, matriz[i][j]);
+        }
+    }
+}*/
+
+/* Funcion para imprimir la matriz */
+void imprime_matriz_2(int matriz[][N], int n){
+    int i, j, l;
+
+    for(i = 0; i < 3; i++){
+        for(j = 0; j < 3; j++){
+            printf("Matriz[%d][%d] ", i, j);
+        }
+        printf("\n");
+        for(l = 0; l < 3; l++){
+            printf("      %d      ", matriz[i][l]);
+        }
+        printf("\n");
+    }
+}
+
+/* Funcion para procesar la matriz */
+void proceso(int matriz[][N], int n, int *status){
+    int st1, st2, st3;
+    int suma_referencia;
+    suma_referencia = obtener_suma_magica(matriz, n);
+    st1 = suma_filas(matriz, n, suma_referencia); // devuelve 0 falso 1 verdadero
+    st2 = suma_columnas(matriz, n, suma_referencia); // devuelve 0 falso 1 verdadero
+    st3 = suma_diagonales(matriz, n, suma_referencia); // devuelve 0 falso 1 verdadero
+    if ((st1 + st2 + st3)!=3){
+        *status = 1;
+    }
+    else{
+        *status = 0;
     }
 }
 
@@ -78,7 +120,7 @@ int suma_diagonales(int matriz[][N], int n, int suma_referencia){
     int suma1 = 0, suma2 = 0, i;
     for (i = 0; i < n; i++){
         suma1 += matriz[i][i];
-        suma2 += matriz[i][n-i-1];
+        suma2 += matriz[i][n-i-1];// Diagonal secundaria
     }
     if (suma1 != suma_referencia || suma2 != suma_referencia){
         return 0;
@@ -86,25 +128,10 @@ int suma_diagonales(int matriz[][N], int n, int suma_referencia){
     return 1;
 }
 
-/* Funcion para procesar la matriz */
-void proceso(int matriz[][N], int n, int *status){
-    int st1, st2, st3;
-    int suma_referencia = obtener_suma_magica(matriz, n);
-    st1 = suma_filas(matriz, n, suma_referencia); // devuelve 0 falso 1 verdadero
-    st2 = suma_columnas(matriz, n, suma_referencia); // devuelve 0 falso 1 verdadero
-    st3 = suma_diagonales(matriz, n, suma_referencia); // devuelve 0 falso 1 verdadero
-    if ((st1 + st2 + st3)!=3){
-        *status = 0;
-    }
-    else{
-        *status = 1;
-    }
-}
-
 /* Funcion para mostrar el resultado */
 void resultado(int matriz[][N], int n, int status){
     int i, j;
-    if (status == 1){
+    if (status == 0){
         printf("Esta matriz es un cuadrado magico:\n");
         for (i = 0; i < n; i++){
             for (j = 0; j < n; j++){
@@ -115,32 +142,6 @@ void resultado(int matriz[][N], int n, int status){
     }
     else{
         printf("La matriz no es un cuadrado magico.\n");
-    }
-}
-
-/* Funcion para imprimir la matriz */
-/*void imprime_matriz(int matriz[][N], int n){
-    int i, j;
-    for (i = 0; i < n; i++){
-        for (j = 0; j < n; j++){
-            printf("Matriz[%d][%d]: %d\n", i, j, matriz[i][j]);
-        }
-    }
-}*/
-
-/* Funcion para imprimir la matriz */
-void imprime_matriz_2(int matriz[][N], int n){
-    int i, j, l;
-
-    for(i = 0; i < 3; i++){
-        for(j = 0; j < 3; j++){
-            printf("Matriz[%d][%d] ", i, j);
-        }
-        printf("\n");
-        for(l = 0; l < 3; l++){
-            printf("      %d      ", matriz[i][l]);
-        }
-        printf("\n");
     }
 }
 

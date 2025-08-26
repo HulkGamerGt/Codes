@@ -79,9 +79,9 @@ void lee_original(char *original, int *N) {
 }
 
 void graba_mensaje(char *codificado) {
-    FILE *file = fopen("codiff35.txt", "w");
+    FILE *file = fopen("codificado.txt", "w");
     if (!file) {
-        printf("Error al abrir codiff35.txt\n");
+        printf("Error al abrir codificado.txt\n");
         return;
     }
     int N;

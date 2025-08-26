@@ -57,9 +57,9 @@ void decodificar(char *codificado, char *decodificado, char *alfabeto, int N) {
 }
 
 void lee_codificado(char *codificado, int *N) {
-    FILE *file = fopen("codiff35.txt", "r");
+    FILE *file = fopen("codificado.txt", "r");
     if (!file) {
-        printf("Error al abrir codiff35.txt\n");
+        printf("Error al abrir codificado.txt\n");
         return;
     }
     char line[MAX_MSG];
