@@ -16,7 +16,7 @@ char buscar_caracter_por_posicion(int, char *);
 /* Prototipos para Decodificación */
 void decodificar(char *, char *, char *);
 void primera_etapa_decodificar(char *, char *, char *, int);
-void segunda_etapa_decodificar(char *, char *, char *, int);
+void segunda_etapa_decodificar(char *, char *, char *, int);//
 
 /* --- Función Principal --- */
 int main() {
