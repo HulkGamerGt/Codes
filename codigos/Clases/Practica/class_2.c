@@ -32,5 +32,5 @@ void Frecuencia(char *texto, int Longitud){
             j++;
         }
     }
-    printf("En el texto %c, la letra %c aparece %d veces.\n", texto[0], caracter, j);
+    printf("En el texto, la letra %c aparece %d veces.\n", caracter, j);
 }

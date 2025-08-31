@@ -17,7 +17,7 @@ int main() {
     scanf("%d", &arreglo);
     int numeros[arreglo];
     for (i = 0; i < arreglo; i++) {
-        printf("Ingrese un numero: ");
+        printf("Ingrese un numero %d: ", i + 1);
         scanf("%d", &numeros[i]);
     }
     int mayor = encontrarMayor(numeros, arreglo);
