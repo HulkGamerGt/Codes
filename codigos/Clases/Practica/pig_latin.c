@@ -28,7 +28,7 @@ int main() {
 
 // Inicializa el array con ceros para asegurar que no haya basura.
 void inicializacion(char pig[]) {
-    memset(pig, 0, TAM);
+    memset(pig, 0, TAM); // Llena el array con ceros
 }
 
 // Solicita al usuario que ingrese texto y lo limpia.
@@ -36,11 +36,11 @@ void obtener_texto(char pig[]) {
     int tamano;
 
     printf("Ingrese su texto: ");
-    fgets(pig, TAM, stdin);
-    
+    fgets(pig, TAM, stdin); // Lee el texto ingresado por el usuario
+
     // Elimina el salto de línea que agrega fgets
     tamano = strlen(pig);
-    if (pig[tamano - 1] == '\n') {
+    if (pig[tamano - 1] == '\n') { // Elimina el salto de línea
         pig[tamano - 1] = '\0';
     }
 }
@@ -63,7 +63,7 @@ void procesar_texto(char pig[]) {
     finPrimera = 0;
     
     // Encuentra el final de la primera palabra (el primer espacio)
-    for (i = 0; i < tamano; i++) {
+    for (i = 0; i < tamano; i++) { 
         if (pig[i] == ' ') {
             finPrimera = i;
             break;
@@ -88,12 +88,12 @@ void procesar_texto(char pig[]) {
 
     // Copia y procesa la primera palabra
     strncpy(primeraPalabra, pig, finPrimera);
-    primeraPalabra[finPrimera] = '\0';
-    invertir_palabra(primeraPalabra, palabraInvertida, finPrimera);
+    primeraPalabra[finPrimera] = '\0';// Termina la cadena
+    invertir_palabra(primeraPalabra, palabraInvertida, finPrimera);// Invierte la primera palabra
 
     // Copia y procesa la segunda palabra
     strncpy(segundaPalabra, pig + inicioSegunda, finSegunda - inicioSegunda);
-    segundaPalabra[finSegunda - inicioSegunda] = '\0';
+    segundaPalabra[finSegunda - inicioSegunda] = '\0';// Termina la cadena
     modificar_palabra(segundaPalabra, palabraModificada);
     
     // Reconstruye la oración completa
@@ -115,11 +115,12 @@ void invertir_palabra(char original[], char invertida[], int largo) {
 // Mueve el primer carácter de una palabra al final.
 void modificar_palabra(char original[], char modificada[]) {
     char primerChar;
+    int tamanoModificada;
 
     primerChar = original[0];
-    strcpy(modificada, original + 1);
-    
-    int tamanoModificada = strlen(modificada);
+    strcpy(modificada, original + 1);// Copia la parte de la cadena sin el primer carácter
+
+    tamanoModificada = strlen(modificada);
     modificada[tamanoModificada] = primerChar;
     modificada[tamanoModificada + 1] = '\0';
 }
@@ -129,8 +130,8 @@ void reconstruir_oracion(char destino[], char primera[], char segunda[], char re
     strcpy(destino, primera);
     strcat(destino, " ");
     strcat(destino, segunda);
-    
-    if (strlen(resto) > 0) {
+
+    if (strlen(resto) > 0) {// Agrega el resto de la oración si existe
         strcat(destino, resto);
     }
 }
