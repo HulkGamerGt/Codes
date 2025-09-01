@@ -1,8 +1,8 @@
 /*
- * Este programa invierte la primera palabra y mueve el primer
- * carácter de la segunda palabra al final para cada par de palabras
- * de una oración.
- */
+ Este programa invierte la primera palabra y mueve el primer
+ carácter de la segunda palabra al final para cada par de palabras
+ de una oración.
+*/
 
 #include <stdio.h>
 #include <string.h>
