@@ -1,137 +1,140 @@
 /*
-    Invierte la primera palabra y mueve el primer
-    carácter de la segunda palabra al final.
+ Este programa invierte la primera palabra y mueve el primer
+ carácter de la segunda palabra al final para cada par de palabras
+ de una oración.
 */
 
 #include <stdio.h>
-#include <string.h>//hola :)
+#include <string.h>
 
-#define TAM 9999
+#define TAM_MAX 9999
 
 // Prototipos de funciones
-void inicializacion(char []);
-void obtener_texto(char []);
-void procesar_texto(char []);
-void invertir_palabra(char [], char [], int);
-void modificar_palabra(char [], char []);
-void reconstruir_oracion(char [], char [], char [], char []);
+void procesar_oracion(char *oracion);
+void invertir_palabra(char *palabra);
+void modificar_palabra(char *palabra);
+char *obtener_siguiente_palabra(char **str);
 
 int main() {
-    char pig[TAM];
+    char oracion[TAM_MAX];
 
-    inicializacion(pig);
-    obtener_texto(pig);
-    procesar_texto(pig);
+    printf("Ingrese su texto: ");
+    fgets(oracion, TAM_MAX, stdin);
+
+    // Elimina el salto de línea que agrega fgets
+    oracion[strcspn(oracion, "\n")] = '\0';
+
+    procesar_oracion(oracion);
+
+    printf("Texto modificado: %s\n", oracion);
 
     return 0;
 }
 
-// Inicializa el array con ceros para asegurar que no haya basura.
-void inicializacion(char pig[]) {
-    memset(pig, 0, TAM); // Llena el array con ceros
-}
+/*
+ Procesa toda la oracion, modificando cada par de palabras.
+ oracion La oracion a procesar.
+ */
+void procesar_oracion(char *oracion) {
+    char *palabra1, *palabra2;
+    char oracion_temp[TAM_MAX];
+    char *p_original = oracion;
+    char *p_nueva = oracion_temp;
 
-// Solicita al usuario que ingrese texto y lo limpia.
-void obtener_texto(char pig[]) {
-    int tamano;
+    // Copia la oracion a un buffer temporal para manipularla de forma segura
+    strcpy(oracion_temp, oracion);
 
-    printf("Ingrese su texto: ");
-    fgets(pig, TAM, stdin); // Lee el texto ingresado por el usuario
+    while (1) {
+        palabra1 = obtener_siguiente_palabra(&p_original);
+        //if (!palabra1) break; // Fin de la oracion
 
-    // Elimina el salto de línea que agrega fgets
-    tamano = strlen(pig);
-    if (pig[tamano - 1] == '\n') { // Elimina el salto de línea
-        pig[tamano - 1] = '\0';
-    }
-}
+        palabra2 = obtener_siguiente_palabra(&p_original);
 
-// Analiza el texto y coordina las modificaciones.
-void procesar_texto(char pig[]) {
-    int i, j;
-    int inicioPrimera, finPrimera;
-    int inicioSegunda, finSegunda;
-    int tamano;
-    
-    char primeraPalabra[TAM];
-    char palabraInvertida[TAM];
-    char segundaPalabra[TAM];
-    char palabraModificada[TAM];
-    char oracionFinal[TAM];
-    
-    tamano = strlen(pig);
-    inicioPrimera = 0;
-    finPrimera = 0;
-    
-    // Encuentra el final de la primera palabra (el primer espacio)
-    for (i = 0; i < tamano; i++) { 
-        if (pig[i] == ' ') {
-            finPrimera = i;
-            break;
+        // Si se encuentra una segunda palabra, se aplican las modificaciones
+        if (palabra2) {
+            invertir_palabra(palabra1);
+            modificar_palabra(palabra2);
+
+            // Se reescribe la oracion con las palabras modificadas
+            strcpy(p_nueva, palabra1);
+            p_nueva += strlen(palabra1);
+            *p_nueva++ = ' ';
+            strcpy(p_nueva, palabra2);
+            p_nueva += strlen(palabra2);
+            *p_nueva++ = ' ';
+        } else {
+            // Si solo queda una palabra, se copia tal como esta
+            strcpy(p_nueva, palabra1);
+            p_nueva += strlen(palabra1);
+            break; // Fin de la oracion
         }
     }
 
-    // Si no se encuentra un espacio, no hay segunda palabra.
-    if (i == tamano) {
-        printf("El texto no tiene dos palabras: %s\n", pig);
-        return;
-    }
-
-    // Encuentra el inicio y fin de la segunda palabra
-    inicioSegunda = i + 1;
-    finSegunda = tamano;
-    for (j = inicioSegunda; j < tamano; j++) {
-        if (pig[j] == ' ') {
-            finSegunda = j;
-            break;
-        }
-    }
-
-    // Copia y procesa la primera palabra
-    strncpy(primeraPalabra, pig, finPrimera);
-    primeraPalabra[finPrimera] = '\0';// Termina la cadena
-    invertir_palabra(primeraPalabra, palabraInvertida, finPrimera);// Invierte la primera palabra
-
-    // Copia y procesa la segunda palabra
-    strncpy(segundaPalabra, pig + inicioSegunda, finSegunda - inicioSegunda);
-    segundaPalabra[finSegunda - inicioSegunda] = '\0';// Termina la cadena
-    modificar_palabra(segundaPalabra, palabraModificada);
-    
-    // Reconstruye la oración completa
-    reconstruir_oracion(oracionFinal, palabraInvertida, palabraModificada, pig + finSegunda);
-
-    printf("Texto original: %s\n", pig);
-    printf("Texto modificado: %s\n", oracionFinal);
+    *p_nueva = '\0';
+    strcpy(oracion, oracion_temp);
 }
 
-// Invierte una palabra.
-void invertir_palabra(char original[], char invertida[], int largo) {
-    int i;
-    for (i = 0; i < largo; i++) {
-        invertida[i] = original[largo - 1 - i];
+/*
+ Invierte los caracteres de una palabra.
+ palabra La palabra a invertir.
+ */
+void invertir_palabra(char *palabra) {
+    int i, len;
+    char temp;
+
+    len = strlen(palabra);
+    for (i = 0; i < len / 2; i++) {
+        temp = palabra[i];
+        palabra[i] = palabra[len - 1 - i];
+        palabra[len - 1 - i] = temp;
     }
-    invertida[largo] = '\0';
 }
 
-// Mueve el primer carácter de una palabra al final.
-void modificar_palabra(char original[], char modificada[]) {
-    char primerChar;
-    int tamanoModificada;
+/*
+ Mueve el primer caracter de una palabra al final.
+ palabra La palabra a modificar.
+ */
+void modificar_palabra(char *palabra) {
+    int len = strlen(palabra);
+    char primer_caracter;
 
-    primerChar = original[0];
-    strcpy(modificada, original + 1);// Copia la parte de la cadena sin el primer carácter
+    if (len <= 1) return;
 
-    tamanoModificada = strlen(modificada);
-    modificada[tamanoModificada] = primerChar;
-    modificada[tamanoModificada + 1] = '\0';
+    primer_caracter = palabra[0];
+    memmove(palabra, palabra + 1, len - 1);
+    palabra[len - 1] = primer_caracter;
+    palabra[len] = '\0';
 }
 
-// Reconstruye la oración con las palabras modificadas
-void reconstruir_oracion(char destino[], char primera[], char segunda[], char resto[]) {
-    strcpy(destino, primera);
-    strcat(destino, " ");
-    strcat(destino, segunda);
+/*
+   Extrae la siguiente palabra de una cadena, manejando los espacios.
+   str Puntero al puntero de la cadena.
+   Puntero a la siguiente palabra encontrada.
+ */
+char *obtener_siguiente_palabra(char **str) {
+    char *inicio;
 
-    if (strlen(resto) > 0) {// Agrega el resto de la oración si existe
-        strcat(destino, resto);
+    // Avanza el puntero para saltar espacios iniciales
+    while (**str == ' ' && **str != '\0') {
+        (*str)++;
     }
+
+    if (**str == '\0') {
+        return NULL;
+    }
+
+    inicio = *str;
+
+    // Encuentra el final de la palabra (el siguiente espacio o el final de la cadena)
+    while (**str != ' ' && **str != '\0') {
+        (*str)++;
+    }
+
+    // Se "corta" la palabra para tratarla como una cadena separada
+    if (**str != '\0') {
+        **str = '\0';
+        (*str)++;
+    }
+
+    return inicio;
 }
