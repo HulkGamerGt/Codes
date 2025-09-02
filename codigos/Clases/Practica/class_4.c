@@ -1,9 +1,6 @@
 #include<stdio.h>
 #include<string.h>
 
-//mejorar a 2 arregos, uno para letras y otro para la frecuencia
-// o dejarlo en uno bidimensional
-
 void muestra_linea(char []);
 void inicializa(int [], int);
 void muestra_frec(int [], int);
@@ -32,26 +29,39 @@ void inicializa(int frec[], int cant){
 }
 
 void muestra_frec(int frec[], int cant){
-    int new_frec[cant],i;
-    char val_caracter[cant];
+    //int new_frec[cant];
+    int bidi[cant][2];
+    int i;
+    //char val_caracter[cant];
     for (i = 32; i < cant; i++){
         if(frec[i] != 0){
-            new_frec[i] = frec[i];
-            val_caracter[i] = (char)i;
+            /*new_frec[i] = frec[i];
+            val_caracter[i] = (char)i;*/
+            bidi[i][0]=(char)i;
+            bidi[i][1]= frec[i];
+
+            if(bidi[i][1] > 1){
+                printf(" *%c* aparece %d veces en el texto\n", bidi[i][0], bidi[i][1]);
+            }
+            else{
+                printf(" *%c* aparece %d vez en el texto\n", bidi[i][0], bidi[i][1]);
+            }
+            /*
             if(new_frec[i] > 1){
                 printf(" *%c* aparece %d veces en el texto\n", val_caracter[i], new_frec[i]);
             }
             else{
                 printf(" *%c* aparece %d vez en el texto\n", val_caracter[i], new_frec[i]);
-            }
+            }*/
         }
+        //j++;
     }
 }
 
 void analisis(char linea[], int frec[]){
-    int tam;
+    int tam,i;
     tam = strlen(linea);
-    for (int i = 0; i < tam; i++){
+    for (i = 0; i < tam; i++){
         frec[linea[i]] += 1;
     }
 }
