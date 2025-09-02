@@ -7,7 +7,7 @@
 void muestra_linea(char []);
 void inicializa(int [], int);
 void muestra_frec(int [], int);
-void analisis(char [], int [], int);
+void analisis(char [], int []);
 
 int main(){
     char linea[50];
@@ -15,7 +15,7 @@ int main(){
     printf("Texto: ");
     fgets(linea, sizeof(linea), stdin);
     inicializa(frec, 256);
-    analisis(linea, frec, 256);
+    analisis(linea, frec);
     muestra_frec(frec, 256);
     return 0;
 }
@@ -25,16 +25,17 @@ void muestra_linea(char linea[]){
 }
 
 void inicializa(int frec[], int cant){
-    for (int i = 0; i < cant; i++){
+    int i;
+    for (i = 0; i < cant; i++){
         frec[i] = 0;
     }
 }
 
 void muestra_frec(int frec[], int cant){
-    int new_frec[cant];
+    int new_frec[cant],i;
     char val_caracter[cant];
-    for (int i = 0; i < cant; i++){
-        if(frec[i] != 0 && i > 31){
+    for (i = 32; i < cant; i++){
+        if(frec[i] != 0){
             new_frec[i] = frec[i];
             val_caracter[i] = (char)i;
             if(new_frec[i] > 1){
@@ -47,7 +48,7 @@ void muestra_frec(int frec[], int cant){
     }
 }
 
-void analisis(char linea[], int frec[], int cant){
+void analisis(char linea[], int frec[]){
     int tam;
     tam = strlen(linea);
     for (int i = 0; i < tam; i++){
