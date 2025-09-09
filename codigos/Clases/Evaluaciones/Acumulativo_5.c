@@ -1,44 +1,46 @@
 /*
  * Identificación del autor: Diego Solis Rojas
  * Fecha: 01 / 09 / 2025
- * Tema: Búsqueda de palabras en una matriz (sopa de letras) con lógica corregida.
- */
-
+ * Tema: Escanea un archivo llamado "Matrix.txt" en el cual contiene una sopa de letras, siendo 
+ * asi que se busca palabras en dicha sopa y la salida se muestra en un archivo de texto llamado "Salida.txt".
+*/
+ 
 #include <stdio.h>
 #include <string.h>
 
 #define FIL_COL 5
 
 /* Declarar prototipos de funciones */
+void procesar_archivo(FILE *);
 void buscar_palabras(char matriz[FIL_COL][FIL_COL], char *palabras[], int num_palabras);
 int buscar_direccion(char matriz[FIL_COL][FIL_COL], int fila, int col, char *palabra);
 void mostrar_coordenadas(char *palabra, int fila_inicio, int col_inicio, int dir_fila, int dir_col);
 
 int main() {
-    char matriz[FIL_COL][FIL_COL] = {
-        {'C', 'R', 'O', 'N', 'O'},
-        {'A', 'A', 'S', 'O', 'L'},
-        {'S', 'T', 'L', 'T', 'A'},
-        {'A', 'O', 'L', 'A', 'R'},
-        {'S', 'S', 'E', 'R', 'S'}
-    };
-    char *palabras[] = {"CASA", "RATOS", "CALAS", "LOSA", "RATON", "SOLO", "SALA"};
-    
-    int num_palabras = sizeof(palabras) / sizeof(palabras[0]); // Calcula el número de palabras
+    FILE *archivo;
+    archivo = fopen("Matrix.txt","r");
+    if (archivo == NULL) {
+        printf("Error al abrir el archivo.\n");
+        return 1;
+    }
+    procesar_archivo(archivo);
+    fclose(archivo);
+    return 0;
+}
 
-    // Muestra la matriz
-    printf("Matriz de letras:\n");
+void procesar_archivo(FILE *archivo) {
+    char *palabras[] = {"CASA", "RATOS", "CALAS", "LOSA", "RATON", "SOLO", "SALA"};
+    char matriz[FIL_COL][FIL_COL];
+
     for (int i = 0; i < FIL_COL; i++) {
         for (int j = 0; j < FIL_COL; j++) {
-            printf("%c  ", matriz[i][j]);
+            fscanf(archivo, " %c", &matriz[i][j]);// Lee cada carácter, ignorando espacios
         }
-        printf("\n");
     }
-    printf("\n");
-
-    buscar_palabras(matriz, palabras, num_palabras);
+    int num_palabras = sizeof(palabras) / sizeof(palabras[0]); // Calcula el número de palabras
     
-    return 0;
+    buscar_palabras(matriz, palabras, num_palabras);
+    fclose(archivo);
 }
 
 // Lógica de búsqueda principal. Itera a través de cada palabra y cada celda de la matriz.
@@ -100,13 +102,38 @@ int buscar_direccion(char matriz[FIL_COL][FIL_COL], int fila, int col, char *pal
 
 // Función que muestra las coordenadas de una palabra.
 void mostrar_coordenadas(char *palabra, int fila_inicio, int col_inicio, int dir_fila, int dir_col) {
-    printf("Palabra encontrada: %s\n", palabra);
+    FILE *Salida;
+    Salida = fopen("Salida.txt","a");
+    if (Salida == NULL) {
+        printf("Error al abrir el archivo de salida.\n");
+        return;
+    }
+    fprintf(Salida, "Palabra encontrada: %s\n", palabra);
     int longitud = strlen(palabra);
     
     for (int i = 0; i < longitud; i++) {
         int fila = fila_inicio + i * dir_fila;
         int col = col_inicio + i * dir_col;
-        printf("%c = (%d, %d) ", palabra[i], fila, col);
+        fprintf(Salida, "%c = (%d, %d) ", palabra[i], fila, col);
     }
-    printf("\n\n");
+    fprintf(Salida, "\n\n");
+    fclose(Salida);
 }
+/*
+    for(int i=0;imput[i]!=\0;i++){
+        if(imput[i] != ' '){
+            output[j++]=imput[i];  
+        }
+    }
+*/
+    /*Muestra la matriz
+    printf("Matriz de letras:\n");
+    for (int i = 0; i < FIL_COL; i++) {
+        for (int j = 0; j < FIL_COL; j++) {
+            fprintf(archivo, "%c  ", matriz[i][j]);
+        }
+        fprintf(archivo, "\n");
+    }
+    fprintf(archivo, "\n");*/
+
+    
