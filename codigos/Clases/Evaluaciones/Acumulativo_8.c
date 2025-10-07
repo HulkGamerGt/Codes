@@ -66,8 +66,8 @@ int Es_Movimiento_Valido(int fila, int columna) {
 
 int Calcular_(int fila, int columna, char Laberinto[FILAS][COLUMNAS]) {
     // Arreglos que definen los 4 movimientos posibles (Abajo, Arriba, Derecha, Izquierda).
-    const int MOV_FILA[] = {1, -1, 0, 0};
-    const int MOV_COLUMNA[] = {0, 0, 1, -1};
+    const int MOV_FILA[] =    {0, 1, 0, -1};
+    const int MOV_COLUMNA[] = {1, 0, -1, 0};
     const int NUM_MOVIMIENTOS = 4;
     int nueva_fila, nueva_columna;
     int i;

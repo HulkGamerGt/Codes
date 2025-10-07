@@ -369,3 +369,11 @@ public:
 
 #endif /* !FENSTER_HEADER */
 #endif /* FENSTER_H */
+/*
+# Linux
+cc main.c -lX11 -lasound -o main && ./main
+# macOS
+cc main.c -framework Cocoa -framework AudioToolbox -o main && ./main
+# windows
+cc main.c -lgdi32 -lwinmm -o main.exe && main.exe
+*/

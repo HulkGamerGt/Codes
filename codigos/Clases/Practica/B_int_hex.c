@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio.h>// entero a hexadecimal %X
 #include <string.h>
 
 #define MAX_LONGITUD 32

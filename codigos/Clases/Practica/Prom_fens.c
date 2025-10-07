@@ -20,6 +20,7 @@ int main(){
     char *nombre;
     IMAGEN original;
     int i, j;
+    unsigned int gray;
     lectura_imagen("Cartagena_nega_ch.pgm", &original);
     uint32_t buf[original.ancho * original.alto];
     struct fenster f = { .title = "Mas clara", .width = original.ancho, .height = original.alto, .buf = buf };
@@ -29,7 +30,8 @@ int main(){
     while (fenster_loop(&f) == 0) {
         for (int i = 0; i < original.alto; i++){
             for (int j = 0; j < original.ancho; j++){
-                unsigned int gray = original.pixeles[i][j];
+                //unsigned int gray = original.pixeles[i][j];
+                gray= original.pixeles[i][j];
                 fenster_pixel(&f, j, i) = (gray << 16) | (gray << 8) | gray;
             }
         }  
