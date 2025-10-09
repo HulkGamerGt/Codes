@@ -1,15 +1,15 @@
 #ifndef FENSTER_H
 #define FENSTER_H
-
+/*
 #ifndef _WIN32
 #define _WIN32
-#endif
+#endif*/
 
 #if defined(__APPLE__)
 #include <CoreGraphics/CoreGraphics.h>
 #include <objc/NSObjCRuntime.h>
 #include <objc/objc-runtime.h>
-#elif defined(_WIN32)
+#elif defined(_WIN64)
 #include <windows.h>
 #else
 #define _DEFAULT_SOURCE 1
@@ -34,7 +34,7 @@ struct fenster {
   int mouse;
 #if defined(__APPLE__)
   id wnd;
-#elif defined(_WIN32)
+#elif defined(_WIN64)
   HWND hwnd;
 #else
   Display *dpy;
@@ -168,7 +168,7 @@ FENSTER_API int fenster_loop(struct fenster *f) {
   msg1(void, NSApp, "sendEvent:", id, ev);
   return 0;
 }
-#elif defined(_WIN32)
+#elif defined(_WIN64)
 // clang-format off
 static const uint8_t FENSTER_KEYCODES[] = {0,27,49,50,51,52,53,54,55,56,57,48,45,61,8,9,81,87,69,82,84,89,85,73,79,80,91,93,10,0,65,83,68,70,71,72,74,75,76,59,39,96,0,92,90,88,67,86,66,78,77,44,46,47,0,0,0,32,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,17,3,0,20,0,19,0,5,18,4,26,127};
 // clang-format on
@@ -314,7 +314,7 @@ FENSTER_API int fenster_loop(struct fenster *f) {
 }
 #endif
 
-#ifdef _WIN32
+#ifdef _WIN64
 FENSTER_API void fenster_sleep(int64_t ms) { Sleep(ms); }
 FENSTER_API int64_t fenster_time() {
   LARGE_INTEGER freq, count;

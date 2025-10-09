@@ -1,4 +1,5 @@
 // main.c
+#include <stdio.h>
 #include "fenster.h"
 #define W 640
 #define H 480
@@ -17,5 +18,6 @@ int main() {
   fenster_close(&f);
   return 0;
 }
+// Windows cc Prog_01.c -lgdi32 -lwinmm -o Prog_01.exe && Prog_01.exe
 
-// cc prog_01.c -framework Cocoa -framework AudioToolbox -o prog_01.hac && ./prog_01.hac
+// MAC cc prog_01.c -framework Cocoa -framework AudioToolbox -o prog_01.hac && ./prog_01.hac
