@@ -76,3 +76,8 @@ void n_queens_main() {
         printf("\nBusqueda finalizada. Total de soluciones encontradas: %d\n", solution_count);
     }
 }
+
+int main(){
+
+    return
+}

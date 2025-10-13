@@ -2,7 +2,7 @@
 #include <string.h>
 
 void invertir_cadena(char *cadena);
-void mostrar_longitud_cadena(char *cadena); //como estas?
+void mostrar_longitud_cadena(char *cadena); 
 int es_polindromo(char *cadena);
 void limpiar_buffer();
 
