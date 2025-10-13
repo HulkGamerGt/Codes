@@ -373,6 +373,7 @@ public:
 
 #endif /* !FENSTER_HEADER */
 #endif /* FENSTER_H */
+
 /*
 # Linux
 cc main.c -lX11 -lasound -o main && ./main
