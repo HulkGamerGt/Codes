@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#define 
+//#define 
 
 char leer_archivo(int , char *);
 
@@ -17,7 +17,9 @@ char leer_archivo(int n, char *genoma){
         printf("Error al abrir el archivo");
     }
 
-    if(fgets(,,))
+    if(fgets(,,)){
+        
+    }
     fclose(archivo);
     return ;
 }
