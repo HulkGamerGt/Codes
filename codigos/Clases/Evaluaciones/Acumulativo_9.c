@@ -5,21 +5,6 @@
 int solucionesUnicasGuardadas[12][N][N] = {0};
 int contadorSolucionesUnicas = 0;
 
-void imprimirTablero(int tablero[N][N]) {
-    int i, j;
-    for (i = 0; i < N; i++) {
-        for (j = 0; j < N; j++) {
-            if (tablero[i][j] == 1) {
-                printf(" Q ");
-            } else {
-                printf(" - ");
-            }
-        }
-        printf("\n");
-    }
-    printf("\n");
-}
-
 void copiarTablero(int destino[N][N], int origen[N][N]) {
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
@@ -108,25 +93,27 @@ int esSeguro(int tablero[N][N], int fila, int columna) {
     }
 
     return 1;
+    }
+
+
+int resolverNReinas(int tablero[N][N]) {
+    return resolverNReinasUtil(tablero, 0);
 }
 
-int resolverNReinasUtil(int tablero[N][N], int columna) {
-    if (columna >= N) {
-        
-        if (!esSimetrico(tablero) && contadorSolucionesUnicas < 12) {
-            
-            copiarTablero(solucionesUnicasGuardadas[contadorSolucionesUnicas], tablero);
-            printf("----------------------------------------\n");
-            printf("SOLUCION UNICA #%d ENCONTRADA:\n", contadorSolucionesUnicas + 1);
-            imprimirTablero(tablero);
-            contadorSolucionesUnicas++;
-        }
-        
-        return 1;
-    }
-    
-    int soluciones_en_este_nodo = 0;
-    
+int main() {
+    int tablero[N][N] = {0};
+
+    printf("Resolviendo el problema de las %d-Reinas y mostrando SOLO las 12 posibles soluciones unicas...\n\n", N);
+
+    resolverNReinas(tablero);
+
+    printf("========================================\n");
+    printf("RESUMEN:\n");
+    printf("Soluciones unicas (sin simetrias, rotaciones o reflexiones): %d\n", contadorSolucionesUnicas);
+
+    return 0;
+}
+
     for (int fila = 0; fila < N; fila++) {
         if (esSeguro(tablero, fila, columna)) {
             tablero[fila][columna] = 1;
@@ -145,15 +132,9 @@ int resolverNReinas(int tablero[N][N]) {
 }
 
 int main() {
-    int tablero[N][N];
-    
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            tablero[i][j] = 0;
-        }
-    }
-    
-    printf("Resolviendo el problema de las %d-Reinas y mostrando SOLO las 12 soluciones unicas...\n\n", N);
+    int tablero[N][N] = {0};
+
+    printf("Resolviendo el problema de las %d-Reinas y mostrando SOLO las 12 posibles soluciones unicas...\n\n", N);
 
     resolverNReinas(tablero);
 
