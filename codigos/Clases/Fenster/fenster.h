@@ -1,6 +1,10 @@
 #ifndef FENSTER_H
 #define FENSTER_H
 
+#ifndef _WIN32
+#define _WIN32
+#endif
+
 #if defined(__APPLE__)
 #include <CoreGraphics/CoreGraphics.h>
 #include <objc/NSObjCRuntime.h>
@@ -369,6 +373,7 @@ public:
 
 #endif /* !FENSTER_HEADER */
 #endif /* FENSTER_H */
+
 /*
 # Linux
 cc main.c -lX11 -lasound -o main && ./main

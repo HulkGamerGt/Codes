@@ -1,4 +1,5 @@
 #include "fenster.h"
+#include <stdio.h>
 
 #define W 640
 #define H 480
@@ -127,3 +128,4 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine,
 #else
 int main() { return run(); }
 #endif
+//cc Fenster_main.c -lgdi32 -lwinmm -o Fenster_main.exe && Fenster_main.exe

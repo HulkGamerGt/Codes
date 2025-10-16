@@ -80,3 +80,6 @@ void crea_archivo(IMAGEN original){
     }
     fclose(sal);
 }
+
+
+//cc Prom_fens.c -lgdi32 -lwinmm -o Prom_fens.exe && Prom_fens.exe
