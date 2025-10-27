@@ -6,7 +6,6 @@
 */
 #include <stdio.h>
 
-
 /* Definición de constantes y límites para el almacenamiento */
 #define NUM_TRIANGULOS 6
 #define NUM_LADOS 3
