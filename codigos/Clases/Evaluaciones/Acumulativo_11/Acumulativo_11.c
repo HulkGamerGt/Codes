@@ -8,7 +8,7 @@ void leer_datos_puzzle(int [Filas][Columnas]);
 void resolver_puzzle(int [Filas][Columnas], int [Filas][Columnas]);
 void intercambiar(int *, int *);
 void prueba_matriz(int [Filas][Columnas]);
-int buscar_0_yNum(int , int [Filas][Columnas]);
+int buscar_0(int [Filas][Columnas]);
 
 int main(){
     int puzzle[Filas][Columnas];
@@ -40,19 +40,29 @@ void prueba_matriz(int puzzle[3][3]){
 }
 
 void resolver_puzzle(int puzzle[Filas][Columnas], int puzzle_resuelto[Filas][Columnas]){
-    int i,j,k,l,posicion[Filas][Columnas];
+    int i,j,k,l,posicion[Filas][Columnas],ubicacion_0[Filas][Columnas];
     for(i=0;i<Filas;i++){
         for(j=0;j<Columnas;j++){
-            if(puzzle[i][j] != puzzle_resuelto[i][j]){
-                posicion[i][j] = buscar_0_yNum(puzzle[i][j], puzzle_resuelto);
+            if(puzzle[i][j]!= puzzle_resuelto[i][j]){
+                ubicacion_0[i][j] = buscar_0(puzzle[i][j]);
+                //logica();
             }
-
         }
-
     }
 }
 
-int buscar_0_yNum(int posicion, int puzzle_resuelto[Filas][Columnas]){}
+int buscar_0(int puzzle[Filas][Columnas]){
+    int i,j,cero=0;
+    for(i=0 ; i< Filas; i++){
+        for(j=0;j< Columnas;j++){
+            if(puzzle[i][j] == cero ){
+                return puzzle[i][j];
+            }
+        }
+        
+    }
+        
+}
 
 void intercambiar(int *a, int *b){
     int temp;
@@ -60,6 +70,8 @@ void intercambiar(int *a, int *b){
     *a = *b;
     *b = temp;
 }
+
+
 
 /*
     for(i=0;i<Filas;i++){
