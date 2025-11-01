@@ -22,7 +22,7 @@ typedef struct {
     int movimiento_realizado;
     int numero_movido;
     int profundidad_actual;
-} NodoBusqueda;
+} ARBOLBUSQUEDA;
 
 typedef struct {
     int *datos_tableros;
@@ -39,44 +39,39 @@ int calcular_indice_almacenamiento(int indice_estado, int fila, int columna) {
 /* -----------------------------------------------------------------
  * PROTOTIPOS 
  * ----------------------------------------------------------------- */
-void leer_configuracion_puzzle(int configuracion[FILAS][COLUMNAS]);
-int buscar_solucion_iddfs(ESTADOTABLERO estado_inicial, ESTADOTABLERO estado_objetivo, 
-                         ALMCENAMIENTOSOLUCION *almacen_solucion);
-int buscar_profundidad_limitada(ESTADOTABLERO estado_actual, ESTADOTABLERO estado_objetivo, 
-                               int profundidad_actual, int limite_profundidad, 
-                               ALMCENAMIENTOSOLUCION *almacen_solucion, 
-                               int *solucion_encontrada, int *tabla_hash_estados);
-void mostrar_tablero_estado(ESTADOTABLERO tablero); 
-void mostrar_tablero_formateado(int configuracion[FILAS][COLUMNAS]);
+void leer_configuracion_puzzle(int [FILAS][COLUMNAS]);
+int buscar_solucion_iddfs(ESTADOTABLERO estado_inicial, ESTADOTABLERO ,ALMCENAMIENTOSOLUCION *);
+int buscar_profundidad_limitada(ESTADOTABLERO , ESTADOTABLERO , int , int , ALMCENAMIENTOSOLUCION *, int *, int *);
+void mostrar_tablero_estado(ESTADOTABLERO ); 
+void mostrar_tablero_formateado(int [FILAS][COLUMNAS]);
 
 /* UTILIDADES */
-void copiar_estado_tablero(ESTADOTABLERO origen, ESTADOTABLERO *destino);
-int comparar_estados_tablero(ESTADOTABLERO estado1, ESTADOTABLERO estado2);
-void intercambiar_valores(int *valor_a, int *valor_b);
-int encontrar_posicion_vacia(ESTADOTABLERO tablero, POSICION *pos_vacia);
+void copiar_estado_tablero(ESTADOTABLERO , ESTADOTABLERO *);
+int comparar_estados_tablero(ESTADOTABLERO , ESTADOTABLERO );
+void intercambiar_valores(int *, int *);
+int encontrar_posicion_vacia(ESTADOTABLERO , POSICION *);
 
-int realizar_intercambio_horizontal(ESTADOTABLERO *tablero, POSICION pos1, POSICION pos2); 
-int realizar_intercambio_vertical(ESTADOTABLERO *tablero, POSICION pos1, POSICION pos2); 
+int realizar_intercambio_horizontal(ESTADOTABLERO *, POSICION , POSICION ); 
+int realizar_intercambio_vertical(ESTADOTABLERO *, POSICION , POSICION ); 
 
 /* Utilitarios */
-void mostrar_secuencia_solucion(ALMCENAMIENTOSOLUCION *almacen_solucion, int total_pasos);
-void guardar_estado_actual(ALMCENAMIENTOSOLUCION *almacen_solucion, ESTADOTABLERO estado, int indice);
-char* determinar_direccion_movimiento(int direccion_espacio_vacio);
+void mostrar_secuencia_solucion(ALMCENAMIENTOSOLUCION *, int );
+void guardar_estado_actual(ALMCENAMIENTOSOLUCION *, ESTADOTABLERO , int );
+char* determinar_direccion_movimiento(int );
 
 /* Funciones de optimización */
-unsigned long calcular_hash_estado(ESTADOTABLERO estado);
-int verificar_estado_visitado(int *tabla_hash_estados, ESTADOTABLERO estado);
-void marcar_estado_visitado(int *tabla_hash_estados, ESTADOTABLERO estado);
-int calcular_heuristica_manhattan(ESTADOTABLERO estado_actual, ESTADOTABLERO estado_objetivo);
-void ordenar_movimientos_prioridad(int movimientos_posibles[4], ESTADOTABLERO estado_actual, ESTADOTABLERO estado_objetivo);
+unsigned long calcular_hash_estado(ESTADOTABLERO );
+int verificar_estado_visitado(int *, ESTADOTABLERO );
+void marcar_estado_visitado(int *, ESTADOTABLERO );
+int calcular_heuristica_manhattan(ESTADOTABLERO , ESTADOTABLERO );
+void ordenar_movimientos_prioridad(int [4], ESTADOTABLERO , ESTADOTABLERO );
 
 /* Direcciones de movimiento DEL ESPACIO VACIO */
 int desplazamiento_fila[] = {-1, 1, 0, 0}; 
 int desplazamiento_columna[] = {0, 0, -1, 1};
 char *nombres_direcciones[] = {"ARRIBA", "ABAJO", "IZQUIERDA", "DERECHA"};
 
-int main()
-{
+int main(){
     ESTADOTABLERO estado_inicial;
     ESTADOTABLERO estado_objetivo = {
         {{1,2,3},
