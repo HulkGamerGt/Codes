@@ -181,7 +181,11 @@ void resolver_puzzle(int inicial[FILAS][COLUMNAS], int objetivo[FILAS][COLUMNAS]
                     imprimir_solucion_array(cola_tableros, cola_padres, cola_movimientos, final);
                 }
                 // LIBERACIÓN DE MEMORIA
-                free(cola_tableros); free(cola_padres); free(cola_movimientos); free(cola_fila_cero); free(cola_col_cero);
+                free(cola_tableros);
+                free(cola_padres);
+                free(cola_movimientos);
+                free(cola_fila_cero);
+                free(cola_col_cero);
                 return;
             }
             
@@ -280,8 +284,9 @@ int ya_visitado_array(int *historia, int tablero[FILAS][COLUMNAS], int estados_g
  * Requisito 2: Lee y valida la entrada (0-8 sin repeticiones).
  */
 void leer_datos_puzzle(int puzzle[FILAS][COLUMNAS]){
-    int i, j, leidos;
+    int i, j, leidos, valor, contador[9] = {0};
     int valido = 0;
+    
     
     while (!valido) {
         printf("Ingrese el puzzle (ej: 1-2-3-4-5-6-7-8-0): ");
@@ -295,13 +300,12 @@ void leer_datos_puzzle(int puzzle[FILAS][COLUMNAS]){
             printf("ERROR: Formato incorrecto o incompleto. Intente de nuevo.\n");
             while (getchar() != '\n'); continue; 
         }
-
-        int contador[9] = {0};
+        for(i=0;i<9;i++) contador[i]=0; // Reiniciar contador
         valido = 1;
 
         for(i = 0; i < FILAS; i++) {
             for(j = 0; j < COLUMNAS; j++) {
-                int valor = puzzle[i][j];
+                valor = puzzle[i][j];
                 
                 if (valor < 0 || valor > 8) {
                     printf("ERROR: El valor %d está fuera del rango [0-8]. Intente de nuevo.\n", valor);
