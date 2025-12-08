@@ -6,7 +6,7 @@
 
 #define FILAS 3 
 #define COLUMNAS 3
-#define MAX_ESTADOS 950000 
+#define MAX_ESTADOS 950000 // Límite máximo de estados a generar
 
 /* FUNCIÓN DE INDEXACIÓN 1D (Reemplaza la macro) */
 // Calcula la posición exacta en el puntero 1D
