@@ -1,6 +1,4 @@
-
 #include <stdio.h>
-
 
 int main() {
     double num;             // Número al que calcular la raíz cuadrada

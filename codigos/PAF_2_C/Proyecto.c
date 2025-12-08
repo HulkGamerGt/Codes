@@ -26,7 +26,7 @@ typedef struct {
 typedef struct {
     TRIANGULO triangulos[NUM_TRIANGULOS];
     int puntuacion_maxima_encontrada; 
-    int lado_valido;
+    int lado_valido; /* Indicador de validez de los lados de los triángulos */
 } CASOPRUEBA;
 
 
@@ -35,8 +35,8 @@ typedef struct {
 int leer_datos_de_entrada(CASOPRUEBA *, int *); /* Lee los datos de entrada estándar */
 void calcular_y_almacenar_resultado(CASOPRUEBA *); /* Calcula y almacena el resultado para un caso de prueba */
 
-void rotar_triangulo(const TRIANGULO , int , TRIANGULO* );/* Recibe la estructura de triangulo para asi poder girarlo*/
-void buscar_max_puntuacion(int , const TRIANGULO *, TRIANGULO *, int *, int *);/* Busca formar el triangulo más alto posible */
+void rotar_triangulo(const TRIANGULO , int , TRIANGULO* ); /* Recibe la estructura de triangulo para asi poder girarlo */
+void buscar_max_puntuacion(int , const TRIANGULO *, TRIANGULO *, int *, int *); /* Busca formar el triangulo más alto posible */
 void imprimir_resultados(const CASOPRUEBA *, int ); /* Imprime los resultados almacenados */
 
 
@@ -67,7 +67,7 @@ int leer_datos_de_entrada(CASOPRUEBA *todos_los_sets, int *num_sets_leidos){
     CASOPRUEBA *set_actual;
 
     sets_leidos_temp = 0;
-
+    
     /* Leer conjuntos de triángulos */
     while(sets_leidos_temp < MAX_NUM_SETS){
         set_actual = &todos_los_sets[sets_leidos_temp];

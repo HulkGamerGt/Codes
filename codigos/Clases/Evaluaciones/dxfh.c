@@ -1,183 +1,186 @@
-/*  Identificación del autor
-    Nombre: Diego Solis Rojas
-    Fecha: 13/10/2025
-    tema: busca las posibles soluciones del problema de las 8 reinas, 12 soluciones encontradas
-*/
-
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
-#define N 8
+#define TAM 36
+#define TOTAL 9999
 
-/*variables globales*/
-int solucionesGuardadas[12][N][N] = {0};
-int contadorUnicas = 0;
+void menu(int *);
+void option(int, const char *[TAM], char [TAM]);
+void mostrar_lista(const char *[TAM], char [TAM]);
+void morse_tex(const char *[TAM], char [TAM]);
+void tex_morse(const char *[TAM], char [TAM]);
+void leer(char *);
 
-void imprimirTablero(int tablero[N][N]) {
-    int i, j;
-    for (i = 0; i < N; i++) {
-        for (j = 0; j < N; j++) {
-            if (tablero[i][j] == 1) {
-                printf(" Q ");
-            } else {
-                printf(" - ");
-            }
-        }
-        printf("\n");
+int main() {
+    int opcion;
+    const char *morse[TAM] = {
+        ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
+        "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-",
+        "..-", "...-", ".--", "-..-", "-.--", "--..", "-----", ".----", "..---",
+        "...--", "....-", ".....", "-....", "--...", "---..", "----."
+    };
+    char letras_morse[TAM] = {
+        'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',
+        'S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'
+    };
+
+    do {
+        menu(&opcion);
+        option(opcion, morse, letras_morse);
+    } while (opcion != 4);
+
+    printf("\nPrograma finalizado.\n");
+    return 0;
+}
+
+void menu(int *opcion) {
+    printf("\n________________________________\n");
+    printf("======= Menu =======\n");
+    printf("________________________________\n");
+    printf("1. Modo Aprendizaje\n");
+    printf("2. Texto a Morse\n");
+    printf("3. Morse a Texto\n");
+    printf("4. Salir\n");
+    printf("Elige una opcion [1-4]: ");
+
+    if (scanf("%d", opcion) != 1) {
+        printf("Error: Entrada invalida.\n");
+        while (getchar() != '\n');
+        *opcion = 0;
+        return;
+    }
+    getchar(); // Limpia el \n del scanf
+}
+
+void option(int opcion, const char *morse[TAM], char letras_morse[TAM]) {
+    switch (opcion) {
+        case 1: mostrar_lista(morse, letras_morse); break;
+        case 2: tex_morse(morse, letras_morse); break;
+        case 3: morse_tex(morse, letras_morse); break;
+        case 4: printf("\nSaliendo del programa...\n"); break;
+        default: printf("Opcion invalida.\n"); break;
+    }
+}
+
+void mostrar_lista(const char *morse[TAM], char letras_morse[TAM]) {
+    printf("\n=== Tabla de Codigo Morse ===\n");
+    for (int i = 0; i < TAM; i++) {
+        printf("%c = %s\n", letras_morse[i], morse[i]);
     }
     printf("\n");
 }
 
-void copiarTablero(int destino[N][N], int origen[N][N]) {
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            destino[i][j] = origen[i][j];
-        }
-    }
-}
+/* =============== TEXTO → MORSE =============== */
+void tex_morse(const char *morse[TAM], char letras_morse[TAM]) {
+    char texto[TOTAL];
+    leer(texto);
+    printf("Traduccion a Morse: ");
 
-void rotar90(int tablero[N][N], int nuevo[N][N]) {
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            nuevo[j][N - 1 - i] = tablero[i][j];
+    int primera_letra = 1;
+    for (int i = 0; texto[i]; i++) {
+        char c = toupper(texto[i]);
+        
+        if (c == ' ') {
+            // Espacio entre palabras - se representa con 3 espacios en morse
+            if (!primera_letra) {
+                printf("  "); // Dos espacios adicionales (total 3 con el espacio que ya hay)
+            }
+            primera_letra = 1;
+            continue;
         }
-    }
-}
-
-void reflejarHorizontal(int tablero[N][N], int nuevo[N][N]) {
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            nuevo[i][N - 1 - j] = tablero[i][j];
-        }
-    }
-}
-
-int comparar(int tableroA[N][N], int tableroB[N][N]) {
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            if (tableroA[i][j] != tableroB[i][j]) {
-                return 0; 
+        
+        int encontrado = 0;
+        for (int j = 0; j < TAM; j++) {
+            if (c == letras_morse[j]) {
+                if (!primera_letra) printf(" ");
+                printf("%s", morse[j]);
+                encontrado = 1;
+                primera_letra = 0;
+                break;
             }
         }
+        if (!encontrado && c != '\n') {
+            if (!primera_letra) printf(" ");
+            printf("?");
+            primera_letra = 0;
+        }
     }
-    return 1;
+    printf("\n");
 }
 
-int esSimetrico(int tablero[N][N]) {
-    int transformado[N][N];
-    int temporal[N][N];
-    int esIgual;
+/* =============== MORSE → TEXTO =============== */
+void morse_tex(const char *morse[TAM], char letras_morse[TAM]) {
+    char entrada[TOTAL];
+    char codigo[20];
+    int i = 0, j = 0;
+    int espacios_seguidos = 0;
 
-    for (int k = 0; k < contadorUnicas; k++) {
-        
-        // 1. ORIGINAL
-        copiarTablero(transformado, tablero);
-        if (comparar(transformado, solucionesGuardadas[k])) return 1;
+    leer(entrada);
+    printf("Traduccion a Texto: ");
 
-        // 2. ROTACION 90
-        rotar90(transformado, temporal);
-        copiarTablero(transformado, temporal);
-        if (comparar(transformado, solucionesGuardadas[k])) return 1;
+    while (entrada[i]) {
+        char c = entrada[i];
 
-        // 3. ROTACION 180
-        rotar90(transformado, temporal);
-        copiarTablero(transformado, temporal);
-        if (comparar(transformado, solucionesGuardadas[k])) return 1;
-
-        // 4. ROTACION 270
-        rotar90(transformado, temporal);
-        copiarTablero(transformado, temporal);
-        if (comparar(transformado, solucionesGuardadas[k])) return 1;
-        
-        // 5. REFLEJADO HORIZONTALMENTE
-        reflejarHorizontal(tablero, transformado);
-        if (comparar(transformado, solucionesGuardadas[k])) return 1;
-        
-        // 6. REFLEJADO + ROTACION 90
-        rotar90(transformado, temporal);
-        copiarTablero(transformado, temporal);
-        if (comparar(transformado, solucionesGuardadas[k])) return 1;
-        
-        // 7. REFLEJADO + ROTACION 180
-        rotar90(transformado, temporal);
-        copiarTablero(transformado, temporal);
-        if (comparar(transformado, solucionesGuardadas[k])) return 1;
-
-        // 8. REFLEJADO + ROTACION 270
-        rotar90(transformado, temporal);
-        copiarTablero(transformado, temporal);
-        if (comparar(transformado, solucionesGuardadas[k])) return 1;
-    }
-
-    return 0;
-}
-
-int esSeguro(int tablero[N][N], int fila, int columna) {
-    int i, j;
-
-    for (i = 0; i < columna; i++) {
-        if (tablero[fila][i]) return 0;
-    }
-
-    for (i = fila, j = columna; i >= 0 && j >= 0; i--, j--) {
-        if (tablero[i][j]) return 0;
-    }
-
-    for (i = fila, j = columna; j >= 0 && i < N; i++, j--) {
-        if (tablero[i][j]) return 0;
-    }
-
-    return 1;
-}
-
-int resolverNReinasUtil(int tablero[N][N], int columna) {
-    if (columna >= N) {
-        
-        if (!esSimetrico(tablero) && contadorUnicas < 12) {
+        if (c == '.' || c == '-') {
+            if (j < 19) {
+                codigo[j++] = c;
+            }
+            espacios_seguidos = 0;
+        }
+        else if (c == ' ') {
+            if (j > 0) {
+                // Procesar código morse completo
+                codigo[j] = '\0';
+                int encontrado = 0;
+                for (int k = 0; k < TAM; k++) {
+                    if (strcmp(codigo, morse[k]) == 0) {
+                        printf("%c", letras_morse[k]);
+                        encontrado = 1;
+                        break;
+                    }
+                }
+                if (!encontrado) printf("?");
+                j = 0;
+            }
             
-            copiarTablero(solucionesGuardadas[contadorUnicas], tablero);
-            printf("----------------------------------------\n");
-            printf("SOLUCION UNICA #%d ENCONTRADA:\n", contadorUnicas + 1);
-            imprimirTablero(tablero);
-            contadorUnicas++;
+            espacios_seguidos++;
+            
+            // Si hay 3 espacios seguidos, es un espacio entre palabras
+            if (espacios_seguidos == 3) {
+                printf(" ");
+                espacios_seguidos = 0;
+            }
         }
-        
-        return 1;
-    }
-    
-    int solucionesNodo = 0;
-    
-    for (int fila = 0; fila < N; fila++) {
-        if (esSeguro(tablero, fila, columna)) {
-            tablero[fila][columna] = 1;
-
-            solucionesNodo += resolverNReinasUtil(tablero, columna + 1);
-
-            tablero[fila][columna] = 0;
+        else if (c != '\n') {
+            // Carácter inválido, ignorar
+            espacios_seguidos = 0;
         }
+        i++;
     }
 
-    return solucionesNodo;
+    // Procesar último código si queda alguno
+    if (j > 0) {
+        codigo[j] = '\0';
+        int encontrado = 0;
+        for (int k = 0; k < TAM; k++) {
+            if (strcmp(codigo, morse[k]) == 0) {
+                printf("%c", letras_morse[k]);
+                encontrado = 1;
+                break;
+            }
+        }
+        if (!encontrado) printf("?");
+    }
+    printf("\n");
 }
 
-int resolverNReinas(int tablero[N][N]) {
-    return resolverNReinasUtil(tablero, 0);
-}
-
-int main() {
-    int tablero[N][N];
+/* =============== FUNCIÓN LEER =============== */
+void leer(char *lectura) {
+    printf("\nIntroduce el texto a procesar: ");
     
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            tablero[i][j] = 0;
-        }
+    if (fgets(lectura, TOTAL, stdin)) {
+        // Eliminar el salto de línea al final
+        lectura[strcspn(lectura, "\n")] = '\0';
     }
-    
-    printf("Resolviendo el problema de las %d-Reinas y mostrando SOLO las 12 soluciones unicas...\n\n", N);
-
-    resolverNReinas(tablero);
-
-    printf("-------------------------------------------\n");
-    printf("Soluciones unicas encontradas: %d\n", contadorUnicas);
-
-    return 0;
 }
