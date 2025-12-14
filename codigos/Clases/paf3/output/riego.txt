@@ -1,0 +1,12 @@
+/*
+Sistema de riego por goteo
+Tipo de cultivo: Lechuga
+Plantas              : 500
+Litros por planta    : 2.0
+Caudal válvula L/min : 5.0
+*/
+Tiempo de apertura   : 200.00 min
+Tiempo en segundos   : 12000 S
+Litros totales       : 1000.00 L
+/*
+*/
