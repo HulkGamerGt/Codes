@@ -1,0 +1,14 @@
+/* ------------------------------------------------------- */
+Sistema de riego por goteo para lechuga palmensana
+
+1.-| Plantas                 : 9999
+2.-| Litros por planta       : 2
+3.-| Caudal valvula L/min    : 4
+
+------------------------------------------------------------
+
+4.-| Tiempo de apertura      : 4999.50 min
+5.-| Tiempo en segundos      : 299970 s
+6.-| Litros totales          : 19998.00 L
+
+/* ------------------------------------------------------- */
