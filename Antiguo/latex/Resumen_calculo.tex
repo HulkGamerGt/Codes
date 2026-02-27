@@ -1,0 +1,532 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{multirow}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+
+% Configuración de márgenes
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2cm}
+
+% Definición de colores exactos del PDF
+\definecolor{titleblue}{RGB}{0, 112, 192}
+\definecolor{sectionblue}{RGB}{0, 112, 192}
+\definecolor{subsectionblue}{RGB}{0, 32, 96}
+\definecolor{tableheader}{RGB}{218, 238, 243}
+\definecolor{tablerow1}{RGB}{242, 242, 242}
+\definecolor{tablerow2}{RGB}{255, 255, 255}
+\definecolor{highlight}{RGB}{255, 255, 204}
+\definecolor{formulabox}{RGB}{245, 245, 255}
+\definecolor{tipbox}{RGB}{232, 245, 233}
+
+% Configuración de secciones
+\titleformat{\section}
+{\normalfont\Large\bfseries\color{sectionblue}\vspace{0.5em}}
+{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{1em}
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries\color{subsectionblue}}
+{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{1em}{0.5em}
+
+% Configuración de subsubsection para tips
+\titleformat{\subsubsection}
+{\normalfont\normalsize\bfseries\color{subsectionblue}}
+{}{0em}{}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Configuración de encabezado y pie de página
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{titleblue}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\color{titleblue}\small\textbf{Resumen de Cálculo}}
+\fancyhead[R]{\color{titleblue}\small Diego Solis Rojas}
+\fancyfoot[C]{\color{titleblue}\thepage}
+
+% Configuración de listas
+\setlist[itemize]{leftmargin=*, itemsep=0.2em, topsep=0.3em}
+\setlist[enumerate]{leftmargin=*, itemsep=0.2em, topsep=0.3em}
+
+% Comando para cajas de fórmulas importantes
+\newcommand{\formulabox}[1]{%
+    \begin{tikzpicture}
+        \node[rectangle, draw=sectionblue!50, fill=formulabox, thick, rounded corners=5pt, inner sep=10pt] {#1};
+    \end{tikzpicture}
+}
+
+% Comando para cajas de tips
+\newcommand{\tipbox}[1]{%
+    \begin{tikzpicture}
+        \node[rectangle, draw=subsectionblue!50, fill=tipbox, thick, rounded corners=5pt, inner sep=8pt, text width=0.95\linewidth] {#1};
+    \end{tikzpicture}
+}
+
+% Título
+\title{\color{titleblue}\textbf{RESUMEN DE CÁLCULO: DERIVACIÓN, INTEGRACIÓN, SÓLIDOS DE REVOLUCIÓN Y FRENET}}
+\author{\color{titleblue}Diego Solis Rojas}
+\date{\color{titleblue}December 3, 2025}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{center}
+    \begin{tikzpicture}
+        \draw[titleblue, line width=1.5pt] (0,0) -- (\linewidth,0);
+    \end{tikzpicture}
+\end{center}
+
+% Índice rápido
+\begin{multicols}{2}
+\footnotesize
+\noindent\textbf{\color{titleblue}Índice Rápido}\\
+I. Derivación Fundamental \\
+II. Derivadas Elementales \\
+III. Derivación Avanzada \\
+IV. Integración Básica \\
+V. Fracciones Parciales \\
+VI. Integrales Especiales \\
+VII. Sólidos de Revolución \\
+VIII. Longitud y Superficie \\
+IX. Triedro de Frenet \\
+X. Centroides \\
+XI. Series de Taylor \\
+XII. Convergencia
+\end{multicols}
+
+\vspace{1em}
+
+% ============================================================================
+\section*{I. FÓRMULAS FUNDAMENTALES DE DERIVACIÓN}
+% ============================================================================
+
+\begin{center}
+\begin{tabular}{|>{\bfseries}l|>{\color{sectionblue}}l|}
+\hline
+\rowcolor{tableheader}
+\textbf{Regla} & \textbf{Fórmula} \\
+\hline
+Constante & $\dfrac{d}{dx}(c) = 0$ \\
+\rowcolor{tablerow1}
+Identidad & $\dfrac{d}{dx}(x) = 1$ \\
+Potencia & $\dfrac{d}{dx}(x^n) = nx^{n-1}$ \\
+\rowcolor{tablerow1}
+Múltiplo Constante & $\dfrac{d}{dx}[c \cdot g(x)] = c \cdot g'(x)$ \\
+Suma/Diferencia & $\dfrac{d}{dx}[g(x) \pm h(x)] = g'(x) \pm h'(x)$ \\
+\rowcolor{tablerow1}
+Producto & $\dfrac{d}{dx}[g(x) \cdot h(x)] = g'(x)h(x) + g(x)h'(x)$ \\
+Cociente & $\dfrac{d}{dx}\left[ \dfrac{g(x)}{h(x)} \right] = \dfrac{g'(x)h(x) - g(x)h'(x)}{[h(x)]^2}$ \\
+\rowcolor{tablerow1}
+Cadena & $\dfrac{d}{dx}[g(h(x))] = g'(h(x)) \cdot h'(x)$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\noindent\textbf{Regla de Leibniz (Derivada de una Integral con Límites Variables)}
+
+\[
+\frac{d}{dx} \left[ \int_{g(x)}^{h(x)} f(t)dt \right] = f(h(x)) \cdot h'(x) - f(g(x)) \cdot g'(x)
+\]
+
+% ============================================================================
+\section*{II. DERIVADAS DE FUNCIONES ELEMENTALES}
+% ============================================================================
+
+\begin{center}
+\begin{tabular}{|>{\color{sectionblue}\bfseries}c|c|>{\color{sectionblue}\bfseries}c|c|}
+\hline
+\rowcolor{tableheader}
+$f(x)$ & $f'(x)$ & $f(x)$ & $f'(x)$ \\
+\hline
+$e^x$ & $e^x$ & $\ln(x)$ & $\dfrac{1}{x}$ \\
+\rowcolor{tablerow1}
+$a^x$ & $a^x \ln(a)$ & $\log_a(x)$ & $\dfrac{1}{x \ln(a)}$ \\
+$\sin(x)$ & $\cos(x)$ & $\cos(x)$ & $-\sin(x)$ \\
+\rowcolor{tablerow1}
+$\tan(x)$ & $\sec^2(x)$ & $\arcsin(x)$ & $\dfrac{1}{\sqrt{1-x^2}}$ \\
+$\sinh(x)$ & $\cosh(x)$ & $\arctan(x)$ & $\dfrac{1}{1+x^2}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================================
+\section*{III. TIPOS DE DERIVACIÓN AVANZADA}
+% ============================================================================
+
+\begin{itemize}
+    \item \textbf{\color{sectionblue}Derivación Implícita:} Para ecuaciones $F(x,y) = 0$.
+    \item \textbf{\color{sectionblue}Derivación Logarítmica:} Para $y = x^x$. Deriva $\ln(y) = x \ln(x)$.
+    \item \textbf{\color{sectionblue}Derivada Paramétrica:} Para $x(t), y(t)$, usa $\dfrac{dy}{dx} = \dfrac{dy/dt}{dx/dt}$.
+    \item \textbf{\color{sectionblue}Derivada Parcial:} Para $f(x,y)$, $\dfrac{\partial f}{\partial x}$ manteniendo $y$ constante.
+\end{itemize}
+
+% ============================================================================
+\section*{IV. MÉTODOS FUNDAMENTALES DE INTEGRACIÓN}
+% ============================================================================
+
+\subsection*{Fórmulas Básicas (Antiderivadas)}
+
+\begin{center}
+\begin{tabular}{|>{\bfseries}l|>{\color{sectionblue}}l|>{\color{sectionblue}}l|}
+\hline
+\rowcolor{tableheader}
+\textbf{Regla} & \textbf{Integral $\int f(x)dx$} & \textbf{Resultado $F(x)+C$} \\
+\hline
+Constante & $\int c\, dx$ & $cx+C$ \\
+\rowcolor{tablerow1}
+Potencia ($n\neq-1$) & $\int x^{n}\, dx$ & $\dfrac{x^{n+1}}{n+1}+C$ \\
+Logaritmo ($n=-1$) & $\int\dfrac{1}{x}\, dx$ & $\ln|x|+C$ \\
+\rowcolor{tablerow1}
+Exponencial & $\int e^{x}\, dx$ & $e^{x}+C$ \\
+Trigonométrica & $\int\cos(x)\, dx$ & $\sin(x)+C$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Técnicas Clave}
+
+\begin{enumerate}
+    \item \textbf{Sustitución Simple ($u$-sustitución):}
+    \begin{itemize}
+        \item Cuando hay $g(x)$ y $g'(x)$ en el integrando
+        \item $u=g(x)$, $du=g'(x)dx$
+    \end{itemize}
+    
+    \item \textbf{Integración por Partes:}
+    \[
+    \int u\, dv = uv - \int v\, du
+    \]
+    \textbf{Regla ILATE} para elegir $u$: Inversa, Logarítmica, Algebraica, Trigonométrica, Exponencial.
+    
+    \item \textbf{Sustitución Trigonométrica:}
+    \begin{itemize}
+        \item $\sqrt{a^{2}-x^{2}} \implies x=a\sin(\theta)$
+        \item $\sqrt{a^{2}+x^{2}} \implies x=a\tan(\theta)$
+        \item $\sqrt{x^{2}-a^{2}} \implies x=a\sec(\theta)$
+    \end{itemize}
+\end{enumerate}
+
+% ============================================================================
+\section*{V. INTEGRACIÓN DE FUNCIONES RACIONALES}
+% ============================================================================
+
+\subsection*{Fracciones Parciales ($\int\frac{P(x)}{Q(x)}dx$)}
+
+\textbf{Requisito:} grado($P$) $<$ grado($Q$). Si no, hacer división larga.
+
+\begin{center}
+\begin{tabular}{|>{\bfseries}c|>{\color{sectionblue}}l|>{\color{sectionblue}}l|}
+\hline
+\rowcolor{tableheader}
+\textbf{Caso} & \textbf{Tipo de Factor en $Q(x)$} & \textbf{Descomposición} \\
+\hline
+I & Lineal No Repetido $(ax+b)$ & $\dfrac{A}{ax+b}$ \\
+\rowcolor{tablerow1}
+II & Lineal Repetido $(ax+b)^{n}$ & $\dfrac{A_1}{ax+b}+\dfrac{A_2}{(ax+b)^2}+\cdots+\dfrac{A_n}{(ax+b)^n}$ \\
+III & Cuadrático Irreducible $(ax^{2}+bx+c)$ & $\dfrac{Ax+B}{ax^{2}+bx+c}$ \\
+\rowcolor{tablerow1}
+IV & Cuadrático Repetido $(ax^{2}+bx+c)^{n}$ & $\dfrac{A_1x+B_1}{ax^{2}+bx+c}+\cdots+\dfrac{A_nx+B_n}{(ax^{2}+bx+c)^n}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\tipbox{%
+\textbf{Integrales Comunes:}
+\begin{itemize}
+    \item $\displaystyle\int\frac{A}{ax+b}dx=\frac{A}{a}\ln|ax+b|+C$
+    \item $\displaystyle\int\frac{1}{u^{2}+k^{2}}du=\frac{1}{k}\arctan\left(\frac{u}{k}\right)+C$
+\end{itemize}
+}
+
+% ============================================================================
+\section*{VI. INTEGRALES ESPECIALES}
+% ============================================================================
+
+\begin{itemize}
+    \item \textbf{Integral Indefinida:} Halla la antiderivada $(F(x)+C)$
+    \item \textbf{Integral Definida:} Calcula valor numérico (área bajo la curva)
+    \item \textbf{Integral Impropia:} 
+    \[
+    \int_{a}^{\infty}f(x)dx=\lim_{b\to\infty}\int_{a}^{b}f(x)dx
+    \]
+    \item \textbf{Sustitución Universal (Weierstrass):} Para $\int R(\sin x,\cos x)dx$
+    \[
+    u=\tan\left(\frac{x}{2}\right), \quad \sin x=\frac{2u}{1+u^{2}}, \quad \cos x=\frac{1-u^{2}}{1+u^{2}}, \quad dx=\frac{2}{1+u^{2}}du
+    \]
+\end{itemize}
+
+% ============================================================================
+\section*{VII. VOLUMEN DE SÓLIDOS DE REVOLUCIÓN}
+% ============================================================================
+
+\subsection*{Método del Disco y la Arandela}
+\textbf{Criterio:} Diferencial \textbf{perpendicular} al Eje de Revolución.
+
+\begin{center}
+\begin{tabular}{|>{\bfseries}c|>{\color{sectionblue}}c|>{\color{sectionblue}}c|}
+\hline
+\rowcolor{tableheader}
+\textbf{Eje de Giro} & \textbf{Disco (Sólido Completo)} & \textbf{Arandela (Hueco)} \\
+\hline
+Horizontal $(y = k)$ & $V = \pi \displaystyle\int_{a}^{b}[R(x)]^{2}dx$ & $V = \pi \displaystyle\int_{a}^{b}([R(x)]^{2} - [r(x)]^{2})dx$ \\
+\rowcolor{tablerow1}
+Vertical $(x = h)$ & $V = \pi \displaystyle\int_{c}^{d}[R(y)]^{2}dy$ & $V = \pi \displaystyle\int_{c}^{d}([R(y)]^{2} - [r(y)]^{2})dy$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Método de Capas Cilíndricas}
+\textbf{Criterio:} Diferencial \textbf{paralelo} al Eje de Revolución.
+
+\begin{center}
+\begin{tabular}{|>{\bfseries}c|>{\color{sectionblue}}c|>{\color{sectionblue}}c|}
+\hline
+\rowcolor{tableheader}
+\textbf{Eje de Giro} & \textbf{Integración} & \textbf{Fórmula de Volumen} \\
+\hline
+Vertical $(x = h)$ & $dx$ (Radio $r(x) = |x - h|$) & $V = 2\pi \displaystyle\int_{a}^{b}r(x)h(x)dx$ \\
+\rowcolor{tablerow1}
+Horizontal $(y = k)$ & $dy$ (Radio $r(y) = |y - k|$) & $V = 2\pi \displaystyle\int_{c}^{d}r(y)h(y)dy$ \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================================
+\section*{VIII. LONGITUD Y SUPERFICIE DE REVOLUCIÓN}
+% ============================================================================
+
+\subsection*{Longitud de Arco $(L)$}
+
+\begin{center}
+\begin{tabular}{|>{\bfseries}c|>{\color{sectionblue}}c|}
+\hline
+\rowcolor{tableheader}
+\textbf{Tipo de Curva} & \textbf{Fórmula de Longitud $(L)$} \\
+\hline
+Explícita $y = f(x), [a, b]$ & $L = \displaystyle\int_{a}^{b}\sqrt{1 + \left( \dfrac{dy}{dx} \right)^{2}}dx$ \\
+\rowcolor{tablerow1}
+Explícita $x = g(y), [c, d]$ & $L = \displaystyle\int_{c}^{d}\sqrt{1 + \left( \dfrac{dx}{dy} \right)^{2}}dy$ \\
+Paramétrica $(x(t), y(t)), [\alpha, \beta]$ & $L = \displaystyle\int_{\alpha}^{\beta}\sqrt{\left( \dfrac{dx}{dt} \right)^{2} + \left( \dfrac{dy}{dt} \right)^{2}}dt$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Área de Superficie de Revolución ($S$)}
+
+\begin{center}
+\begin{tabular}{|>{\bfseries}c|>{\color{sectionblue}}c|}
+\hline
+\rowcolor{tableheader}
+\textbf{Eje de Giro} & \textbf{Fórmula (Curva $y=f(x)$)} \\
+\hline
+Horizontal $(y=k)$ & $S=2\pi\displaystyle\int_{a}^{b}|f(x)-k|\sqrt{1+(y')^{2}}dx$ \\
+\rowcolor{tablerow1}
+Vertical $(x=h)$ & $S=2\pi\displaystyle\int_{a}^{b}|x-h|\sqrt{1+(y')^{2}}dx$ \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================================
+\section*{IX. TRIEDRO DE FRENET Y GEOMETRÍA DE CURVAS}
+% ============================================================================
+
+\subsection*{Componentes del Triedro (T,N,B)}
+
+\begin{center}
+\begin{tabular}{|>{\bfseries}c|>{\color{sectionblue}}c|>{\color{sectionblue}}c|}
+\hline
+\rowcolor{tableheader}
+\textbf{Vector} & \textbf{Fórmula} & \textbf{Cálculo} \\
+\hline
+Tangente (T) & $\mathbf{T}(t)=\dfrac{\mathbf{r}'(t)}{|\mathbf{r}'(t)|}$ & Normalizar $\mathbf{r}'(t)$ \\
+\rowcolor{tablerow1}
+Binormal (B) & $\mathbf{B}(t)=\dfrac{\mathbf{r}'(t)\times\mathbf{r}''(t)}{|\mathbf{r}'(t) \times\mathbf{r}''(t)|}$ & Normalizar $\mathbf{r}'(t)\times\mathbf{r}''(t)$ \\
+Normal (N) & $\mathbf{N}(t)=\mathbf{B}(t)\times\mathbf{T}(t)$ & Producto cruz $\mathbf{B}\times\mathbf{T}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Parámetros Geométricos}
+
+\begin{center}
+\begin{tabular}{|>{\bfseries}c|>{\color{sectionblue}}c|>{\color{sectionblue}}c|}
+\hline
+\rowcolor{tableheader}
+\textbf{Parámetro} & \textbf{Fórmula} & \textbf{Mide} \\
+\hline
+Curvatura ($\kappa$) & $\kappa(t)=\dfrac{|\mathbf{r}'(t)\times\mathbf{r}''(t)|}{|\mathbf{r}'(t)|^{3}}$ & Grado de curvatura \\
+\rowcolor{tablerow1}
+Torsión ($\tau$) & $\tau(t)=\dfrac{(\mathbf{r}'(t)\times\mathbf{r}''(t))\times\mathbf{r}'''(t)}{| \mathbf{r}'(t)\times\mathbf{r}''(t)|^{2}}$ & Giro fuera del plano \\
+\hline
+\end{tabular}
+\end{center}
+
+% ============================================================================
+\section*{X. MOMENTOS Y CENTRO DE MASA (CENTROIDE)}
+% ============================================================================
+
+\subsection*{Para Región Plana Homogénea}
+
+\begin{center}
+\begin{tabular}{|>{\bfseries}c|>{\color{sectionblue}}c|}
+\hline
+\rowcolor{tableheader}
+\textbf{Concepto} & \textbf{Ecuación (entre $f(x)$ y $g(x)$)} \\
+\hline
+Área ($A$) & $A=\displaystyle\int_{a}^{b}[f(x)-g(x)]dx$ \\
+\rowcolor{tablerow1}
+Momento $y$ ($M_{y}$) & $M_{y}=\displaystyle\int_{a}^{b}x[f(x)-g(x)]dx$ \\
+Momento $x$ ($M_{x}$) & $M_{x}=\displaystyle\int_{a}^{b}\frac{1}{2}[f(x)^{2}-g(x)^{2}]dx$ \\
+\rowcolor{tablerow1}
+Coordenadas Centroide & $\bar{x}=\dfrac{M_{y}}{A}$ ; $\bar{y}=\dfrac{M_{x}}{A}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Teoremas de Pappus-Guldinus}
+
+\begin{center}
+\begin{tabular}{|>{\bfseries}c|>{\color{sectionblue}}c|>{\color{sectionblue}}c|}
+\hline
+\rowcolor{tableheader}
+\textbf{Teorema} & \textbf{Mide} & \textbf{Fórmula} \\
+\hline
+Pappus 1 (Volumen) & Volumen de Revolución & $V=2\pi\cdot r_{\text{centroide}}\cdot A$ \\
+\rowcolor{tablerow1}
+Pappus 2 (Superficie) & Área de Superficie & $S=2\pi\cdot r_{\text{centroide}}\cdot L$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\tipbox{%
+\textbf{Distancia del Centroide al Eje:}
+\begin{itemize}
+    \item Eje Horizontal $(y=k)$: $r_{\text{centroide}}=|\bar{y}-k|$
+    \item Eje Vertical $(x=h)$: $r_{\text{centroide}}=|\bar{x}-h|$
+    \item Eje Oblicuo $(Ax+By+C=0)$: $r_{\text{centroide}}=\dfrac{|A\bar{x}+B\bar{y}+C|}{\sqrt{A^{2}+B^{2}}}$
+\end{itemize}
+}
+
+% ============================================================================
+\section*{XI. SERIE DE TAYLOR}
+% ============================================================================
+
+\subsection*{Fórmula General (Centrada en $c$)}
+
+La Serie de Taylor de una función $f(x)$ alrededor del punto $x=c$ se define como:
+\[
+f(x)\approx\sum_{n=0}^{\infty}\frac{f^{(n)}(c)}{n!}(x-c)^{n}
+\]
+
+Expandida (Polinomio de Taylor de grado $N$):
+\[
+P_{N}(x)=f(c)+\frac{f^{\prime}(c)}{1!}(x-c)+\frac{f^{\prime\prime}(c)}{2!}(x-c)^{2}+\cdots+\frac{f^{(N)}(c)}{N!}(x-c)^{N}
+\]
+
+\subsection*{Tips para Resolver y Simplificar}
+
+\begin{itemize}
+    \item \textbf{Proceso Metódico:} Calcula las primeras $N$ derivadas de $f(x)$ y luego evalúalas en el punto central $c$.
+    \item \textbf{Usa Sustitución ($u=x-c$):} Para evitar errores algebraicos con $(x-c)$, define $u=x-c$. Resuelve la serie para $g(u)=f(u+c)$ alrededor de $u=0$ (Maclaurin), y al final sustituye $u$ por $(x-c)$.
+    \item \textbf{Manipulación Algebraica (Tip Avanzado):} Usa series conocidas (ej., $e^{u}$, $\sin(u)$) y propiedades algebraicas para reescribir la función en términos de $(x-c)$, evitando derivaciones complejas.
+\end{itemize}
+
+\subsection*{El Caso Difícil: El Residuo (Error)}
+
+El error $R_{N}(x)$ es la diferencia entre la función y su aproximación: $f(x)=P_{N}(x)+R_{N}(x)$.
+
+\textbf{Fórmula de Lagrange del Residuo:}
+\[
+R_{N}(x)=\frac{f^{(N+1)}(z)}{(N+1)!}(x-c)^{N+1}
+\]
+Donde $z$ es algún número entre $c$ y $x$.
+
+\textbf{Condición de Convergencia:} Para que la serie de Taylor sea una representación exacta de $f(x)$, se debe demostrar que:
+\[
+\lim_{N\to\infty}R_{N}(x)=0
+\]
+
+% ============================================================================
+\section*{XII. CRITERIOS DE CONVERGENCIA Y SERIES ESPECIALES}
+% ============================================================================
+
+\subsection*{Series Notables}
+
+\begin{center}
+\begin{tabular}{|>{\bfseries}l|>{\color{sectionblue}}l|>{\color{sectionblue}}l|}
+\hline
+\rowcolor{tableheader}
+\textbf{Serie} & \textbf{Forma} & \textbf{Convergencia} \\
+\hline
+Geométrica & $\sum ar^{n}$ & $|r|<1$, $S=\dfrac{a}{1-r}$ \\
+\rowcolor{tablerow1}
+Serie-p & $\sum\dfrac{1}{n^{p}}$ & $p>1$ \\
+Telescópica & $\sum(b_{n}-b_{n+1})$ & Si $\lim_{N\to\infty}b_{N+1}$ existe \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Criterios Fundamentales}
+
+\begin{itemize}
+    \item \textbf{Criterio de Divergencia:} Si $\lim_{n\to\infty}a_{n}\neq 0$ \textbf{DIVERGE}
+    \item \textbf{Criterio de la Razón:} $L=\lim_{n\to\infty}\left|\dfrac{a_{n+1}}{a_{n}}\right|$
+    \begin{itemize}
+        \item $L<1$: Converge
+        \item $L>1$: Diverge
+        \item $L=1$: No concluyente
+    \end{itemize}
+    \item \textbf{Criterio de la Integral:} Para $f(x)$ decreciente
+\end{itemize}
+
+\subsection*{Criterios de Comparación}
+
+\begin{itemize}
+    \item \textbf{Comparación Directa:} $0<a_n\leq b_n$, $\sum b_n$ converge $\Rightarrow$ $\sum a_n$ converge
+    \item \textbf{Comparación al Límite:} $L=\lim_{n\to\infty}\dfrac{a_n}{b_n}$, $0<L<\infty$: mismo comportamiento
+\end{itemize}
+
+\subsection*{Series Alternantes}
+
+\begin{itemize}
+    \item \textbf{Forma:} $\sum(-1)^{n}b_{n}$ ($b_{n}>0$)
+    \item \textbf{Criterio de Leibniz:} Converge si:
+    \begin{enumerate}
+        \item $b_{n+1}\leq b_{n}$ (decreciente)
+        \item $\lim_{n\to\infty}b_{n}=0$
+    \end{enumerate}
+\end{itemize}
+
+\tipbox{%
+\textbf{Identificación Rápida:}
+\begin{itemize}
+    \item \textbf{Factoriales/potencias:} Criterio de la Razón
+    \item \textbf{Fracción de polinomios:} Comparación al Límite con Serie-p
+    \item \textbf{Signos alternados:} Criterio de Leibniz
+\end{itemize}
+}
+
+\begin{center}
+    \begin{tikzpicture}
+        \draw[titleblue, line width=1.5pt] (0,0) -- (\linewidth,0);
+        \node at (0.5\linewidth, 0.5) {\color{titleblue}\textbf{Fin del Resumen}};
+    \end{tikzpicture}
+\end{center}
+
+\end{document}
