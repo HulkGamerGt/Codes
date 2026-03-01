@@ -43,14 +43,24 @@ print_slow(arcana_art)
 print("  ")
 print("\n" + "="*110)
 print("  ")
+contador = 0
 while True:
 
     preguntar = input(" ¿Comenzar Juego? ('Si o No') ").capitalize()
-
+    
     if preguntar == "No":
         print("  ")
-        print("\033[31m                  🤬 ¡PUES QUE TE JODAN¡ 🤬\033[0m")
-        print("  ")
+        contador += 1
+        if contador == 1:
+            print("\033[31m                  🤬 ¡PUES QUE TE JODAN¡ 🤬\033[0m")
+            print("  ")
+        if contador == 2 :
+            print("\n\033[31m                  🤬 ¡PUES QUE TE JODAN PUTO CERDO¡ 🤬\033[0m")
+        elif contador == 3:
+            print("\n\033[31m                  🤬 !ENTONCES PA QUE ABRISTE EJ JUEGO AWEONAO¡ 🤬\033[0m")
+        elif contador == 4:
+            print("\033[31m                  🤬 ¡VETE A LA MIERDA SAPO Y LA RECONCHA DE TU REPUTISIMA MADRE Y LA DE TU ABUELA SAPO CULIAO¡ 🤬\033[0m")
+            print(" ")
     elif preguntar == "Si":
         print("  ")
         print("\033[33m                     ✩ ¡GENIAL!✩\033[0m")
