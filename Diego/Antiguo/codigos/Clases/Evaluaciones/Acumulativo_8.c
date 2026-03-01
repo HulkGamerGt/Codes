@@ -23,10 +23,10 @@ char Laberinto[FILAS][COLUMNAS] = {
     {' ', '#', '#', ' ', '#', '#', '#', ' ', '#', ' '},
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '},
     {'#', '#', '#', '#', '#', ' ', '#', ' ', '#', ' '},
-    {' ', ' ', ' ', ' ', '#', ' ', '#', ' ', ' ', ' '},
+    {' ', ' ', ' ', 'B', '#', ' ', '#', ' ', ' ', ' '},
     {' ', '#', '#', '#', '#', ' ', '#', '#', '#', ' '},
     {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' '},
-    {'#', '#', '#', '#', '#', '#', '#', '#', '#', 'B'}
+    {'#', '#', '#', '#', '#', '#', '#', '#', '#', ' '}
 };
 
 // Prototipos de funciones
@@ -47,10 +47,10 @@ int main() {
 }
 
 
-void Mostrar_Mapa(char Laberinto[FILAS][COLUMNAS]) {
+void Mostrar_Mapa(char Laberinto[FILAS][COLUMNAS]){
     int i,j;
-    for (i = 0; i < FILAS; i++) {
-        for (j = 0; j < COLUMNAS; j++) {
+    for(i = 0; i < FILAS; i++){
+        for(j = 0; j < COLUMNAS; j++){
             printf("%c ", Laberinto[i][j]);
         }
         printf("\n");
@@ -73,8 +73,7 @@ int Calcular_(int fila, int columna, char Laberinto[FILAS][COLUMNAS]) {
     int i;
 
     /* 1. Caso Base: Verificar si la posición es válida (límites). */
-    if (!Es_Movimiento_Valido
-    (fila, columna)) {
+    if (!Es_Movimiento_Valido(fila, columna)){
         return FALSE;
     }
     /* 2. Caso Base: Se encontró el destino 'B'. */
