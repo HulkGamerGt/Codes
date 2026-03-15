@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HULK GYM - No Excusas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #0f0f0f;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80') center/cover no-repeat;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4.5rem, 12vw, 9rem);
+      color: #ff0033;
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px rgba(255,0,51,0.6);
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      color: #fff;
+      margin-bottom: 30px;
+    }
+    .btn {
+      display: inline-block;
+      background: #ff0033;
+      color: white;
+      padding: 18px 50px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 50px;
+      margin: 10px;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px rgba(255,0,51,0.7);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 3px solid #ff0033;
+      color: #ff0033;
+    }
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      text-align: center;
+      color: #ff0033;
+      margin-bottom: 50px;
+      letter-spacing: 3px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      text-align: center;
+    }
+    .stat-item {
+      background: #1a1a1a;
+      padding: 40px 20px;
+      border-radius: 15px;
+      border: 1px solid #333;
+    }
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: #ff0033;
+      margin-bottom: 10px;
+    }
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 1.1rem;
+      color: #777;
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 6rem; }
+      h2 { font-size: 3.8rem; }
+      .btn { padding: 14px 40px; font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>HULK</h1>
+    <div class="subtitle">NO EXCUSES. JUST GAINS.</div>
+    
+    <a href="#progreso" class="btn">VER PROGRESO</a>
+    <a href="https://wa.me/56987654321?text=Hola%20Hulk%2C%20quiero%20info%20de%20tus%20entrenos" target="_blank" class="btn btn-outline">CONTACTO</a>
+  </header>
+
+  <section id="progreso">
+    <h2>TRANSFORMACIÓN</h2>
+    
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-number">+18 kg</div>
+        <p>Masa muscular</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">-14%</div>
+        <p>Grasa corporal</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">380 kg</div>
+        <p>Deadlift 1RM</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100+</div>
+        <p>Entrenamientos seguidos</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#111; text-align:center;">
+    <h2 style="color:#fff;">"El dolor que sientes hoy...<br>es la fuerza que tendrás mañana"</h2>
+    <p style="font-size:1.4rem; max-width:800px; margin:40px auto; color:#ccc;">
+      Si estás listo para dejar de ser promedio y convertirte en una bestia,  
+      este es el momento. No mañana. Hoy.
+    </p>
+    <a href="https://wa.me/56987654321?text=Quiero%20entrenar%20contigo%20Hulk" target="_blank" class="btn" style="font-size:1.6rem; padding:22px 60px;">
+      ¡ENTRENA CONMIGO!
+    </a>
+  </section>
+
+  <footer>
+    © 2026 HULK GYM — Talca, Maule Region — Sin excusas, solo resultados.
+  </footer>
+
+</body>
+</html>
