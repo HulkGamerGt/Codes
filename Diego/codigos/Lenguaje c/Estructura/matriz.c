@@ -1,52 +1,57 @@
 #include <stdio.h>
 
-int main(){
-    int Q=1,W=1,E=1,R=1;
-    printf("Mencione el tamano de la fila del 1er arreglo: ");
-    scanf("%d",&Q);
-    printf("Mencione el tamano de la fila del 1er arreglo: ");
-    scanf("%d",&W);
-    printf("Mencione el tamano de la fila del 1er arreglo: ");
-    scanf("%d",&E);
-    printf("Mencione el tamano de la fila del 1er arreglo: ");
-    scanf("%d",&Q);
+int main() {
+    int Q, W, E, R;
 
-    if(W!=E){
-        return 0;
+    printf("Filas matriz 1: "); scanf("%d", &Q);
+    printf("Columnas matriz 1: "); scanf("%d", &W);
+    printf("Filas matriz 2: "); scanf("%d", &E);
+    printf("Columnas matriz 2: "); scanf("%d", &R);
+
+    if (W != E) {
+        printf("Error: Las columnas de A deben coincidir con las filas de B.\n");
+        return 1;
     }
 
-    int A[Q][W];
-    int B[E][R];
-    int C[W][E];
-    int i,j,m;
+    int A[Q][W], B[E][R], C[Q][R];
 
-    for(int n=0; n<Q; n++){
-        for(int l=0; l < W; l++){
-            printf("ingrese valor de la 1era matriz en [%d][%d]",n,l);
-            scanf("%d",A[n][l]);
+    // Inicializar C en 0
+    for(int i=0; i<Q; i++)
+        for(int j=0; j<R; j++) C[i][j] = 0;
+
+    // Leer Matriz A
+    for(int n=0; n<Q; n++) {
+        for(int l=0; l<W; l++) {
+            printf("A[%d][%d]: ", n, l);
+            scanf("%d", &A[n][l]); // Se agregó el &
         }
     }
 
-    for(int n=0; n<E; n++){
-        for(int l=0; l < Q; l++){
-            printf("ingrese valor de la 2da matriz en[%d][%d]",n,l);
-            scanf("%d",B[n][l]);
+    // Leer Matriz B
+    for(int n=0; n<E; n++) {
+        for(int l=0; l<R; l++) { // Se corrigió el límite a R
+            printf("B[%d][%d]: ", n, l);
+            scanf("%d", &B[n][l]); // Se agregó el &
         }
     }
 
-    for(i=0;i<W ; i++){
-        for(j=0 ; j<E ;j++){
-            for(m=0; m<W ; m++){
-                C[i][j]=C[i][j] + A[m][i] * B[i][m];
+    // Multiplicación Lógica Correcta
+    for(int i=0; i<Q; i++) {       // Filas de A
+        for(int j=0; j<R; j++) {   // Columnas de B
+            for(int k=0; k<W; k++) { // Factor común
+                C[i][j] += A[i][k] * B[k][j];
             }
         }
     }
 
-    for(j=0 ; j<W ;j++){
-            for(m=0; m<E ; m++){
-                printf("%d",C[W][E]);
-            }
+    // Imprimir Resultado
+    printf("\nResultado Matriz C:\n");
+    for(int i=0; i<Q; i++) {
+        for(int j=0; j<R; j++) {
+            printf("%d ", C[i][j]);
         }
+        printf("\n");
+    }
 
     return 0;
 }
