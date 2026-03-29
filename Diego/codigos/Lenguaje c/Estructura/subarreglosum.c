@@ -3,8 +3,6 @@
 
 #define TAM 5
 
-//int num_random(int *);
-
 typedef struct {
     int suma_maxima;
     int inicio;
@@ -12,29 +10,43 @@ typedef struct {
 } RESULTADO;
 
 int main() {
-    int arr[TAM] = {-1, 3, -2, 0, 4};
+    int arr[TAM] = {-1, 5, -2, 1, 4};
 
-    //num_random(arr);
     int suma_actual = arr[0];
-    int inicio_temporal = 0;
-
+    int inicio_temp = 0;
+    
     RESULTADO mejor;
-    mejor.suma_maxima = arr[0];
+    mejor.suma_maxima = -999;
     mejor.inicio = 0;
     mejor.fin = 0;
 
-    for(int i = 1; i < TAM; i++){
-        if(arr[i] > suma_actual + arr[i]){
+    for (int i = 1; i < TAM; i++) {
+        if (arr[i] > suma_actual + arr[i]) {
             suma_actual = arr[i];
-            inicio_temporal = i;
-        }else{
+            inicio_temp = i;
+        } else {
             suma_actual += arr[i];
         }
 
-        if(suma_actual > mejor.suma_maxima){
-            mejor.suma_maxima = suma_actual;
-            mejor.inicio = inicio_temporal;
-            mejor.fin = i;
+        if (suma_actual > mejor.suma_maxima) {
+            if (inicio_temp == 0 && i == TAM - 1) {
+                int suma_sin_primero = suma_actual - arr[0];
+                int suma_sin_ultimo = suma_actual - arr[TAM - 1];
+
+                if (suma_sin_primero > suma_sin_ultimo) {
+                    mejor.suma_maxima = suma_sin_primero;
+                    mejor.inicio = 1;
+                    mejor.fin = TAM - 1;
+                } else {
+                    mejor.suma_maxima = suma_sin_ultimo;
+                    mejor.inicio = 0;
+                    mejor.fin = TAM - 2;
+                }
+            } else {
+                mejor.suma_maxima = suma_actual;
+                mejor.inicio = inicio_temp;
+                mejor.fin = i;
+            }
         }
     }
 
