@@ -5,4 +5,7 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(ListasAplicacion main.c
         include/lista.h
-        src/lista.c)
+        src/lista.c
+        ejercicio_1.c
+        include/lista_1.h
+        src/lista_1.c)
