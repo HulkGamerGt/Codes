@@ -1,53 +1,62 @@
-#include "cola_1.h"
+#include "pila_1.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 void mostrar_menu();
 
 int main(){
-    int opcion;
-    int n;
+    int opcion, n;
+    Pila p = pila_vacia();
 
-    TipoCola l;
-
-    l = NULL;
-
-    do{
+    do {
         mostrar_menu();
-        scanf("%d",&opcion);
-        switch(opcion){
-        case 1:
-            printf("ingrese un valor");
-            scanf("%d",&n);
-            l = inserta_por_cola(l,n);
-            muestra_cola(l);
-            break;
-        case 2:
-            /* code */
-            break;
-        case 3:
-            /* code */
-            break;
-        case 4:
-            /* code */
-            break;
-        case 5:
-            /* code */
-            break;
-        case 0:
-            /* code */
-            break;
-        
-        default:
-            break;
+        scanf("%d", &opcion);
+        switch(opcion) {
+            case 1:
+                printf("Ingrese un valor: ");
+                scanf("%d", &n);
+                p = push(p, n);
+                mostrar_pila(p);
+                break;
+            case 2:
+                if (!es_pila_vacia(p)) {
+                    printf("Eliminando %d\n", cima(p));
+                    p = pop(p);
+                } else
+                    printf("Pila vacía\n");
+                mostrar_pila(p);
+                break;
+            case 3:
+                if (!es_pila_vacia(p))
+                    printf("Cima: %d\n", cima(p));
+                else
+                    printf("Pila vacía\n");
+                break;
+            case 4:
+                mostrar_pila(p);
+                break;
+            case 5:
+                printf("La pila %s vacía\n", es_pila_vacia(p) ? "está" : "no está");
+                break;
+            case 0:
+                liberar_pila(p);
+                p = NULL;
+                printf("Saliendo...\n");
+                break;
+            default:
+                printf("Opción inválida\n");
         }
-    }while(opcion!=0);
-
+    } while(opcion != 0);
     return 0;
 }
 
 void mostrar_menu(){
-    printf("Seleccione una opcion : ");
-    printf("\n1. Insertar un número en la pila.\n2. Eliminar el último número ingresado.\n3. Mostrar el número que está en la cima.\n4. Mostrar todos los números almacenados.\n5. Indicar si la pila está vacía.\n0.Salida..");
-    printf("\nOpcion a elegir: ");
+    printf("\nSeleccione una opción:\n");
+    printf("1. Insertar un número en la pila.\n");
+    printf("2. Eliminar el último número ingresado.\n");
+    printf("3. Mostrar el número que está en la cima.\n");
+    printf("4. Mostrar todos los números almacenados.\n");
+    printf("5. Indicar si la pila está vacía.\n");
+    printf("0. Salida.\n");
+    printf("Opción a elegir: ");
 }
