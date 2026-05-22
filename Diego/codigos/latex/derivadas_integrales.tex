@@ -3,23 +3,35 @@
 % --- Paquetes para Estilo y Matemáticas ---
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath} % Para notación matemática y entornos de ecuación
-\usepackage{array} % Para control de tablas
-\usepackage{booktabs} % Para tablas profesionales (sin líneas verticales)
-\usepackage{caption} % Para captions de tablas
-\usepackage{geometry} % Para márgenes
-\usepackage{tcolorbox} % Para recuadros
-\usepackage{graphicx} % Para incluir imágenes
-\usepackage{fancyhdr} % Para encabezados y pies de página
-\usepackage{lastpage} % Para número de páginas totales
-\usepackage{titlesec} % Para personalizar secciones
-\usepackage{enumitem} % Para personalizar listas
-\usepackage{multicol} % Para columnas múltiples
+\usepackage{amsmath}               % Notación matemática
+\usepackage{array}                 % Control de tablas
+\usepackage{booktabs}              % Tablas profesionales
+\usepackage{caption}               % Captions
+\usepackage{geometry}              % Márgenes
+\usepackage[table,svgnames]{xcolor}% Colores y sombreado en tablas
+\usepackage{tcolorbox}             % Recuadros
+\tcbuselibrary{skins,breakable}    % Librerías adicionales
+\usepackage{graphicx}              % Imágenes
+\usepackage{fancyhdr}              % Encabezados y pies
+\usepackage{lastpage}              % Número total de páginas
+\usepackage{titlesec}              % Personalizar secciones
+\usepackage{enumitem}              % Listas
+\usepackage{multicol}              % Columnas múltiples
+
+% --- Operadores matemáticos personalizados ---
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\arcosh}{arcosh}
 
 % --- Configuración de Estilo ---
 \geometry{a4paper, margin=1in, headheight=15pt}
+\colorlet{titlecolor}{DarkBlue}
+\colorlet{sectioncolor}{DarkBlue}
+\colorlet{boxframe}{DarkBlue!70!black}
 
-% --- Configuración de Encabezados y Pies ---
+% --- Encabezados y Pies ---
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\textbf{Compendio de Cálculo}}
@@ -29,32 +41,54 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.2pt}
 
-% --- Configuración de Títulos ---
+% --- Títulos de secciones ---
 \titleformat{\section}
-{\normalfont\Large\bfseries}
-{\thesection}{1em}{}
-
+  {\color{sectioncolor}\normalfont\Large\bfseries}
+  {\thesection}{1em}{}
 \titleformat{\subsection}
-{\normalfont\large\bfseries}
-{\thesubsection}{0.5em}{}
+  {\color{sectioncolor}\normalfont\large\bfseries}
+  {\thesubsection}{0.5em}{}
 
-% --- Redefinición de Listas ---
+% --- Listas ---
 \setlist[itemize]{leftmargin=*, itemsep=2pt, parsep=2pt}
 \setlist[enumerate]{leftmargin=*, itemsep=2pt, parsep=2pt}
 
-% --- Comandos Personalizados ---
+% --- Comandos personalizados ---
 \newcommand{\highlight}[1]{\textbf{#1}}
 \newcommand{\formula}[1]{\ensuremath{#1}}
 \newcommand{\deriv}[2]{\frac{d#1}{d#2}}
 \newcommand{\partialderiv}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\integral}[2]{\int #1 \, d#2}
-\newcommand{\examplebox}[1]{\begin{tcolorbox}[colback=gray!5!white, colframe=black, fonttitle=\bfseries, title=Ejemplo, #1\end{tcolorbox}}
+
+% --- Recuadro para ejemplos ---
+\newtcolorbox{examplebox}{
+  colback=gray!5!white,
+  colframe=boxframe,
+  fonttitle=\bfseries,
+  title=Ejemplo,
+  sharp corners
+}
+
+% --- Sombras suaves para bloques destacados ---
+\newtcolorbox{infobox}[1][]{
+  enhanced,
+  sharp corners,
+  colback=gray!5!white,
+  colframe=boxframe,
+  fonttitle=\bfseries,
+  drop shadow={black!30!white},
+  #1
+}
+
+% --- Configuración de tablas con color alterno ---
+\newcommand{\tablerowcolors}{\rowcolors{2}{gray!10}{white}}
+% Se usará dentro de los entornos de tabla
 
 % --- Portada ---
-\title{\Huge\textbf{Compendio Completo de Cálculo}\\
+\title{\Huge\textbf{\textcolor{titlecolor}{Compendio Completo de Cálculo}}\\
 \Large Derivadas e Integrales: Fórmulas, Propiedades y Técnicas}
-\author{\Large Departamento de Matemáticas\\[0.5em]
-\small Última actualización: \today}
+\author{
+\small Diego Solis Rojas: \today}
 \date{}
 
 \begin{document}
@@ -65,15 +99,10 @@
     \centering
     \vspace{2cm}
     
-    \begin{tcolorbox}[
-        enhanced,
-        sharp corners,
-        colback=white,
-        colframe=black,
+    \begin{infobox}[
         width=0.8\textwidth,
         center,
-        fontupper=\large,
-        drop shadow={black!50!white}
+        fontupper=\large
     ]
         \centering
         \textbf{Contenido del Documento}\\[0.5em]
@@ -88,7 +117,7 @@
                 \item Apéndice B: Tabla paralela de 40 derivadas e integrales
             \end{itemize}
         \end{minipage}
-    \end{tcolorbox}
+    \end{infobox}
     
     \vfill
     \rule{0.8\textwidth}{0.4pt}\\[0.5em]
@@ -124,7 +153,7 @@
 \noindent
 \textbf{Integrales:}
 \begin{itemize}
-    \item \formula{\integral{c \cdot f(x) \pm g(x)}{x} = c \cdot \integral{f(x)}{x} \pm \integral{g(x)}{x}}
+    \item \formula{\integral{(c f(x) \pm g(x))}{x} = c \cdot \integral{f(x)}{x} \pm \integral{g(x)}{x}}
     \item \formula{\integral{0}{x} = C}
     \item \formula{\int_a^b f(x) dx = - \int_b^a f(x) dx}
     \item \formula{\int_a^c f(x) dx = \int_a^b f(x) dx + \int_b^c f(x) dx}
@@ -135,7 +164,8 @@
 \subsection{Teorema Fundamental del Cálculo y Regla de Leibniz}
 
 \begin{center}
-\begin{tabular}{@{}lll@{}}
+\tablerowcolors
+\begin{tabular}{lll}
 \toprule
 \textbf{Caso} & \textbf{Integral} & \textbf{Derivada ($\frac{d}{dx}$)} \\
 \midrule
@@ -155,7 +185,8 @@ Ambos Límites Variables & \formula{\int_{h(x)}^{g(x)} f(t) dt} & \formula{f(g(x
 
 \begin{center}
 \small
-\begin{tabular}{@{}lll@{}}
+\tablerowcolors
+\begin{tabular}{lll}
 \toprule
 \textbf{Función} & \textbf{Derivada} & \textbf{Ejemplo} \\
 \midrule
@@ -177,16 +208,17 @@ Ambos Límites Variables & \formula{\int_{h(x)}^{g(x)} f(t) dt} & \formula{f(g(x
 
 \begin{center}
 \small
-\begin{tabular}{@{}ll@{}}
+\tablerowcolors
+\begin{tabular}{ll}
 \toprule
 \textbf{Función} & \textbf{Derivada} \\
 \midrule
 \formula{\arcsin u} & \formula{\frac{u'}{\sqrt{1 - u^2}}} \\
 \formula{\arccos u} & \formula{-\frac{u'}{\sqrt{1 - u^2}}} \\
 \formula{\arctan u} & \formula{\frac{u'}{1 + u^2}} \\
-\formula{\text{arccot } u} & \formula{-\frac{u'}{1 + u^2}} \\
-\formula{\text{arcsec } u} & \formula{\frac{u'}{|u|\sqrt{u^2 - 1}}} \\
-\formula{\text{arccsc } u} & \formula{-\frac{u'}{|u|\sqrt{u^2 - 1}}} \\
+\formula{\arccot u} & \formula{-\frac{u'}{1 + u^2}} \\
+\formula{\arcsec u} & \formula{\frac{u'}{|u|\sqrt{u^2 - 1}}} \\
+\formula{\arccsc u} & \formula{-\frac{u'}{|u|\sqrt{u^2 - 1}}} \\
 \bottomrule
 \end{tabular}
 \captionof{table}{Derivadas de funciones trigonométricas inversas}
@@ -201,7 +233,8 @@ Ambos Límites Variables & \formula{\int_{h(x)}^{g(x)} f(t) dt} & \formula{f(g(x
 
 \begin{center}
 \small
-\begin{tabular}{@{}lll@{}}
+\tablerowcolors
+\begin{tabular}{lll}
 \toprule
 \textbf{Función} & \textbf{Integral} & \textbf{Ejemplo} \\
 \midrule
@@ -220,7 +253,8 @@ Ambos Límites Variables & \formula{\int_{h(x)}^{g(x)} f(t) dt} & \formula{f(g(x
 
 \begin{center}
 \small
-\begin{tabular}{@{}lp{8cm}@{}}
+\tablerowcolors
+\begin{tabular}{lp{8cm}}
 \toprule
 \textbf{Método} & \textbf{Descripción y Fórmula} \\
 \midrule
@@ -245,7 +279,8 @@ Ambos Límites Variables & \formula{\int_{h(x)}^{g(x)} f(t) dt} & \formula{f(g(x
 
 \begin{center}
 \small
-\begin{tabular}{@{}lllp{4cm}@{}}
+\tablerowcolors
+\begin{tabular}{lllp{4cm}}
 \toprule
 \textbf{Tipo} & \textbf{Variables} & \textbf{Notación} & \textbf{Descripción} \\
 \midrule
@@ -262,7 +297,8 @@ Implícita & \formula{F(x,y)=0} & \formula{\frac{dy}{dx}} & Para funciones no de
 
 \begin{center}
 \small
-\begin{tabular}{@{}lllp{4cm}@{}}
+\tablerowcolors
+\begin{tabular}{lllp{4cm}}
 \toprule
 \textbf{Tipo} & \textbf{Notación} & \textbf{Resultado} & \textbf{Rol} \\
 \midrule
@@ -279,7 +315,8 @@ De línea & \formula{\int_C f(x,y) ds} & Número real & Integración sobre curva
 
 \begin{center}
 \small
-\begin{tabular}{@{}lll@{}}
+\tablerowcolors
+\begin{tabular}{lll}
 \toprule
 \textbf{Orden} & \textbf{Notación} & \textbf{Interpretación} \\
 \midrule
@@ -319,15 +356,7 @@ Enésima & \formula{f^{(n)}(x)} & Derivada de orden \formula{n} \\
 \end{itemize}
 \end{multicols}
 
-\begin{tcolorbox}[
-    enhanced,
-    sharp corners,
-    colback=gray!5!white,
-    colframe=black,
-    title=\textbf{Consejos Prácticos},
-    fonttitle=\bfseries,
-    drop shadow={black!30!white}
-]
+\begin{infobox}[title=\textbf{Consejos Prácticos}]
 \begin{itemize}
     \item \textbf{Siempre verifica} tu derivada/integral derivando/integrando hacia atrás
     \item \textbf{No olvides} la constante de integración \formula{C} en integrales indefinidas
@@ -335,7 +364,7 @@ Enésima & \formula{f^{(n)}(x)} & Derivada de orden \formula{n} \\
     \item \textbf{Usa notación clara} y muestra todos los pasos intermedios
     \item \textbf{Revisa dominios} especialmente en funciones logarítmicas y raíces
 \end{itemize}
-\end{tcolorbox}
+\end{infobox}
 
 \subsection*{Referencias y Recursos}
 \begin{itemize}
@@ -353,7 +382,7 @@ Enésima & \formula{f^{(n)}(x)} & Derivada de orden \formula{n} \\
 \section{Ejemplos Resueltos}
 
 \subsection{Ejemplo 1: Derivación Implícita}
-\begin{tcolorbox}[colback=gray!5!white, colframe=black]
+\begin{examplebox}
 \textbf{Problema}: Encuentra \formula{\frac{dy}{dx}} para \formula{x^2 + y^2 = 25}
 
 \textbf{Solución}:
@@ -363,10 +392,10 @@ Enésima & \formula{f^{(n)}(x)} & Derivada de orden \formula{n} \\
 2y \cdot \frac{dy}{dx} &= -2x \\
 \frac{dy}{dx} &= -\frac{x}{y}
 \end{align*}
-\end{tcolorbox}
+\end{examplebox}
 
 \subsection{Ejemplo 2: Integración por Partes}
-\begin{tcolorbox}[colback=gray!5!white, colframe=black]
+\begin{examplebox}
 \textbf{Problema}: Calcula \formula{\int x e^x dx}
 
 \textbf{Solución} (usando ILATE):
@@ -377,10 +406,10 @@ du = dx &\quad v = e^x \\
 &= x e^x - e^x + C \\
 &= e^x(x - 1) + C
 \end{align*}
-\end{tcolorbox}
+\end{examplebox}
 
 \subsection{Ejemplo 3: Sustitución Trigonométrica}
-\begin{tcolorbox}[colback=gray!5!white, colframe=black]
+\begin{examplebox}
 \textbf{Problema}: Calcula \formula{\int \frac{1}{\sqrt{9-x^2}} dx}
 
 \textbf{Solución}:
@@ -390,27 +419,28 @@ du = dx &\quad v = e^x \\
 &= \int \frac{3\cos\theta}{3\cos\theta} d\theta = \int 1 d\theta \\
 &= \theta + C = \arcsin\left(\frac{x}{3}\right) + C
 \end{align*}
-\end{tcolorbox}
+\end{examplebox}
 
 % ============================================
 % APÉNDICE: TABLA PARALELA
 % ============================================
-\newpage % Comienza la nueva sección de la tabla en una nueva página (Sección 1/2)
+\newpage
 \section{Tabla Paralela de Derivadas e Integrales Inmediatas (40 Fórmulas)}
 \label{sec:tabla_paralela_completa_parte1}
 
 \subsection*{Instrucciones}
-Esta tabla presenta derivadas inmediatas (columna izquierda) y sus correspondientes integrales inmediatas (columna derecha), organizadas en paralelo. Se utiliza una sintaxis compacta para maximizar la visibilidad de todas las fórmulas.
+Esta tabla presenta derivadas inmediatas (columna izquierda) y sus correspondientes integrales inmediatas (columna derecha), organizadas en paralelo.
 
 \begin{center}
 \captionof{table}{Formulario Paralelo de Derivadas e Integrales (Parte 1)}
-\footnotesize % Fuente pequeña para mayor compacidad
-\setlength{\tabcolsep}{4pt} % Reducir espacio entre columnas
-\begin{tabular}{|p{0.48\textwidth}|p{0.48\textwidth}|}
+\footnotesize
+\setlength{\tabcolsep}{6pt}
+\tablerowcolors
+\begin{tabular}{p{0.48\textwidth}p{0.48\textwidth}}
 \toprule
 \textbf{DERIVADAS INMEDIATAS} ($\deriv{}{x}[f(x)]$) & \textbf{INTEGRALES INMEDIATAS} ($\integral{f(x)}{x}$) \\
 \midrule
-\multicolumn{2}{|l|}{\textbf{1. Trigonométricas Básicas}} \\
+\multicolumn{2}{l}{\textbf{1. Trigonométricas Básicas}} \\
 \midrule
 $\dfrac{d}{dx}[\sin x] = \cos x$ & $\displaystyle\int \cos x \, dx = \sin x + C$ \\
 $\dfrac{d}{dx}[\cos x] = -\sin x$ & $\displaystyle\int \sin x \, dx = -\cos x + C$ \\
@@ -419,40 +449,40 @@ $\dfrac{d}{dx}[\cot x] = -\csc^2 x$ & $\displaystyle\int \csc^2 x \, dx = -\cot 
 $\dfrac{d}{dx}[\sec x] = \sec x \tan x$ & $\displaystyle\int \sec x \tan x \, dx = \sec x + C$ \\
 $\dfrac{d}{dx}[\csc x] = -\csc x \cot x$ & $\displaystyle\int \csc x \cot x \, dx = -\csc x + C$ \\
 \midrule
-\multicolumn{2}{|l|}{\textbf{2. Exponenciales}} \\
+\multicolumn{2}{l}{\textbf{2. Exponenciales}} \\
 \midrule
 $\dfrac{d}{dx}[e^x] = e^x$ & $\displaystyle\int e^x \, dx = e^x + C$ \\
 $\dfrac{d}{dx}[e^{kx}] = ke^{kx}$ & $\displaystyle\int e^{kx} \, dx = \frac{1}{k}e^{kx} + C$ \\
 $\dfrac{d}{dx}[a^x] = a^x \ln a$ & $\displaystyle\int a^x \, dx = \frac{a^x}{\ln a} + C$ \\
 \midrule
-\multicolumn{2}{|l|}{\textbf{3. Logarítmicas}} \\
+\multicolumn{2}{l}{\textbf{3. Logarítmicas}} \\
 \midrule
 $\dfrac{d}{dx}[\ln|x|] = \frac{1}{x}$ & $\displaystyle\int \frac{1}{x} \, dx = \ln|x| + C$ \\
 $\dfrac{d}{dx}[\ln|f(x)|] = \frac{f'(x)}{f(x)}$ & $\displaystyle\int \frac{f'(x)}{f(x)} \, dx = \ln|f(x)| + C$ \\
 $\dfrac{d}{dx}[\log_a x] = \frac{1}{x \ln a}$ & $\displaystyle\int \frac{1}{x \ln a} \, dx = \log_a |x| + C$ \\
 \midrule
-\multicolumn{2}{|l|}{\textbf{4. Potenciales/Algebraicas}} \\
+\multicolumn{2}{l}{\textbf{4. Potenciales/Algebraicas}} \\
 \midrule
 $\dfrac{d}{dx}[x^n] = nx^{n-1}$ & $\displaystyle\int x^n \, dx = \frac{x^{n+1}}{n+1} + C, \quad n \neq -1$ \\
 $\dfrac{d}{dx}[\sqrt{x}] = \frac{1}{2\sqrt{x}}$ & $\displaystyle\int \frac{1}{2\sqrt{x}} \, dx = \sqrt{x} + C$ \\
 $\dfrac{d}{dx}\left[\frac{1}{x}\right] = -\frac{1}{x^2}$ & $\displaystyle\int -\frac{1}{x^2} \, dx = \frac{1}{x} + C$ \\
 $\dfrac{d}{dx}\left[\frac{1}{x^n}\right] = -\frac{n}{x^{n+1}}$ & $\displaystyle\int -\frac{n}{x^{n+1}} \, dx = \frac{1}{x^n} + C$ \\
 \midrule
-\multicolumn{2}{|l|}{\textbf{5. Trigonométricas Inversas}} \\
+\multicolumn{2}{l}{\textbf{5. Trigonométricas Inversas}} \\
 \midrule
 $\dfrac{d}{dx}[\arcsin x] = \frac{1}{\sqrt{1-x^2}}$ & $\displaystyle\int \frac{1}{\sqrt{1-x^2}} \, dx = \arcsin x + C$ \\
 $\dfrac{d}{dx}[\arccos x] = -\frac{1}{\sqrt{1-x^2}}$ & $\displaystyle\int -\frac{1}{\sqrt{1-x^2}} \, dx = \arccos x + C$ \\
 $\dfrac{d}{dx}[\arctan x] = \frac{1}{1+x^2}$ & $\displaystyle\int \frac{1}{1+x^2} \, dx = \arctan x + C$ \\
-$\dfrac{d}{dx}[\operatorname{arccot} x] = -\frac{1}{1+x^2}$ & $\displaystyle\int -\frac{1}{1+x^2} \, dx = \operatorname{arccot} x + C$ \\
+$\dfrac{d}{dx}[\arccot x] = -\frac{1}{1+x^2}$ & $\displaystyle\int -\frac{1}{1+x^2} \, dx = \arccot x + C$ \\
 \midrule
-\multicolumn{2}{|l|}{\textbf{6. Hiperbólicas}} \\
+\multicolumn{2}{l}{\textbf{6. Hiperbólicas}} \\
 \midrule
 $\dfrac{d}{dx}[\sinh x] = \cosh x$ & $\displaystyle\int \cosh x \, dx = \sinh x + C$ \\
 $\dfrac{d}{dx}[\cosh x] = \sinh x$ & $\displaystyle\int \sinh x \, dx = \cosh x + C$ \\
 $\dfrac{d}{dx}[\tanh x] = \operatorname{sech}^2 x$ & $\displaystyle\int \operatorname{sech}^2 x \, dx = \tanh x + C$ \\
 $\dfrac{d}{dx}[\coth x] = -\operatorname{csch}^2 x$ & $\displaystyle\int -\operatorname{csch}^2 x \, dx = \coth x + C$ \\
 \midrule
-\multicolumn{2}{|l|}{\textbf{7. Funciones Compuestas Básicas}} \\
+\multicolumn{2}{l}{\textbf{7. Funciones Compuestas Básicas}} \\
 \midrule
 $\dfrac{d}{dx}[\sin(kx)] = k\cos(kx)$ & $\displaystyle\int k\cos(kx) \, dx = \sin(kx) + C$ \\
 $\dfrac{d}{dx}[\cos(kx)] = -k\sin(kx)$ & $\displaystyle\int -k\sin(kx) \, dx = \cos(kx) + C$ \\
@@ -463,41 +493,42 @@ $\dfrac{d}{dx}[\ln|ax|] = \frac{1}{x}$ & $\displaystyle\int \frac{1}{x} \, dx = 
 \end{tabular}
 \end{center}
 
-\newpage % <-- SALTO DE PÁGINA SOLICITADO
+\newpage
 
 \section{Continuación: Radicales, Especiales y Funciones No Inmediatas}
 \label{sec:tabla_paralela_continuacion}
 
 \begin{center}
 \captionof{table}{Formulario Paralelo de Derivadas e Integrales (Parte 2)}
-\footnotesize % Fuente pequeña para mayor compacidad
-\setlength{\tabcolsep}{4pt} % Reducir espacio entre columnas
-\begin{tabular}{|p{0.48\textwidth}|p{0.48\textwidth}|}
+\footnotesize
+\setlength{\tabcolsep}{6pt}
+\tablerowcolors
+\begin{tabular}{p{0.48\textwidth}p{0.48\textwidth}}
 \toprule
 \textbf{DERIVADAS INMEDIATAS} ($\deriv{}{x}[f(x)]$) & \textbf{INTEGRALES INMEDIATAS} ($\integral{f(x)}{x}$) \\
 \midrule
-\multicolumn{2}{|l|}{\textbf{8. Con Radicales}} \\
+\multicolumn{2}{l}{\textbf{8. Con Radicales}} \\
 \midrule
 $\dfrac{d}{dx}[\sqrt{1-x^2}] = \frac{-x}{\sqrt{1-x^2}}$ & $\displaystyle\int \frac{-x}{\sqrt{1-x^2}} \, dx = \sqrt{1-x^2} + C$ \\
 $\dfrac{d}{dx}[\sqrt{a^2-x^2}] = \frac{-x}{\sqrt{a^2-x^2}}$ & $\displaystyle\int \frac{-x}{\sqrt{a^2-x^2}} \, dx = \sqrt{a^2-x^2} + C$ \\
 $\dfrac{d}{dx}[\sqrt{x^2+a^2}] = \frac{x}{\sqrt{x^2+a^2}}$ & $\displaystyle\int \frac{x}{\sqrt{x^2+a^2}} \, dx = \sqrt{x^2+a^2} + C$ \\
 \midrule
-\multicolumn{2}{|l|}{\textbf{9. Con Funciones Trigonométricas Especiales (Integrales de Funciones Trigonométricas)}} \\
+\multicolumn{2}{l}{\textbf{9. Integrales de Funciones Trigonométricas}} \\
 \midrule
 $\dfrac{d}{dx}[\ln|\sin x|] = \cot x$ & $\displaystyle\int \cot x \, dx = \ln|\sin x| + C$ \\
 $\dfrac{d}{dx}[\ln|\cos x|] = -\tan x$ & $\displaystyle\int \tan x \, dx = -\ln|\cos x| + C$ \\
 $\dfrac{d}{dx}[\ln|\sec x+\tan x|] = \sec x$ & $\displaystyle\int \sec x \, dx = \ln|\sec x+\tan x| + C$ \\
 $\dfrac{d}{dx}[\ln|\csc x-\cot x|] = \csc x$ & $\displaystyle\int \csc x \, dx = \ln|\csc x-\cot x| + C$ \\
 \midrule
-\multicolumn{2}{|l|}{\textbf{10. Funciones que NO son Pares Perfectos (Ejemplos de Integrales por Partes)}} \\
+\multicolumn{2}{l}{\textbf{10. Funciones que requieren Integración por Partes}} \\
 \midrule
-$\dfrac{d}{dx}[\arcsinh x] = \frac{1}{\sqrt{1+x^2}}$ & $\displaystyle\int \frac{1}{\sqrt{1+x^2}} \, dx = \operatorname{arsinh} x + C$ \\
-$\dfrac{d}{dx}[\operatorname{arcosh} x] = \frac{1}{\sqrt{x^2-1}}$ & $\displaystyle\int \frac{1}{\sqrt{x^2-1}} \, dx = \operatorname{arcosh} x + C$ \\
+$\dfrac{d}{dx}[\arsinh x] = \frac{1}{\sqrt{1+x^2}}$ & $\displaystyle\int \frac{1}{\sqrt{1+x^2}} \, dx = \arsinh x + C$ \\
+$\dfrac{d}{dx}[\arcosh x] = \frac{1}{\sqrt{x^2-1}}$ & $\displaystyle\int \frac{1}{\sqrt{x^2-1}} \, dx = \arcosh x + C$ \\
 $\dfrac{d}{dx}[x\ln x - x] = \ln x$ & $\displaystyle\int \ln x \, dx = x\ln x - x + C$ \\
 $\dfrac{d}{dx}[x\sin x + \cos x] = x\cos x$ & $\displaystyle\int x\cos x \, dx = x\sin x + \cos x + C$ \\
 $\dfrac{d}{dx}[x\cos x - \sin x] = -x\sin x$ & $\displaystyle\int x\sin x \, dx = -x\cos x + \sin x + C$ \\
 $\dfrac{d}{dx}[xe^x - e^x] = xe^x$ & $\displaystyle\int xe^x \, dx = (x-1)e^x + C$ \\
-$\dfrac{d}{dx}\left[\frac{x^2}{2}\arctan x - \frac{x}{2} + \frac{1}{2}\arctan x\right] = x\arctan x$ & $\displaystyle\int x\arctan x \, dx = \frac{x^2}{2}\arctan x - \frac{x}{2} + \frac{1}{2}\arctan x + C$ \\
+$\dfrac{d}{dx}\!\left[\frac{x^2}{2}\arctan x - \frac{x}{2} + \frac{1}{2}\arctan x\right] = x\arctan x$ & $\displaystyle\int x\arctan x \, dx = \frac{x^2}{2}\arctan x - \frac{x}{2} + \frac{1}{2}\arctan x + C$ \\
 $\dfrac{d}{dx}[x\arcsin x + \sqrt{1-x^2}] = \arcsin x$ & $\displaystyle\int \arcsin x \, dx = x\arcsin x + \sqrt{1-x^2} + C$ \\
 $\dfrac{d}{dx}[x\arccos x - \sqrt{1-x^2}] = \arccos x$ & $\displaystyle\int \arccos x \, dx = x\arccos x - \sqrt{1-x^2} + C$ \\
 \bottomrule

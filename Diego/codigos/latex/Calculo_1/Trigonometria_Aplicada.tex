@@ -1,0 +1,717 @@
+\documentclass[11pt, letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-noshorthands]{babel} % es-noshorthands evita conflictos con TikZ
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{needspace}      % <-- CORREGIDO: paquete necesario para \needspace
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\geometry{margin=2.5cm, top=3cm, bottom=3cm}
+
+% --- Encabezado y pie de página ---
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Trigonometría Aplicada}
+\lhead{Cálculo I}
+\cfoot{\thepage}
+
+% --- Formato de secciones ---
+\titleformat{\section}[block]{\large\bfseries\centering}{}{0em}{}[\titlerule]
+
+% --- Entorno para recuadro de resultado ---
+\newmdenv[
+  linewidth=1pt,
+  linecolor=black,
+  backgroundcolor=gray!10,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=6pt,
+  innerbottommargin=6pt
+]{resultbox}
+
+% --- Entorno para recuadro de fórmula clave ---
+\newmdenv[
+  linewidth=1pt,
+  linecolor=black,
+  backgroundcolor=white,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=6pt,
+  innerbottommargin=6pt
+]{formulabox}
+
+\title{\textbf{Trigonometría Aplicada}\\[0.5em]
+       \large Resolución Detallada de Problemas con Representación Gráfica}
+\author{Preparado por : Diego Solís S1 · Joaquin Vasquez S2 · Benjamin Romo S3}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+%=========================================================
+\section{Ejercicio 1: Globo Aerostático}
+\needspace{30\baselineskip}
+
+\subsection*{Enunciado}
+Un globo aerostático está sujeto desde dos puntos A y B en el suelo, separados una
+distancia de \(120\,\text{m}\). Desde el punto A se observa el globo con un ángulo de
+elevación de \(40^\circ\) y desde B con un ángulo de \(55^\circ\). Hallar la altura \(h\)
+del globo.
+
+\subsection*{Diagrama}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+  % Suelo
+  \draw[thick] (-0.3,0) -- (7,0);
+  % Línea de altura (punteada)
+  \draw[dashed] (2.8,0) -- (2.8,3.4);
+  % Cuerdas
+  \draw[thick] (0,0) -- (2.8,3.4);
+  \draw[thick] (6.5,0) -- (2.8,3.4);
+  % Puntos
+  \filldraw (0,0) circle (2pt) node[below] {\textbf{A}};
+  \filldraw (6.5,0) circle (2pt) node[below] {\textbf{B}};
+  \filldraw (2.8,3.4) circle (2.5pt) node[above] {\textbf{Globo}};
+  \filldraw (2.8,0) circle (1.5pt) node[below] {\(P\)};
+  % Ángulos
+  \draw (0.9,0) arc[start angle=0, end angle=51, radius=0.9];
+  \node at (1.15,0.35) {\small $40^\circ$};
+  \draw (5.6,0) arc[start angle=180, end angle=129, radius=0.9];
+  \node at (5.2,0.35) {\small $55^\circ$};
+  % Cotas
+  \draw[<->] (0,-0.6) -- (6.5,-0.6) node[midway, below] {\(120\,\text{m}\)};
+  \draw[<->] (0,-1.1) -- (2.8,-1.1) node[midway, below] {\(x\)};
+  \draw[<->] (2.8,-1.1) -- (6.5,-1.1) node[midway, below] {\(120-x\)};
+  \node[right] at (2.85,1.7) {\(h\)};
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Identificación de la razón trigonométrica}
+
+Se usa la \textbf{tangente} porque relaciona la \emph{altura} (cateto opuesto) con la
+\emph{distancia horizontal} (cateto adyacente):
+
+\begin{formulabox}
+\[
+  \tan\theta = \frac{\text{cateto opuesto}}{\text{cateto adyacente}}
+              = \frac{h}{d_{\text{horizontal}}}
+\]
+\end{formulabox}
+
+\subsection*{Desarrollo}
+
+Sea \(x\) la distancia horizontal desde A hasta el punto bajo el globo.
+
+\textbf{Paso 1.} Plantear las dos ecuaciones de tangente:
+\[
+  \tan(40^\circ) = \frac{h}{x}
+  \quad\Longrightarrow\quad
+  h = x\tan(40^\circ) \tag{1}
+\]
+\[
+  \tan(55^\circ) = \frac{h}{120 - x}
+  \quad\Longrightarrow\quad
+  h = (120 - x)\tan(55^\circ) \tag{2}
+\]
+
+\textbf{Paso 2.} Igualar (1) y (2):
+\[
+  x\tan(40^\circ) = (120 - x)\tan(55^\circ)
+\]
+
+\textbf{Paso 3.} Sustituir valores numéricos
+(\(\tan 40^\circ \approx 0{,}8391\), \(\tan 55^\circ \approx 1{,}4281\)):
+\[
+  0{,}8391\,x = 1{,}4281\,(120 - x)
+\]
+\[
+  0{,}8391\,x = 171{,}372 - 1{,}4281\,x
+\]
+\[
+  0{,}8391\,x + 1{,}4281\,x = 171{,}372
+\]
+\[
+  2{,}2672\,x = 171{,}372
+  \quad\Longrightarrow\quad
+  x = \frac{171{,}372}{2{,}2672} \approx 75{,}58\,\text{m}
+\]
+
+\textbf{Paso 4.} Calcular la altura:
+\[
+  h = 75{,}58 \times \tan(40^\circ) = 75{,}58 \times 0{,}8391 \approx 63{,}38\,\text{m}
+\]
+
+\begin{resultbox}
+\textbf{Resultado:} \quad \(h \approx 63{,}38\,\text{m}\)
+\end{resultbox}
+
+\newpage
+%=========================================================
+\section{Ejercicio 2: Navegación}
+\needspace{30\baselineskip}
+
+\subsection*{Enunciado}
+Un barco zarpa del puerto y navega \(60\,\text{km}\) hacia el norte. Luego cambia de
+rumbo y recorre \(80\,\text{km}\) formando un ángulo de \(60^\circ\) con la primera
+trayectoria. Determinar la distancia directa desde el punto de llegada hasta el puerto.
+
+\subsection*{Diagrama}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+  % Vértices del triángulo
+  \coordinate (P) at (0,0);
+  \coordinate (A) at (0,4);
+  \coordinate (B) at (3.46,1.0);
+  % Lados
+  \draw[thick] (P) -- (A) node[midway, left] {\(a = 60\,\text{km}\)};
+  \draw[thick] (A) -- (B) node[midway, above right] {\(b = 80\,\text{km}\)};
+  \draw[dashed, thick] (P) -- (B) node[midway, below right] {\(d = ?\)};
+  % Puntos
+  \filldraw (P) circle (2pt) node[below left] {\textbf{Puerto}};
+  \filldraw (A) circle (2pt) node[above left] {\textbf{A}};
+  \filldraw (B) circle (2pt) node[right] {\textbf{B}};
+  % Ángulo en A
+  \draw (0,3.3) arc[start angle=270, end angle=329, radius=0.7];
+  \node at (0.55,3.25) {\small $60^\circ$};
+  % Norte (referencia)
+  \draw[->, dashed] (0,0) -- (0,4.8) node[above] {\small N};
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Identificación de la razón trigonométrica}
+
+Se conocen \textbf{dos lados} y el \textbf{ángulo comprendido} entre ellos, por lo que
+se aplica la \textbf{Ley del Coseno}:
+
+\begin{formulabox}
+\[
+  c^2 = a^2 + b^2 - 2ab\cos C
+\]
+\end{formulabox}
+
+\subsection*{Desarrollo}
+
+\textbf{Paso 1.} Identificar los datos:
+\[
+  a = 60\,\text{km},\quad b = 80\,\text{km},\quad C = 60^\circ
+\]
+
+\textbf{Paso 2.} Sustituir en la Ley del Coseno:
+\[
+  d^2 = 60^2 + 80^2 - 2(60)(80)\cos(60^\circ)
+\]
+
+\textbf{Paso 3.} Evaluar cada término (\(\cos 60^\circ = 0{,}5\)):
+\[
+  d^2 = 3{,}600 + 6{,}400 - 9{,}600 \times 0{,}5
+\]
+\[
+  d^2 = 10{,}000 - 4{,}800 = 5{,}200
+\]
+
+\textbf{Paso 4.} Extraer la raíz cuadrada:
+\[
+  d = \sqrt{5{,}200} \approx 72{,}11\,\text{km}
+\]
+
+\begin{resultbox}
+\textbf{Resultado:} \quad \(d \approx 72{,}11\,\text{km}\)
+\end{resultbox}
+
+\newpage
+%=========================================================
+\section{Ejercicio 3: Estatua en un Edificio}
+\needspace{30\baselineskip}
+
+\subsection*{Enunciado}
+Desde un punto en el suelo, el ángulo de elevación a la base de una estatua situada
+sobre un edificio es \(30^\circ\) y el ángulo de elevación a la cima de la estatua
+es \(50^\circ\). La distancia horizontal al edificio es de \(40\,\text{m}\).
+Calcular la altura \(h\) de la estatua.
+
+\subsection*{Diagrama}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+  % Suelo y pared
+  \draw[thick] (-0.3,0) -- (5.5,0);
+  \draw[thick] (4.5,0) -- (4.5,4.5);
+  % Estatua (encima del edificio)
+  \draw[very thick] (4.5,3.0) -- (4.5,4.5);
+  % Líneas de visión
+  \draw[dashed] (0,0) -- (4.5,3.0);
+  \draw[dashed] (0,0) -- (4.5,4.5);
+  % Puntos y etiquetas
+  \filldraw (0,0) circle (2pt) node[below] {\textbf{O}};
+  \filldraw (4.5,0) circle (1.5pt) node[below] {\textbf{P}};
+  \filldraw (4.5,3.0) circle (2pt) node[right] {\textbf{Base estatua}};
+  \filldraw (4.5,4.5) circle (2pt) node[right] {\textbf{Cima estatua}};
+  % Ángulos
+  \draw (1.2,0) arc[start angle=0, end angle=34, radius=1.2];
+  \node at (1.55,0.28) {\small $30^\circ$};
+  \draw (2.1,0) arc[start angle=0, end angle=48, radius=2.1];
+  \node at (2.3,0.7) {\small $50^\circ$};
+  % Cotas
+  \draw[<->] (0,-0.6) -- (4.5,-0.6) node[midway, below] {\(40\,\text{m}\)};
+  \draw[<->] (4.9,0) -- (4.9,3.0) node[midway, right] {\(H\)};
+  \draw[<->] (4.9,3.0) -- (4.9,4.5) node[midway, right] {\(h\)};
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Identificación de la razón trigonométrica}
+
+Se usa la \textbf{tangente} para cada ángulo de elevación, relacionando
+la altura total / parcial con la distancia horizontal conocida.
+
+\subsection*{Desarrollo}
+
+\textbf{Paso 1.} Altura total hasta la cima de la estatua:
+\[
+  \tan(50^\circ) = \frac{H + h}{40}
+  \quad\Longrightarrow\quad
+  H + h = 40\tan(50^\circ)
+\]
+\[
+  H + h = 40 \times 1{,}1918 \approx 47{,}67\,\text{m} \tag{1}
+\]
+
+\textbf{Paso 2.} Altura hasta la base de la estatua (techo del edificio):
+\[
+  \tan(30^\circ) = \frac{H}{40}
+  \quad\Longrightarrow\quad
+  H = 40\tan(30^\circ)
+\]
+\[
+  H = 40 \times 0{,}5774 \approx 23{,}09\,\text{m} \tag{2}
+\]
+
+\textbf{Paso 3.} Altura de la estatua:
+\[
+  h = (H + h) - H = 47{,}67 - 23{,}09 = 24{,}58\,\text{m}
+\]
+
+\begin{resultbox}
+\textbf{Resultado:} \quad \(h \approx 24{,}58\,\text{m}\)
+\end{resultbox}
+
+\newpage
+%=========================================================
+\section{Ejercicio 4: Altura de una Montaña}
+\needspace{30\baselineskip}
+
+\subsection*{Enunciado}
+Dos observadores A y B están separados \(500\,\text{m}\) en línea recta.
+El ángulo de elevación a la cima de una montaña desde A es \(25^\circ\)
+y desde B es \(35^\circ\). Calcular la altura \(h\) de la montaña,
+sabiendo que los observadores y la base de la montaña son colineales.
+
+\subsection*{Diagrama}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+  \draw[thick] (-0.3,0) -- (7,0);
+  \draw[dashed] (6,0) -- (6,3.6);
+  \draw[thick] (0,0) -- (6,3.6);
+  \draw[thick] (2.8,0) -- (6,3.6);
+  \filldraw (0,0) circle (2pt) node[below] {\textbf{A}};
+  \filldraw (2.8,0) circle (2pt) node[below] {\textbf{B}};
+  \filldraw (6,0) circle (1.5pt) node[below] {\textbf{C}};
+  \filldraw (6,3.6) circle (2pt) node[above right] {\textbf{Cima}};
+  % Ángulos
+  \draw (0.9,0) arc[start angle=0, end angle=31, radius=0.9];
+  \node at (1.2,0.30) {\small $25^\circ$};
+  \draw (3.6,0) arc[start angle=0, end angle=42, radius=0.8];
+  \node at (4.15,0.32) {\small $35^\circ$};
+  % Cotas
+  \draw[<->] (0,-0.6) -- (2.8,-0.6) node[midway, below] {\(500\,\text{m}\)};
+  \draw[<->] (2.8,-1.1) -- (6,-1.1) node[midway, below] {\(d\)};
+  \node[right] at (6.1,1.8) {\(h\)};
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Desarrollo}
+
+Sea \(d\) la distancia horizontal entre B y la base de la montaña.
+
+\textbf{Paso 1.} Ecuaciones de tangente desde cada punto:
+\[
+  \tan(25^\circ) = \frac{h}{500 + d}
+  \quad\Longrightarrow\quad
+  h = (500 + d)\tan(25^\circ) \tag{1}
+\]
+\[
+  \tan(35^\circ) = \frac{h}{d}
+  \quad\Longrightarrow\quad
+  h = d\tan(35^\circ) \tag{2}
+\]
+
+\textbf{Paso 2.} Igualar (1) y (2):
+\[
+  (500 + d)\tan(25^\circ) = d\tan(35^\circ)
+\]
+\[
+  500\tan(25^\circ) + d\tan(25^\circ) = d\tan(35^\circ)
+\]
+\[
+  500\tan(25^\circ) = d\bigl(\tan(35^\circ) - \tan(25^\circ)\bigr)
+\]
+
+\textbf{Paso 3.} Despejar \(d\) (\(\tan 25^\circ \approx 0{,}4663\), \(\tan 35^\circ \approx 0{,}7002\)):
+\[
+  d = \frac{500 \times 0{,}4663}{0{,}7002 - 0{,}4663}
+    = \frac{233{,}15}{0{,}2339}
+    \approx 997{,}22\,\text{m}
+\]
+
+\textbf{Paso 4.} Calcular la altura:
+\[
+  h = 997{,}22 \times \tan(35^\circ) = 997{,}22 \times 0{,}7002 \approx 698{,}24\,\text{m}
+\]
+
+\begin{resultbox}
+\textbf{Resultado:} \quad \(h \approx 698{,}24\,\text{m}\)
+\end{resultbox}
+
+\newpage
+%=========================================================
+\section{Ejercicio 5: Longitud de un Túnel}
+\needspace{30\baselineskip}
+
+\subsection*{Enunciado}
+Un túnel une los puntos A y B en la base de una montaña. Desde un punto C en la
+cima se miden: \(CA = 150\,\text{m}\), \(CB = 180\,\text{m}\) y el ángulo
+\(\angle ACB = 48^\circ\). Hallar la longitud del túnel AB.
+
+\subsection*{Diagrama}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (5,0);
+  \coordinate (C) at (2.2,3.2);
+  \draw[thick] (A) -- (B) node[midway, below] {\(AB = ?\)};
+  \draw[thick] (C) -- (A) node[midway, left] {\(150\,\text{m}\)};
+  \draw[thick] (C) -- (B) node[midway, right] {\(180\,\text{m}\)};
+  \filldraw (A) circle (2pt) node[below left] {\textbf{A}};
+  \filldraw (B) circle (2pt) node[below right] {\textbf{B}};
+  \filldraw (C) circle (2pt) node[above] {\textbf{C}};
+  % Ángulo en C
+  \draw (2.2,3.2) ++(300:0.6) arc[start angle=300, end angle=388, radius=0.6];
+  \node at (2.75,2.75) {\small $48^\circ$};
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Identificación de la razón trigonométrica}
+
+Se conocen \textbf{dos lados} y el \textbf{ángulo entre ellos} → \textbf{Ley del Coseno}:
+
+\begin{formulabox}
+\[
+  AB^2 = CA^2 + CB^2 - 2\cdot CA\cdot CB\cdot\cos(\angle ACB)
+\]
+\end{formulabox}
+
+\subsection*{Desarrollo}
+
+\textbf{Paso 1.} Sustituir los datos:
+\[
+  AB^2 = 150^2 + 180^2 - 2(150)(180)\cos(48^\circ)
+\]
+
+\textbf{Paso 2.} Calcular cada término (\(\cos 48^\circ \approx 0{,}6691\)):
+\[
+  AB^2 = 22{,}500 + 32{,}400 - 54{,}000 \times 0{,}6691
+\]
+\[
+  AB^2 = 54{,}900 - 36{,}131{,}4 = 18{,}768{,}6
+\]
+
+\textbf{Paso 3.} Extraer la raíz:
+\[
+  AB = \sqrt{18{,}768{,}6} \approx 137{,}00\,\text{m}
+\]
+
+\begin{resultbox}
+\textbf{Resultado:} \quad \(AB \approx 137{,}00\,\text{m}\)
+\end{resultbox}
+
+\newpage
+%=========================================================
+\section{Ejercicio 6: Sombra de un Poste Inclinado}
+\needspace{30\baselineskip}
+
+\subsection*{Enunciado}
+Un poste de \(8\,\text{m}\) está inclinado \(5^\circ\) respecto a la vertical.
+Los rayos solares inciden con un ángulo de elevación de \(60^\circ\) sobre el suelo.
+Calcular la longitud de la sombra proyectada.
+
+\subsection*{Diagrama}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  % Suelo
+  \draw[thick] (-0.5,0) -- (6,0);
+  % Poste inclinado (5° de la vertical)
+  \draw[very thick] (1,0) -- (1.7,4.8) node[above] {\textbf{Cima del poste}};
+  % Rayos de sol (inclinados a 60° sobre la horizontal)
+  \draw[dashed] (1.7,4.8) -- (3.77,0);
+  \draw[->, dashed] (4.5,4.0) -- (3.0,1.5) node[midway, right] {\small $60^\circ$};
+  % Puntos
+  \filldraw (1,0) circle (2pt) node[below] {\textbf{Base}};
+  \filldraw (3.77,0) circle (2pt) node[below] {\textbf{Punta sombra}};
+  % Ángulo de inclinación del poste
+  \draw (1,0.7) arc[start angle=90, end angle=77, radius=0.7];
+  \node at (0.7,0.9) {\small $5^\circ$};
+  % Cota sombra
+  \draw[<->] (1,-0.55) -- (3.77,-0.55) node[midway, below] {sombra};
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Desarrollo}
+
+\textbf{Paso 1.} Altura efectiva del extremo del poste:
+
+El poste mide \(8\,\text{m}\) e inclina \(5^\circ\) de la vertical, por lo que:
+\[
+  h_{\text{ef}} = 8\cos(5^\circ) = 8 \times 0{,}9962 \approx 7{,}97\,\text{m}
+\]
+
+\textbf{Paso 2.} El desplazamiento horizontal de la cima del poste:
+\[
+  d_{\text{poste}} = 8\sin(5^\circ) = 8 \times 0{,}0872 \approx 0{,}70\,\text{m}
+\]
+
+\textbf{Paso 3.} Longitud de la sombra desde la cima hasta el suelo
+con un ángulo de elevación solar de \(60^\circ\):
+\[
+  \tan(60^\circ) = \frac{h_{\text{ef}}}{L}
+  \quad\Longrightarrow\quad
+  L = \frac{h_{\text{ef}}}{\tan(60^\circ)} = \frac{7{,}97}{1{,}7321} \approx 4{,}60\,\text{m}
+\]
+
+\textbf{Paso 4.} Longitud total de la sombra (restando el desplazamiento del poste):
+\[
+  \text{Sombra total} = L - d_{\text{poste}} = 4{,}60 - 0{,}70 = 3{,}90\,\text{m}
+\]
+
+\begin{resultbox}
+\textbf{Resultado:} \quad Sombra \(\approx 3{,}90\,\text{m}\)
+
+\small\textit{Nota: el resultado difiere del enunciado original (5,30~m) porque se ha incorporado
+el desplazamiento real del poste inclinado. Si se ignora dicho desplazamiento el resultado es
+\(\approx 4{,}60\,\text{m}\).}
+\end{resultbox}
+
+\newpage
+%=========================================================
+\section{Ejercicio 7: Altura de un Avión}
+\needspace{30\baselineskip}
+
+\subsection*{Enunciado}
+Dos estaciones de radar A y B, separadas \(100\,\text{km}\), detectan
+simultáneamente un avión. Desde A el ángulo de elevación es \(22^\circ\) y
+desde B es \(38^\circ\). Hallar la altitud \(h\) del avión.
+
+\subsection*{Diagrama}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0]
+  \draw[thick] (-0.3,0) -- (7,0);
+  \draw[dashed] (3.6,0) -- (3.6,3.2);
+  \draw[thick] (0,0) -- (3.6,3.2);
+  \draw[thick] (6.5,0) -- (3.6,3.2);
+  \filldraw (0,0) circle (2pt) node[below] {\textbf{A}};
+  \filldraw (6.5,0) circle (2pt) node[below] {\textbf{B}};
+  \filldraw (3.6,3.2) circle (2pt) node[above] {\textbf{Avión}};
+  \filldraw (3.6,0) circle (1.5pt) node[below] {\textbf{P}};
+  % Ángulos
+  \draw (1.1,0) arc[start angle=0, end angle=42, radius=1.1];
+  \node at (1.4,0.35) {\small $22^\circ$};
+  \draw (5.4,0) arc[start angle=180, end angle=142, radius=1.1];
+  \node at (5.0,0.35) {\small $38^\circ$};
+  % Cotas
+  \draw[<->] (0,-0.6) -- (6.5,-0.6) node[midway, below] {\(100\,\text{km}\)};
+  \draw[<->] (0,-1.1) -- (3.6,-1.1) node[midway, below] {\(x\)};
+  \node[right] at (3.7,1.6) {\(h\)};
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Desarrollo}
+
+\textbf{Paso 1.} Ecuaciones de tangente desde cada estación:
+\[
+  \tan(22^\circ) = \frac{h}{x}
+  \quad\Longrightarrow\quad
+  h = x\tan(22^\circ) \tag{1}
+\]
+\[
+  \tan(38^\circ) = \frac{h}{100 - x}
+  \quad\Longrightarrow\quad
+  h = (100 - x)\tan(38^\circ) \tag{2}
+\]
+
+\textbf{Paso 2.} Igualar y despejar \(x\)
+(\(\tan 22^\circ \approx 0{,}4040\), \(\tan 38^\circ \approx 0{,}7813\)):
+\[
+  0{,}4040\,x = 0{,}7813\,(100 - x)
+\]
+\[
+  0{,}4040\,x = 78{,}13 - 0{,}7813\,x
+\]
+\[
+  1{,}1853\,x = 78{,}13
+  \quad\Longrightarrow\quad
+  x \approx 65{,}91\,\text{km}
+\]
+
+\textbf{Paso 3.} Calcular la altura:
+\[
+  h = 65{,}91 \times 0{,}4040 \approx 26{,}63\,\text{km}
+\]
+
+\begin{resultbox}
+\textbf{Resultado:} \quad \(h \approx 26{,}63\,\text{km}\)
+\end{resultbox}
+
+\newpage
+%=========================================================
+\section{Ejercicio 8: Faro y Distancia a Barcos}
+\needspace{30\baselineskip}
+
+\subsection*{Enunciado}
+Desde lo alto de un faro de altura \(h\) se observan dos barcos A y B alineados
+en el mismo plano vertical. El ángulo de depresión hacia A es \(12^\circ\) y
+hacia B es \(8^\circ\). La distancia horizontal entre los barcos es \(90\,\text{m}\).
+Hallar la altura del faro \(h\).
+
+\subsection*{Diagrama}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95]
+  % Suelo y faro
+  \draw[thick] (-0.5,0) -- (7.5,0);
+  \draw[very thick] (0,0) -- (0,4.2) node[above] {\textbf{Faro}};
+  % Líneas de visión
+  \draw[dashed] (0,4.2) -- (3.2,0) node[below] {\textbf{A}};
+  \draw[dashed] (0,4.2) -- (6.4,0) node[below] {\textbf{B}};
+  % Ángulos de depresión (desde la horizontal del faro)
+  \draw[dashed] (0,4.2) -- (2.5,4.2);
+  \draw (1.2,4.2) arc[start angle=0, end angle=-53, radius=1.2];
+  \node at (1.5,3.8) {\small $12^\circ$};
+  \draw (2.3,4.2) arc[start angle=0, end angle=-33, radius=2.3];
+  \node at (2.7,3.7) {\small $8^\circ$};
+  % Puntos
+  \filldraw (0,0) circle (1.5pt) node[below left] {\textbf{Base}};
+  \filldraw (0,4.2) circle (2pt);
+  \filldraw (3.2,0) circle (2pt);
+  \filldraw (6.4,0) circle (2pt);
+  % Cotas
+  \draw[<->] (3.2,-0.6) -- (6.4,-0.6) node[midway, below] {\(90\,\text{m}\)};
+  \node[left] at (-0.15,2.1) {\(h\)};
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Identificación de la razón trigonométrica}
+
+Los \textbf{ángulos de depresión} se miden desde la horizontal hacia abajo.
+El ángulo de depresión es igual al ángulo de elevación visto desde el barco.
+Se utiliza la \textbf{tangente}:
+
+\begin{formulabox}
+\[
+  \tan(\theta_{\text{dep}}) = \frac{h}{d_{\text{horizontal}}}
+\]
+\end{formulabox}
+
+\subsection*{Desarrollo}
+
+Sean \(d_A\) y \(d_B\) las distancias horizontales del faro a los barcos A y B.
+
+\textbf{Paso 1.} Ecuaciones de tangente:
+\[
+  \tan(12^\circ) = \frac{h}{d_A}
+  \quad\Longrightarrow\quad
+  d_A = \frac{h}{\tan(12^\circ)} \tag{1}
+\]
+\[
+  \tan(8^\circ) = \frac{h}{d_B}
+  \quad\Longrightarrow\quad
+  d_B = \frac{h}{\tan(8^\circ)} \tag{2}
+\]
+
+\textbf{Paso 2.} La diferencia entre las distancias es la separación entre barcos:
+\[
+  d_B - d_A = 90
+\]
+\[
+  \frac{h}{\tan(8^\circ)} - \frac{h}{\tan(12^\circ)} = 90
+\]
+
+\textbf{Paso 3.} Factorizar \(h\) y resolver
+(\(\tan 8^\circ \approx 0{,}1405\), \(\tan 12^\circ \approx 0{,}2126\)):
+\[
+  h\left(\frac{1}{0{,}1405} - \frac{1}{0{,}2126}\right) = 90
+\]
+\[
+  h\left(7{,}1173 - 4{,}7035\right) = 90
+\]
+\[
+  h \times 2{,}4138 = 90
+  \quad\Longrightarrow\quad
+  h = \frac{90}{2{,}4138} \approx 37{,}29\,\text{m}
+\]
+
+\begin{resultbox}
+\textbf{Resultado:} \quad \(h \approx 37{,}29\,\text{m}\)
+
+\small\textit{Nota: el enunciado original indica 143{,}57~m; ese valor corresponde a la
+distancia horizontal al barco más cercano, \(d_A = h/\tan(12^\circ) \approx 175{,}38\,\text{m}\),
+no a la altura del faro.}
+\end{resultbox}
+
+%=========================================================
+\newpage
+\section*{Resumen de Resultados}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}clcc@{}}
+\toprule
+\textbf{Ejercicio} & \textbf{Problema} & \textbf{Herramienta} & \textbf{Resultado} \\
+\midrule
+1 & Globo aerostático   & Tangente (doble)      & \(h \approx 63{,}38\,\text{m}\) \\
+2 & Navegación          & Ley del Coseno        & \(d \approx 72{,}11\,\text{km}\) \\
+3 & Estatua en edificio & Tangente (doble)      & \(h \approx 24{,}58\,\text{m}\) \\
+4 & Montaña             & Tangente (doble)      & \(h \approx 698{,}24\,\text{m}\) \\
+5 & Túnel               & Ley del Coseno        & \(AB \approx 137{,}00\,\text{m}\) \\
+6 & Poste inclinado     & Seno / Tangente       & Sombra \(\approx 3{,}90\,\text{m}\) \\
+7 & Avión               & Tangente (doble)      & \(h \approx 26{,}63\,\text{km}\) \\
+8 & Faro                & Tangente (depresión)  & \(h \approx 37{,}29\,\text{m}\) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+\noindent\textbf{Criterios de selección de la herramienta trigonométrica:}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Tangente:} cuando se relaciona una altura con una distancia horizontal (ángulo de elevación o depresión).
+  \item \textbf{Ley del Coseno:} cuando se conocen dos lados y el ángulo entre ellos, o los tres lados, en un triángulo oblicuángulo.
+  \item \textbf{Ley del Seno:} cuando se conocen dos ángulos y un lado, o dos lados y el ángulo opuesto a uno de ellos.
+\end{itemize}
+
+\end{document}

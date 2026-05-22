@@ -3,72 +3,92 @@
 #include <string.h>
 #include "at_clientes.h"
 
-
-// Inserta un CLIENTE al final de la lista
-CLIENTE* insertar_lista(CLIENTE *lista,int numero, char nombre[], char accion[]) {
+CLIENTE* encolar(CLIENTE *cola, int numero, const char *nombre, const char *tramite) {
     CLIENTE *nuevo = (CLIENTE*)malloc(sizeof(CLIENTE));
-    if(nuevo == NULL) return lista;
-
-    strcpy(nuevo->nombre, nombre);
-    strcpy(nuevo->accion, accion);
+    if (nuevo == NULL) return cola;
     nuevo->numero = numero;
+    strcpy(nuevo->nombre, nombre);
+    strcpy(nuevo->tramite, tramite);
     nuevo->sig = NULL;
 
-    if(lista == NULL){
-        return nuevo;
-    }else{
-        CLIENTE *aux = lista;
-        while(aux->sig != NULL){
-            aux = aux->sig;
-        }
-        aux->sig = nuevo;
-        return lista;
-    }
+    if (cola == NULL) return nuevo;
+
+    CLIENTE *aux = cola;
+    while (aux->sig != NULL) aux = aux->sig;
+    aux->sig = nuevo;
+    return cola;
 }
 
-// 1. Leer datos desde el archivo 'acciones.txt'
-CLIENTE* leer_archivo(CLIENTE *lista) {
-    FILE *archivo = fopen("acciones.txt", "r");
-
-    if (archivo == NULL) {
-        printf("\nError: No se encontro 'acciones.txt''\n");
-        return lista;
+CLIENTE* desencolar(CLIENTE *cola, int *num, char nombre[], char tramite[]) {
+    if (cola == NULL) {
+        *num = -1;
+        nombre[0] = '\0';
+        tramite[0] = '\0';
+        return NULL;
     }
-
-    // Limpiamos la lista actual para evitar duplicados si se lee dos veces
-    liberar_lista(lista);
-    lista = NULL;
-
-    while (fscanf(archivo, "%d %s %s", numero, nombre, accion) != EOF) {
-        lista = insertar_lista(lista, numero, ombre, accion);
-    }
-
-    fclose(archivo);
-    printf("\n[OK] Datos cargados exitosamente.\n");
-    return lista;
+    CLIENTE *primero = cola;
+    *num = primero->numero;
+    strcpy(nombre, primero->nombre);
+    strcpy(tramite, primero->tramite);
+    cola = cola->sig;
+    free(primero);
+    return cola;
 }
 
-// 2. Mostrar todos los CLIENTEs por pantalla
-void mostrar_lista(CLIENTE *lista) {
-    if (lista == NULL) {
-        printf("\nLa lista esta vacia.\n");
+void mostrar_cola(CLIENTE *cola) {
+    if (cola == NULL) {
+        printf("\nCola de espera vacia.\n");
         return;
     }
-    CLIENTE *aux = lista;
-    printf("\n--- PERSONAS EN ESPERA ---\n");
-    printf("%-15s %-20s %-5s\n", "NUMERO", "NOMBRE", "ACCION");
+    printf("\n--- COLA DE ATENCION ---\n");
+    printf("%-8s %-20s %-15s\n", "NUMERO", "NOMBRE", "TRAMITE");
+    CLIENTE *aux = cola;
     while (aux != NULL) {
-        printf("%-15s %-20s %.1f\n", aux->numero, aux->nombre, aux->accion);
+        printf("%-8d %-20s %-15s\n", aux->numero, aux->nombre, aux->tramite);
         aux = aux->sig;
     }
 }
 
-// Libera la memoria dinámica
-void liberar_lista(CLIENTE *lista) {
+void guardar_pendientes(CLIENTE *cola, const char *archivo) {
+    if (cola == NULL) {
+        printf("\nNo hay clientes pendientes.\n");
+        return;
+    }
+    FILE *f = fopen(archivo, "w");
+    if (f == NULL) {
+        printf("Error al crear archivo.\n");
+        return;
+    }
+    CLIENTE *aux = cola;
+    while (aux != NULL) {
+        fprintf(f, "%d %s %s\n", aux->numero, aux->nombre, aux->tramite);
+        aux = aux->sig;
+    }
+    fclose(f);
+    printf("\nClientes pendientes guardados en '%s'\n", archivo);
+}
+
+void liberar_cola(CLIENTE *cola) {
     CLIENTE *aux;
-    while (lista != NULL) {
-        aux = lista;
-        lista = lista->sig;
+    while (cola != NULL) {
+        aux = cola;
+        cola = cola->sig;
         free(aux);
     }
+}
+
+CLIENTE* cargar_clientes_desde_archivo(CLIENTE *cola, const char *archivo) {
+    FILE *f = fopen(archivo, "r");
+    if (f == NULL) {
+        printf("\nError: No se encontro '%s'\n", archivo);
+        return cola;
+    }
+    int num;
+    char nombre[50], tramite[50];
+    while (fscanf(f, "%d %s %s", &num, nombre, tramite) == 3) {
+        cola = encolar(cola, num, nombre, tramite);
+    }
+    fclose(f);
+    printf("\nClientes cargados desde '%s'.\n", archivo);
+    return cola;
 }

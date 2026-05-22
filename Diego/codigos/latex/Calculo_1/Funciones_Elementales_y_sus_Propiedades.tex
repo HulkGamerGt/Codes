@@ -1,0 +1,1153 @@
+\documentclass[12pt,a4paper]{article}
+
+% Codificación y lenguaje
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+
+% Matemáticas
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{cancel}
+
+% Diseño
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+
+% Gráficos
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween} % por buena práctica
+
+% Hiperenlaces
+\usepackage{hyperref} % antes estaba hyperref (mal escrito)
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Cajas
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\newtcolorbox{funcbox}[2][]{
+    colback=blue!5!white,
+    colframe=blue!75!black,
+    fonttitle=\bfseries,
+    title={#2},
+    #1
+}
+
+% Definición de dominio y recorrido en español
+\newcommand{\Dominio}{\ensuremath{\mathrm{Dom}}}
+\newcommand{\Recorrido}{\ensuremath{\mathrm{Rec}}}
+
+\begin{document}
+
+% Portada
+\title{\textbf{Funciones Elementales y sus Propiedades}\\ \Large Un repaso completo para estudiantes}
+\author{}
+\date{\today}
+\maketitle
+
+\tableofcontents
+\newpage
+
+%=====================================================================
+% APARTADO 1: FUNCIONES INICIALES
+%=====================================================================
+\section{Funciones Iniciales que Deben Conocer los Estudiantes}
+
+A continuación presentamos las funciones fundamentales, sus gráficas, dominio y recorrido (rango). Se incluyen tanto las formas canónicas como variantes con desplazamientos.
+
+%--- Lineal ---
+\subsection{Función Lineal}
+\begin{funcbox}{Función Lineal $f(x)=mx+b$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Definición:} $f:\mathbb{R}\to\mathbb{R}$, $f(x)=mx+b$, con $m,b\in\mathbb{R}$.\\
+    \textbf{Dominio:} $\Dominio(f)=\mathbb{R}$\\
+    \textbf{Recorrido:} 
+    \begin{itemize}
+        \item Si $m\neq 0$: $\Recorrido(f)=\mathbb{R}$
+        \item Si $m=0$: función constante, $\Recorrido(f)=\{b\}$
+    \end{itemize}
+    \textbf{Características:}
+    \begin{itemize}
+        \item $m$ es la pendiente, indica la inclinación.
+        \item $b$ es la ordenada al origen (corte con eje $y$).
+        \item Gráfica: línea recta.
+        \item Si $m>0$, la función es creciente; si $m<0$, decreciente.
+    \end{itemize}
+    \textbf{Ejemplo gráfico:} $f(x)=2x-1$
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-2.5, xmax=2.5,
+            ymin=-3.5, ymax=3.5,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=2x-1$}
+        ]
+        \addplot[domain=-2:2, samples=100, blue, thick] {2*x-1};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+% --- Lineal con desplazamiento ---
+\subsection{Función Lineal con Desplazamiento}
+\begin{funcbox}{Función Lineal Desplazada: $f(x)=m(x-h)+k$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Forma general:} $f(x)=m(x-h)+k$\\
+    Pasa por el punto $(h,k)$ y tiene pendiente $m$.\\
+    \textbf{Dominio:} $\mathbb{R}$\\
+    \textbf{Recorrido:} $\mathbb{R}$ (si $m\neq0$).\\
+    \textbf{Características:}
+    \begin{itemize}
+        \item Es la recta con pendiente $m$ que pasa por $(h,k)$.
+        \item Si $h=0$, se obtiene la forma $mx+k$; si $k=0$ es $m(x-h)$.
+    \end{itemize}
+    \textbf{Ejemplo:} $f(x)=2(x-1)+3$ (pasa por $(1,3)$, pendiente $2$)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-1, xmax=3,
+            ymin=-1, ymax=6,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=2(x-1)+3$}
+        ]
+        \addplot[domain=-0.5:2.5, samples=100, blue, thick] {2*(x-1)+3};
+        \addplot[mark=*, only marks, red] coordinates {(1,3)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+%--- Cuadrática ---
+\subsection{Función Cuadrática}
+\begin{funcbox}{Función Cuadrática $f(x)=ax^2+bx+c$ \quad ($a\neq 0$)}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Forma canónica:} $f(x)=a(x-h)^2+k$ con vértice $(h,k)$.\\
+    \textbf{Dominio:} $\Dominio(f)=\mathbb{R}$\\
+    \textbf{Recorrido:}
+    \begin{itemize}
+        \item Si $a>0$: $[k,\infty)$
+        \item Si $a<0$: $(-\infty, k]$
+    \end{itemize}
+    \textbf{Características:}
+    \begin{itemize}
+        \item Gráfica: parábola vertical.
+        \item $a$ determina la abertura: $|a|>1$, más estrecha; $0<|a|<1$, más ancha.
+        \item El vértice es el punto mínimo (si $a>0$) o máximo (si $a<0$).
+        \item Eje de simetría: recta $x=h$.
+    \end{itemize}
+    \textbf{Ejemplo:} $f(x)=x^2$ (vértice $(0,0)$, $a=1$)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-2.5, xmax=2.5,
+            ymin=-1, ymax=4,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=x^2$}
+        ]
+        \addplot[domain=-2:2, samples=100, blue, thick] {x^2};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+% --- Cuadrática desplazada ---
+\subsection{Función Cuadrática Desplazada}
+\begin{funcbox}{Función Cuadrática Desplazada: $f(x)=a(x-h)^2+k$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Ejemplo concreto:} $f(x)=2(x-1)^2+3$\\
+    Vértice: $(1,3)$; $a=2>0$, parábola hacia arriba.\\
+    \textbf{Dominio:} $\mathbb{R}$\\
+    \textbf{Recorrido:} $[3,\infty)$\\
+    \textbf{Características:}
+    \begin{itemize}
+        \item El vértice se ha trasladado a $(h,k)$.
+        \item El eje de simetría es $x=h$.
+        \item El signo de $a$ sigue determinando la orientación.
+    \end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-1, xmax=3.5,
+            ymin=-2, ymax=8,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=2(x-1)^2+3$}
+        ]
+        \addplot[domain=-0.5:2.5, samples=100, blue, thick] {2*(x-1)^2+3};
+        \addplot[mark=*, only marks, red] coordinates {(1,3)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+%--- Valor absoluto ---
+\subsection{Función Valor Absoluto}
+\begin{funcbox}{Función Valor Absoluto $f(x)=|x|$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Definición:} $f(x)=|x|=\begin{cases} 
+                x, & x\geq 0 \\
+                -x, & x<0 
+            \end{cases}$\\
+    \textbf{Dominio:} $\Dominio(f)=\mathbb{R}$\\
+    \textbf{Recorrido:} $[0,\infty)$\\
+    \textbf{Características:}
+    \begin{itemize}
+        \item Gráfica en forma de ``V''.
+        \item Punto anguloso en el origen.
+        \item Función par: $f(-x)=f(x)$.
+        \item Decreciente en $(-\infty,0]$, creciente en $[0,\infty)$.
+    \end{itemize}
+    \textbf{Gráfica:}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-2.5, xmax=2.5,
+            ymin=-0.5, ymax=3.5,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=|x|$}
+        ]
+        \addplot[domain=-2.5:2.5, samples=200, blue, thick] {abs(x)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+% --- Valor absoluto con desplazamiento ---
+\subsection{Función Valor Absoluto con Desplazamiento}
+\begin{funcbox}{Función Valor Absoluto Desplazada: $f(x)=a|x-h|+k$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Forma general:} $f(x)=a|x-h|+k$\\
+    Vértice en $(h,k)$.\\
+    \textbf{Dominio:} $\mathbb{R}$\\
+    \textbf{Recorrido:}
+    \begin{itemize}
+        \item Si $a>0$: $[k,\infty)$
+        \item Si $a<0$: $(-\infty,k]$
+    \end{itemize}
+    \textbf{Ejemplo:} $f(x)=|x-2|+1$ (vértice $(2,1)$, abre hacia arriba)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-1, xmax=4.5,
+            ymin=-1, ymax=5,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=|x-2|+1$}
+        ]
+        \addplot[domain=-0.5:4.5, samples=200, blue, thick] {abs(x-2)+1};
+        \addplot[mark=*, only marks, red] coordinates {(2,1)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+%--- Cúbica (sin desplazamiento) ---
+\subsection{Función Cúbica (forma básica)}
+\begin{funcbox}{Función Cúbica $f(x)=x^3$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Definición:} $f(x)=x^3$\\
+    \textbf{Dominio:} $\mathbb{R}$\\
+    \textbf{Recorrido:} $\mathbb{R}$\\
+    \textbf{Características:}
+    \begin{itemize}
+        \item Gráfica en forma de ``S'' alargada.
+        \item Función impar: $f(-x)=-f(x)$ (simetría respecto al origen).
+        \item Creciente en todo $\mathbb{R}$.
+        \item Punto de inflexión en $(0,0)$.
+    \end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-2.5, xmax=2.5,
+            ymin=-4, ymax=4,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=x^3$}
+        ]
+        \addplot[domain=-2:2, samples=200, blue, thick] {x^3};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+%--- Cúbica con desplazamiento ---
+\subsection{Función Cúbica con Desplazamiento}
+\begin{funcbox}{Función Cúbica desplazada: $f(x)=a(x-h)^3+k$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Forma general:} $f(x)=a(x-h)^3+k$.\\
+    \textbf{Dominio:} $\mathbb{R}$\\
+    \textbf{Recorrido:} $\mathbb{R}$ (si $a\neq 0$).\\
+    \textbf{Características:}
+    \begin{itemize}
+        \item El punto de inflexión se traslada a $(h,k)$.
+        \item La gráfica mantiene la forma cúbica básica pero desplazada.
+        \item Si $a<0$, se refleja verticalmente (decreciente global).
+    \end{itemize}
+    \textbf{Ejemplo:} $f(x)=(x-1)^3+2$ (desplazamiento a la derecha 1, arriba 2)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-1.5, xmax=3.5,
+            ymin=-2, ymax=6,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=(x-1)^3+2$}
+        ]
+        \addplot[domain=-1:3, samples=200, blue, thick] {(x-1)^3+2};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+%--- Raíz cuadrada ---
+\subsection{Función Raíz Cuadrada}
+\begin{funcbox}{Función Raíz Cuadrada $f(x)=\sqrt{x}$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Definición:} $f(x)=\sqrt{x}=x^{1/2}$ para $x\geq 0$.\\
+    \textbf{Dominio:} $[0,\infty)$\\
+    \textbf{Recorrido:} $[0,\infty)$\\
+    \textbf{Características:}
+    \begin{itemize}
+        \item Creciente en todo su dominio.
+        \item Cóncava hacia abajo.
+        \item Punto de inicio en $(0,0)$.
+        \item La pendiente decrece al aumentar $x$.
+    \end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-0.5, xmax=5,
+            ymin=-0.5, ymax=3,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=\sqrt{x}$}
+        ]
+        \addplot[domain=0:5, samples=200, blue, thick] {sqrt(x)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+% --- Raíz cuadrada con desplazamiento ---
+\subsection{Función Raíz Cuadrada con Desplazamiento}
+\begin{funcbox}{Función Raíz Cuadrada Desplazada: $f(x)=a\sqrt{x-h}+k$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Forma general:} $f(x)=a\sqrt{x-h}+k$ con $x\ge h$.\\
+    Punto de inicio: $(h,k)$.\\
+    \textbf{Dominio:} $[h,\infty)$\\
+    \textbf{Recorrido:}
+    \begin{itemize}
+        \item Si $a>0$: $[k,\infty)$
+        \item Si $a<0$: $(-\infty,k]$
+    \end{itemize}
+    \textbf{Ejemplo:} $f(x)=\sqrt{x-2}+1$ (inicio en $(2,1)$)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=1.5, xmax=6,
+            ymin=-0.5, ymax=4,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=\sqrt{x-2}+1$}
+        ]
+        \addplot[domain=2:6, samples=200, blue, thick] {sqrt(x-2)+1};
+        \addplot[mark=*, only marks, red] coordinates {(2,1)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+%--- Raíz cúbica ---
+\subsection{Función Raíz Cúbica}
+\begin{funcbox}{Función Raíz Cúbica $f(x)=\sqrt[3]{x}=x^{1/3}$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Definición:} $f(x)=\sqrt[3]{x}$ para todo $x\in\mathbb{R}$.\\
+    \textbf{Dominio:} $\mathbb{R}$\\
+    \textbf{Recorrido:} $\mathbb{R}$\\
+    \textbf{Características:}
+    \begin{itemize}
+        \item Función impar (simétrica respecto al origen).
+        \item Creciente en todo $\mathbb{R}$.
+        \item Punto de inflexión en $(0,0)$.
+        \item Para $x>0$, $f(x)>0$; para $x<0$, $f(x)<0$.
+    \end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-2.5, xmax=2.5,
+            ymin=-2.5, ymax=2.5,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=\sqrt[3]{x}$}
+        ]
+        \addplot[domain=-2:2, samples=200, blue, thick] {sign(x)*abs(x)^(1/3)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+% --- Raíz cúbica con desplazamiento ---
+\subsection{Función Raíz Cúbica con Desplazamiento}
+\begin{funcbox}{Función Raíz Cúbica Desplazada: $f(x)=a\sqrt[3]{x-h}+k$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Forma general:} $f(x)=a\sqrt[3]{x-h}+k$\\
+    Punto de inflexión: $(h,k)$.\\
+    \textbf{Dominio:} $\mathbb{R}$\\
+    \textbf{Recorrido:} $\mathbb{R}$\\
+    \textbf{Ejemplo:} $f(x)=\frac{1}{2}\sqrt[3]{x+1}+2$ (inflexión en $(-1,2)$)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-3, xmax=3,
+            ymin=0, ymax=4,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=\frac{1}{2}\sqrt[3]{x+1}+2$}
+        ]
+        \addplot[domain=-3:3, samples=200, blue, thick] {0.5*sign(x+1)*abs(x+1)^(1/3)+2};
+        \addplot[mark=*, only marks, red] coordinates {(-1,2)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+%--- Logarítmica ---
+\subsection{Función Logarítmica}
+\begin{funcbox}{Función Logarítmica $f(x)=\log_a(x)$ con $a>0$, $a\neq 1$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Definición:} $y=\log_a(x) \iff a^y=x$.\\
+    \textbf{Dominio:} $(0,\infty)$\\
+    \textbf{Recorrido:} $\mathbb{R}$\\
+    \textbf{Características:}
+    \begin{itemize}
+        \item Si $a>1$, es creciente; si $0<a<1$, decreciente.
+        \item Asíntota vertical en $x=0$.
+        \item Pasa por $(1,0)$ y $(a,1)$.
+        \item Logaritmo natural: $\ln(x):=\log_e(x)$.
+    \end{itemize}
+    \textbf{Ejemplo:} $f(x)=\ln(x)$
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-0.5, xmax=5,
+            ymin=-3, ymax=2.5,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=\ln(x)$}
+        ]
+        \addplot[domain=0.05:5, samples=200, blue, thick] {ln(x)};
+        \draw[dashed] (axis cs:0,-3) -- (axis cs:0,2.5);
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+% --- Logarítmica con desplazamiento ---
+\subsection{Función Logarítmica con Desplazamiento}
+\begin{funcbox}{Función Logarítmica Desplazada: $f(x)=a\log_b(x-h)+k$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Forma general:} $f(x)=a\log_b(x-h)+k$\\
+    Asíntota vertical en $x=h$.\\
+    \textbf{Dominio:} $(h,\infty)$\\
+    \textbf{Recorrido:} $\mathbb{R}$\\
+    \textbf{Ejemplo:} $f(x)=\ln(x-1)+2$ (asíntota $x=1$, desplazada arriba 2)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=0.5, xmax=5,
+            ymin=-2, ymax=5,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=\ln(x-1)+2$}
+        ]
+        \addplot[domain=1.05:5, samples=200, blue, thick] {ln(x-1)+2};
+        \draw[dashed] (axis cs:1,-2) -- (axis cs:1,5);
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+%--- Exponencial ---
+\subsection{Función Exponencial}
+\begin{funcbox}{Función Exponencial $f(x)=a^x$ con $a>0$, $a\neq 1$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Definición:} $f(x)=a^x$. Caso típico: $f(x)=e^x$.\\
+    \textbf{Dominio:} $\mathbb{R}$\\
+    \textbf{Recorrido:} $(0,\infty)$\\
+    \textbf{Características:}
+    \begin{itemize}
+        \item Si $a>1$, creciente; si $0<a<1$, decreciente.
+        \item Asíntota horizontal en $y=0$.
+        \item Pasa por $(0,1)$ y $(1,a)$.
+        \item Inversa de la función logarítmica.
+    \end{itemize}
+    \textbf{Ejemplo:} $f(x)=e^x$
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-3, xmax=3,
+            ymin=-1, ymax=5,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=e^x$}
+        ]
+        \addplot[domain=-3:1.6, samples=200, blue, thick] {exp(x)};
+        \draw[dashed] (axis cs:-3,0) -- (axis cs:3,0);
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+% --- Exponencial con desplazamiento ---
+\subsection{Función Exponencial con Desplazamiento}
+\begin{funcbox}{Función Exponencial Desplazada: $f(x)=a\cdot b^{(x-h)}+k$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Forma general:} $f(x)=a\cdot b^{(x-h)}+k$\\
+    Asíntota horizontal en $y=k$.\\
+    \textbf{Dominio:} $\mathbb{R}$\\
+    \textbf{Recorrido:}
+    \begin{itemize}
+        \item Si $a>0$: $(k,\infty)$
+        \item Si $a<0$: $(-\infty,k)$
+    \end{itemize}
+    \textbf{Ejemplo:} $f(x)=2\cdot 3^{(x-1)}-2$ (asíntota $y=-2$, pasa por $(1,0)$)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-2, xmax=3,
+            ymin=-3, ymax=5,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=2\cdot 3^{(x-1)}-2$}
+        ]
+        \addplot[domain=-2:2.5, samples=200, blue, thick] {2*3^(x-1)-2};
+        \draw[dashed] (axis cs:-2,-2) -- (axis cs:3,-2);
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+%--- Racional ---
+\subsection{Función Racional de la forma $y=\dfrac{ax+b}{cx+d}$}
+\begin{funcbox}{Función Homográfica $f(x)=\dfrac{ax+b}{cx+d}$ \quad ($c\neq 0$, $ad\neq bc$)}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Definición:} Cociente de polinomios lineales.\\
+    \textbf{Dominio:} $\mathbb{R}\setminus\left\{-\dfrac{d}{c}\right\}$\\
+    \textbf{Recorrido:} $\mathbb{R}\setminus\left\{\dfrac{a}{c}\right\}$ (asíntota horizontal)\\
+    \textbf{Características:}
+    \begin{itemize}
+        \item Asíntota vertical: $x=-\dfrac{d}{c}$.
+        \item Asíntota horizontal: $y=\dfrac{a}{c}$.
+        \item Hipérbola equilátera trasladada.
+        \item Monótona por ramas.
+    \end{itemize}
+    \textbf{Ejemplo:} $f(x)=\dfrac{2x+1}{x-3}$; Dom: $\mathbb{R}\setminus\{3\}$, Rec: $\mathbb{R}\setminus\{2\}$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-2, xmax=8,
+            ymin=-5, ymax=7,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=\frac{2x+1}{x-3}$},
+            restrict y to domain=-5:7
+        ]
+        \addplot[domain=-2:2.8, samples=200, blue, thick] {(2*x+1)/(x-3)};
+        \addplot[domain=3.2:8, samples=200, blue, thick] {(2*x+1)/(x-3)};
+        \draw[dashed] (axis cs:3,-5) -- (axis cs:3,7);
+        \draw[dashed] (axis cs:-2,2) -- (axis cs:8,2);
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+% --- Proporcionalidad inversa desplazada ---
+\subsection{Función Proporcionalidad Inversa Desplazada}
+\begin{funcbox}{Función $f(x)=\dfrac{a}{x-h}+k$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Forma general:} $f(x)=\dfrac{a}{x-h}+k$\\
+    Es la hipérbola $y=1/x$ trasladada.\\
+    \textbf{Dominio:} $\mathbb{R}\setminus\{h\}$\\
+    \textbf{Recorrido:} $\mathbb{R}\setminus\{k\}$\\
+    Asíntotas: $x=h$ (vertical) e $y=k$ (horizontal).\\
+    \textbf{Ejemplo:} $f(x)=\dfrac{2}{x-1}+3$ (asíntotas $x=1$, $y=3$)
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-2, xmax=4,
+            ymin=-2, ymax=8,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$f(x)=\frac{2}{x-1}+3$},
+            restrict y to domain=-2:8
+        ]
+        \addplot[domain=-2:0.85, samples=200, blue, thick] {2/(x-1)+3};
+        \addplot[domain=1.15:4, samples=200, blue, thick] {2/(x-1)+3};
+        \draw[dashed] (axis cs:1,-2) -- (axis cs:1,8);
+        \draw[dashed] (axis cs:-2,3) -- (axis cs:4,3);
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+%--- Por tramos ---
+\subsection{Función Definida por Tramos}
+\begin{funcbox}{Función a trozos}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Definición:} La función se define con expresiones diferentes en intervalos disjuntos.\\
+    \textbf{Dominio:} Unión de los intervalos de definición.\\
+    \textbf{Recorrido:} Se determina analizando cada tramo.\\
+    \textbf{Ejemplo:} 
+    $f(x)=\begin{cases}
+        x^2, & x<0 \\
+        x+1, & x\geq 0
+    \end{cases}$\\
+    Dominio: $\mathbb{R}$; Recorrido: $(0,\infty)\cup[1,\infty) = (0,\infty)$ (porque $x^2>0$ para $x<0$, y $x+1\geq1$ para $x\geq0$).\\
+    Puntos de ruptura pueden presentar saltos o cambios de fórmula.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-3, xmax=3,
+            ymin=-1, ymax=5,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={Por tramos}
+        ]
+        \addplot[domain=-3:0, samples=200, blue, thick, solid] {x^2};
+        \addplot[domain=0:3, samples=200, blue, thick, solid] {x+1};
+        % Círculo abierto en (0,0) (no pertenece a la primera rama)
+        \addplot[mark=*, fill=white, only marks, blue] coordinates {(0,0)};
+        % Punto cerrado en (0,1) (sí pertenece a la segunda rama)
+        \addplot[mark=*, only marks, blue] coordinates {(0,1)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+%=====================================================================
+% APARTADO 2: PROPIEDADES DE LOGARITMOS
+%=====================================================================
+\section{Propiedades de los Logaritmos}
+
+Sea $a>0$, $a\neq 1$, y $x,y>0$, $n\in\mathbb{R}$. Se cumple:
+
+\begin{tcolorbox}[colback=green!5, colframe=green!70!black, title=Propiedades Fundamentales]
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Logaritmo del producto:} $\log_a(xy) = \log_a(x) + \log_a(y)$.
+    \item \textbf{Logaritmo del cociente:} $\log_a\!\left(\dfrac{x}{y}\right) = \log_a(x) - \log_a(y)$.
+    \item \textbf{Logaritmo de una potencia:} $\log_a(x^n) = n\,\log_a(x)$.
+    \item \textbf{Logaritmo de la base:} $\log_a(a) = 1$.
+    \item \textbf{Logaritmo de 1:} $\log_a(1)=0$.
+    \item \textbf{Cambio de base:} $\log_a(x) = \dfrac{\log_b(x)}{\log_b(a)}$, para cualquier $b>0$, $b\neq 1$.
+    \item \textbf{Inversa:} $a^{\log_a(x)} = x$ y $\log_a(a^x)=x$.
+    \item \textbf{Logaritmo natural y decimal:}
+    \begin{itemize}
+        \item $\ln(x) = \log_e(x)$, donde $e\approx 2.71828$.
+        \item $\log(x)$ usualmente denota $\log_{10}(x)$.
+    \end{itemize}
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{funcbox}{Ejemplo de aplicación}
+\begin{align*}
+    \log_2(8x) &= \log_2(8) + \log_2(x) = 3 + \log_2(x) \\
+    \ln\!\left(\frac{e^3}{y}\right) &= \ln(e^3) - \ln(y) = 3 - \ln(y) \\
+    \log_5(125) &= \log_5(5^3) = 3
+\end{align*}
+\end{funcbox}
+
+%=====================================================================
+% APARTADO 3: FUNCIÓN COMPUESTA
+%=====================================================================
+\section{Función Compuesta}
+
+Dadas dos funciones $f$ y $g$, la función compuesta $(f\circ g)(x)=f(g(x))$ consiste en aplicar primero $g$ y luego $f$.
+
+\subsection{Definición y dominio}
+\begin{tcolorbox}[colback=orange!5, colframe=orange!70!black, title=Dominio de la composición]
+Para que $(f\circ g)(x)$ esté definida, se requiere:
+\begin{itemize}
+    \item $x\in\Dominio(g)$.
+    \item $g(x)\in\Dominio(f)$.
+\end{itemize}
+Es decir, $\Dominio(f\circ g) = \{x\in\Dominio(g) \mid g(x)\in\Dominio(f)\}$.
+\end{tcolorbox}
+
+\subsection{Ejemplos detallados}
+
+\subsubsection{Ejemplo 1: $f(x)=\sqrt{x}$ y $g(x)=2x-3$}
+\begin{align*}
+    (f\circ g)(x) &= f(g(x)) = \sqrt{2x-3}.
+\end{align*}
+\begin{itemize}
+    \item Dominio de $g$: $\mathbb{R}$.
+    \item $g(x)\in\Dominio(f)=[0,\infty) \;\Rightarrow\; 2x-3 \geq 0 \;\Rightarrow\; x \geq \frac{3}{2}$.
+    \item Por tanto, $\Dominio(f\circ g) = \left[\frac{3}{2},\infty\right)$.
+    \item Recorrido: Como la raíz cuadrada devuelve valores $\geq 0$, el recorrido es $[0,\infty)$.
+\end{itemize}
+
+\subsubsection{Ejemplo 2: $f(x)=\ln(x)$ y $g(x)=x^2+1$}
+\begin{align*}
+    (f\circ g)(x) &= \ln(x^2+1).
+\end{align*}
+\begin{itemize}
+    \item Dominio de $g$: $\mathbb{R}$.
+    \item $g(x)=x^2+1 \geq 1 > 0$ para todo $x$, así que siempre pertenece al dominio de $\ln$, $(0,\infty)$.
+    \item Luego $\Dominio(f\circ g)=\mathbb{R}$.
+    \item Recorrido: como $x^2+1 \in [1,\infty)$, $\ln$ toma valores en $[\ln(1),\infty)=[0,\infty)$. Así $\Recorrido(f\circ g)=[0,\infty)$.
+\end{itemize}
+
+\subsubsection{Ejemplo 3: ¡Cuidado con el orden!}
+Sean $f(x)=x^2$ y $g(x)=x+1$.
+\begin{align*}
+    (f\circ g)(x) &= (x+1)^2 = x^2+2x+1, \\
+    (g\circ f)(x) &= x^2+1 \neq (f\circ g)(x).
+\end{align*}
+La composición no es conmutativa.
+
+%=====================================================================
+% APARTADO 4: FUNCIONES BIYECTIVAS Y RESTRICCIÓN
+%=====================================================================
+\section{Funciones Biyectivas y Restricción del Dominio}
+
+\subsection{Conceptos previos}
+Una función $f:A\to B$ es:
+\begin{itemize}
+    \item \textbf{Inyectiva} (uno a uno): si $f(x_1)=f(x_2) \Rightarrow x_1=x_2$. Gráficamente, cada recta horizontal corta la gráfica a lo sumo una vez.
+    \item \textbf{Suprayectiva} (sobre): si $\Recorrido(f)=B$, es decir, todo elemento de $B$ es imagen de algún $x\in A$.
+    \item \textbf{Biyectiva}: si es inyectiva y suprayectiva a la vez. Solo las funciones biyectivas admiten función inversa en todo su dominio.
+\end{itemize}
+
+\subsection{Restricción del dominio para lograr biyectividad}
+
+Muchas funciones no son biyectivas de forma natural, pero al restringir su dominio y codominio adecuadamente, se convierten en biyectivas.
+
+\subsubsection{Función cuadrática}
+$f(x)=x^2$ con $f:\mathbb{R}\to\mathbb{R}$ no es inyectiva (porque $f(-2)=f(2)=4$) ni suprayectiva (su recorrido es $[0,\infty)\neq\mathbb{R}$).
+
+\textbf{Restricción:} $f:[0,\infty)\to[0,\infty)$ con $f(x)=x^2$ sí es biyectiva. Es inyectiva (la rama derecha es creciente) y suprayectiva (cubre todos los no negativos).
+
+\subsubsection{Función raíz cuadrada}
+$g(x)=\sqrt{x}$ con $g:[0,\infty)\to[0,\infty)$ es naturalmente biyectiva (creciente y su recorrido llena $[0,\infty)$).
+
+\subsubsection{Función racional homográfica}
+$h(x)=\dfrac{2x+1}{x-3}$, con dominio natural $\mathbb{R}\setminus\{3\}$. Para que sea biyectiva, se toma codominio $\mathbb{R}\setminus\{2\}$ (excluyendo la asíntota horizontal). Así $h:\mathbb{R}\setminus\{3\}\to\mathbb{R}\setminus\{2\}$ es biyectiva (estrictamente monótona por ramas y su imagen es todo el codominio).
+
+\subsubsection{Función valor absoluto}
+$k(x)=|x|$ no es inyectiva ($|2|=|-2|=2$). Se restringe, por ejemplo, $k:[0,\infty)\to[0,\infty)$ y entonces $k(x)=x$ es biyectiva (identidad en no negativos). O bien $k:(-\infty,0]\to[0,\infty)$ con $k(x)=-x$.
+
+%=====================================================================
+% APARTADO 5: FUNCIONES INVERSAS
+%=====================================================================
+\section{Funciones Inversas}
+
+Dada una función biyectiva $f$, su inversa $f^{-1}$ cumple:
+\[
+f^{-1}(f(x)) = x \quad \text{y} \quad f(f^{-1}(y)) = y.
+\]
+La gráfica de $f^{-1}$ es la reflexión de la gráfica de $f$ respecto a la recta $y=x$.
+
+\subsection{Ejemplos de funciones inversas (basadas en el Apartado 1)}
+
+\subsubsection{Lineal: $f(x)=2x-1$}
+\begin{align*}
+    y &= 2x-1 \;\Rightarrow\; y+1 = 2x \;\Rightarrow\; x = \frac{y+1}{2}.
+\end{align*}
+Por tanto, $f^{-1}(x)=\dfrac{x+1}{2}$. Dominio y recorrido: ambos $\mathbb{R}$.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xlabel=$x$, ylabel=$y$,
+        xmin=-3, xmax=3,
+        ymin=-3, ymax=3,
+        grid=both,
+        minor tick num=1,
+        width=7cm, height=7cm,
+        title={$f$ y $f^{-1}$ lineales}
+    ]
+    \addplot[domain=-2.5:2.5, blue, thick] {2*x-1};
+    \addplot[domain=-2.5:2.5, red, thick] {(x+1)/2};
+    \addplot[domain=-3:3, dashed, gray] {x};
+    \legend{$f(x)=2x-1$, $f^{-1}(x)=\frac{x+1}{2}$, $y=x$}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Cuadrática restringida: $f(x)=x^2$ en $[0,\infty)$}
+\begin{align*}
+    y &= x^2,\; x\geq 0 \;\Rightarrow\; x = \sqrt{y}.
+\end{align*}
+Inversa: $f^{-1}(x)=\sqrt{x}$ con dominio $[0,\infty)$.
+
+\subsubsection{Exponencial y logarítmica}
+$f(x)=e^x$ (dominio $\mathbb{R}$, recorrido $(0,\infty)$) es biyectiva. Su inversa es $f^{-1}(x)=\ln(x)$, dominio $(0,\infty)$, recorrido $\mathbb{R}$.
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle,
+        xlabel=$x$, ylabel=$y$,
+        xmin=-3, xmax=5,
+        ymin=-3, ymax=5,
+        grid=both,
+        minor tick num=1,
+        width=7cm, height=7cm,
+        title={Exponencial y logaritmo}
+    ]
+    \addplot[domain=-3:1.6, blue, thick] {exp(x)};
+    \addplot[domain=0.05:5, red, thick] {ln(x)};
+    \addplot[domain=-3:5, dashed, gray] {x};
+    \legend{$e^x$, $\ln(x)$, $y=x$}
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Racional: $f(x)=\dfrac{2x+1}{x-3}$}
+Dominio $\mathbb{R}\setminus\{3\}$, recorrido $\mathbb{R}\setminus\{2\}$. Despejamos $x$:
+\begin{align*}
+    y(x-3) &= 2x+1 \;\Rightarrow\; yx - 3y = 2x+1 \\
+    yx - 2x &= 3y+1 \;\Rightarrow\; x(y-2) = 3y+1 \\
+    x &= \frac{3y+1}{y-2}.
+\end{align*}
+Inversa: $f^{-1}(x)=\dfrac{3x+1}{x-2}$ con dominio $\mathbb{R}\setminus\{2\}$.
+
+\subsubsection{Raíz cúbica y cúbica}
+$f(x)=x^3$ (biyectiva en $\mathbb{R}$) tiene inversa $f^{-1}(x)=\sqrt[3]{x}$, ambas con dominio y recorrido $\mathbb{R}$.
+
+\subsubsection{Cúbica desplazada: $f(x)=(x-1)^3+2$}
+\begin{align*}
+    y &= (x-1)^3+2 \;\Rightarrow\; y-2 = (x-1)^3 \\
+    \sqrt[3]{y-2} &= x-1 \;\Rightarrow\; x = \sqrt[3]{y-2}+1.
+\end{align*}
+Inversa: $f^{-1}(x)=\sqrt[3]{x-2}+1$.
+
+\subsubsection{Valor absoluto restringido}
+Si restringimos $f(x)=|x|$ a $x\geq 0$, la función es $f(x)=x$, cuya inversa es $f^{-1}(x)=x$ (es su propia inversa en ese dominio).
+
+%=====================================================================
+% NUEVA SECCIÓN: SECCIONES CÓNICAS
+%=====================================================================
+\newpage
+\section{Secciones Cónicas}
+
+Las cónicas son curvas obtenidas al cortar un cono con un plano. En su forma canónica con centro (o vértice) en $(h,k)$, sus ecuaciones son:
+
+\subsection{Circunferencia}
+\begin{funcbox}{Circunferencia $(x-h)^2+(y-k)^2=r^2$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Ecuación:} $(x-h)^2+(y-k)^2=r^2$\\
+    \textbf{Centro:} $(h,k)$\\
+    \textbf{Radio:} $r>0$\\
+    \textbf{Características:}
+    \begin{itemize}
+        \item Lugar geométrico de puntos a distancia $r$ del centro.
+        \item Gráfica: curva cerrada.
+    \end{itemize}
+    \textbf{Ejemplo:} $(x-1)^2+(y+2)^2=9$ \\ Centro $(1,-2)$, radio $3$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-3, xmax=5,
+            ymin=-6, ymax=2,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$(x-1)^2+(y+2)^2=9$}
+        ]
+        \addplot[domain=0:360, samples=200, blue, thick] 
+            ({1+3*cos(x)},{-2+3*sin(x)});
+        \addplot[mark=*, only marks, red] coordinates {(1,-2)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+\subsection{Parábola}
+\subsubsection{Parábola vertical}
+\begin{funcbox}{Parábola vertical $(x-h)^2=4p(y-k)$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Ecuación:} $(x-h)^2=4p(y-k)$ o $y=a(x-h)^2+k$ con $a=\frac{1}{4p}$.\\
+    \textbf{Vértice:} $(h,k)$\\
+    \textbf{Foco:} $(h, k+p)$ (si abre hacia arriba)\\
+    \textbf{Directriz:} $y=k-p$\\
+    \textbf{Orientación:} $p>0$ abre hacia arriba; $p<0$ hacia abajo.\\
+    \textbf{Ejemplo:} $(x-2)^2=8(y-1)$; $p=2$, vértice $(2,1)$, foco $(2,3)$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-2, xmax=6,
+            ymin=-2, ymax=6,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$(x-2)^2=8(y-1)$}
+        ]
+        \addplot[domain=-0.8:4.8, samples=200, blue, thick] 
+            {1 + (x-2)^2/8};
+        \addplot[mark=*, only marks, red] coordinates {(2,1)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+\subsubsection{Parábola horizontal}
+\begin{funcbox}{Parábola horizontal $(y-k)^2=4p(x-h)$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Ecuación:} $(y-k)^2=4p(x-h)$\\
+    \textbf{Vértice:} $(h,k)$\\
+    \textbf{Foco:} $(h+p,k)$ (si abre a la derecha)\\
+    \textbf{Directriz:} $x=h-p$\\
+    \textbf{Ejemplo:} $(y+1)^2=12(x-3)$; $p=3$, vértice $(3,-1)$, abre a la derecha.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-1, xmax=9,
+            ymin=-8, ymax=6,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$(y+1)^2=12(x-3)$}
+        ]
+        \addplot[
+            domain=-7:5, 
+            samples=200, 
+            smooth, 
+            blue, 
+            thick, 
+            variable=\t
+        ]
+        ({3+(\t+1)^2/12},{\t}); % parametrización correcta
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+\subsection{Elipse}
+\begin{funcbox}{Elipse $\dfrac{(x-h)^2}{a^2}+\dfrac{(y-k)^2}{b^2}=1$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Ecuación:} $\dfrac{(x-h)^2}{a^2}+\dfrac{(y-k)^2}{b^2}=1$\\
+    \textbf{Centro:} $(h,k)$\\
+    \textbf{Semieje mayor:} $a$, semieje menor: $b$ (si $a>b$ es horizontal; si $b>a$ vertical).\\
+    \textbf{Ejemplo:} $\dfrac{(x-2)^2}{16}+\dfrac{(y+1)^2}{9}=1$\\
+    Centro $(2,-1)$, semieje mayor horizontal $a=4$, menor $b=3$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-3, xmax=7,
+            ymin=-5, ymax=3,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={Elipse $(x-2)^2/16+(y+1)^2/9=1$}
+        ]
+        \addplot[domain=0:360, samples=200, blue, thick] 
+            ({2+4*cos(x)},{-1+3*sin(x)});
+        \addplot[mark=*, only marks, red] coordinates {(2,-1)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+\subsection{Hipérbola}
+\subsubsection{Hipérbola horizontal}
+\begin{funcbox}{Hipérbola $\dfrac{(x-h)^2}{a^2}-\dfrac{(y-k)^2}{b^2}=1$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Ecuación:} $\dfrac{(x-h)^2}{a^2}-\dfrac{(y-k)^2}{b^2}=1$\\
+    \textbf{Centro:} $(h,k)$\\
+    \textbf{Vértices:} $(h\pm a, k)$\\
+    \textbf{Asíntotas:} rectas que pasan por el centro con pendiente $\pm b/a$.\\
+    \textbf{Ejemplo:} $\dfrac{(x-1)^2}{9}-\dfrac{(y-2)^2}{4}=1$\\
+    Centro $(1,2)$, $a=3$, $b=2$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-5, xmax=7,
+            ymin=-4, ymax=8,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$\frac{(x-1)^2}{9}-\frac{(y-2)^2}{4}=1$}
+        ]
+        % Rama derecha
+        \addplot[domain=-1:1, samples=200, blue, thick] 
+            ({1+3*cosh(x)},{2+2*sinh(x)});
+        % Rama izquierda
+        \addplot[domain=-1:1, samples=200, blue, thick] 
+            ({1-3*cosh(x)},{2+2*sinh(x)});
+        % Asíntotas
+        \addplot[dashed, domain=-4:6, samples=2] {2 + 2/3*(x-1)};
+        \addplot[dashed, domain=-4:6, samples=2] {2 - 2/3*(x-1)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+\subsubsection{Hipérbola vertical}
+\begin{funcbox}{Hipérbola $\dfrac{(y-k)^2}{a^2}-\dfrac{(x-h)^2}{b^2}=1$}
+\begin{minipage}[t]{0.55\textwidth}
+    \textbf{Ecuación:} $\dfrac{(y-k)^2}{a^2}-\dfrac{(x-h)^2}{b^2}=1$\\
+    \textbf{Centro:} $(h,k)$\\
+    \textbf{Vértices:} $(h, k\pm a)$\\
+    \textbf{Asíntotas:} $y-k = \pm \frac{a}{b}(x-h)$.\\
+    \textbf{Ejemplo:} $\dfrac{(y+1)^2}{4}-\dfrac{(x-3)^2}{1}=1$\\
+    Centro $(3,-1)$, $a=2$, $b=1$, abre hacia arriba y abajo.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\textwidth}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$, ylabel=$y$,
+            xmin=-1, xmax=7,
+            ymin=-6, ymax=4,
+            grid=both,
+            minor tick num=1,
+            width=6cm, height=5cm,
+            title={$\frac{(y+1)^2}{4}-\frac{(x-3)^2}{1}=1$}
+        ]
+        % Rama superior
+        \addplot[domain=-1:1, samples=200, blue, thick] 
+            ({3+sinh(x)},{-1+2*cosh(x)});
+        % Rama inferior
+        \addplot[domain=-1:1, samples=200, blue, thick] 
+            ({3+sinh(x)},{-1-2*cosh(x)});
+        % Asíntotas
+        \addplot[dashed, domain=-0.5:6.5, samples=2] {-1 + 2*(x-3)};
+        \addplot[dashed, domain=-0.5:6.5, samples=2] {-1 - 2*(x-3)};
+        \end{axis}
+    \end{tikzpicture}
+\end{minipage}
+\end{funcbox}
+
+\end{document}

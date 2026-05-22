@@ -1,0 +1,846 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{capt-of}
+\usepackage{parskip}
+
+\usetikzlibrary{arrows.meta,calc}
+
+% Comando corregido para la circunferencia unitaria
+\newcommand{\unitcircle}[1]{%
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+  \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+  \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+  \draw (0,0) circle (1.2);
+  \foreach \coord/\lab in {#1} {
+    \filldraw (\coord) circle (2pt) node[font=\footnotesize, fill=white, inner sep=1pt] {$\lab$};
+  }
+\end{tikzpicture}
+\captionof{figure}{Soluciones en la circunferencia unitaria en $[0,2\pi)$.}
+\end{center}
+}
+
+\setlength{\parskip}{4pt plus2pt minus1pt}
+\setlength{\parindent}{0pt}
+
+\title{\textbf{Soluciones paso a paso con gráficos}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+% Solución 1
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 1}
+\textbf{Ecuación:} \(2\cos^2 x - \cos x - 1 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} Sea \(u = \cos x\). Entonces:
+    \[
+    2u^2 - u - 1 = 0.
+    \]
+    \item \textbf{Factorización:}
+    \[
+    2u^2 - u - 1 = (2u + 1)(u - 1) = 0.
+    \]
+    De donde \(2u + 1 = 0\) o \(u - 1 = 0\).
+    \item \textbf{Soluciones para \(u\):}
+    \[
+    u = -\frac{1}{2} \quad\text{o}\quad u = 1.
+    \]
+    \item \textbf{Volver a \(\cos x\):}
+    \begin{itemize}
+        \item \(\cos x = 1\).
+        \item \(\cos x = -\frac{1}{2}\).
+    \end{itemize}
+    \item \textbf{Resolver \(\cos x = 1\):}
+    \[
+    x = 0 + 2k\pi \quad (k\in\mathbb{Z}).
+    \]
+    En \([0,2\pi)\) la única solución es \(x = 0\).
+    
+    \item \textbf{Resolver \(\cos x = -\frac{1}{2}\):}
+    Los ángulos de referencia son \(\frac{\pi}{3}\). Como el coseno es negativo en los cuadrantes II y III:
+    \begin{align*}
+        x &= \pi - \frac{\pi}{3} + 2k\pi = \frac{2\pi}{3} + 2k\pi,\\
+        x &= \pi + \frac{\pi}{3} + 2k\pi = \frac{4\pi}{3} + 2k\pi.
+    \end{align*}
+    En \([0,2\pi)\): \(x = \frac{2\pi}{3}\) y \(x = \frac{4\pi}{3}\).
+
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{0,\ \frac{2\pi}{3},\ \frac{4\pi}{3}}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  {(1.2,0)/0},%
+  {{1.2*cos(120)},{1.2*sin(120)}}/{\frac{2\pi}{3}},%
+  {{1.2*cos(240)},{1.2*sin(240)}}/{\frac{4\pi}{3}}%
+}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 2
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 2}
+\textbf{Ecuación:} \(3\tan^2 x - 4\tan x + 1 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \tan x\) \(\Rightarrow\) \(3u^2 - 4u + 1 = 0\).
+    \item \textbf{Factorización:} \((3u - 1)(u - 1) = 0\).
+    \item \textbf{Raíces:} \(u = \frac{1}{3}\) o \(u = 1\).
+    \item \textbf{Volver a \(\tan x\):}
+    \begin{itemize}
+        \item \(\tan x = 1\).
+        \item \(\tan x = \frac{1}{3}\).
+    \end{itemize}
+    \item \textbf{Para \(\tan x = 1\):} Solución general: \(x = \frac{\pi}{4} + k\pi\). En \([0,2\pi)\): \(x = \frac{\pi}{4},\ \frac{5\pi}{4}\).
+    \item \textbf{Para \(\tan x = \frac{1}{3}\):} No es un ángulo especial. Usamos la función inversa:
+    \[
+    x = \arctan\!\left(\frac{1}{3}\right) + k\pi.
+    \]
+    En \([0,2\pi)\) con \(k=0\): \(x_1 = \arctan\!\left(\frac{1}{3}\right)\) (cuadrante I).\\
+    Con \(k=1\): \(x_2 = \arctan\!\left(\frac{1}{3}\right) + \pi\) (cuadrante III).
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\frac{\pi}{4},\ \frac{5\pi}{4},\ \arctan\!\left(\frac{1}{3}\right),\ \pi + \arctan\!\left(\frac{1}{3}\right)}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  {{1.2*cos(45)},{1.2*sin(45)}}/{\frac{\pi}{4}},%
+  {{1.2*cos(225)},{1.2*sin(225)}}/{\frac{5\pi}{4}},%
+  {{1.2*cos(18.4349)},{1.2*sin(18.4349)}}/{\alpha},%
+  {{1.2*cos(198.4349)},{1.2*sin(198.4349)}}/{\pi{+}\alpha}%
+}
+{\small $\alpha = \arctan\frac13$.}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 3
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 3}
+\textbf{Ecuación:} \(\sin^2 x + \sin x - 2 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \sin x\) \(\Rightarrow\) \(u^2 + u - 2 = 0\).
+    \item \textbf{Factorización:} \((u + 2)(u - 1) = 0\).
+    \item \textbf{Raíces:} \(u = -2\) o \(u = 1\).
+    \item \textbf{Análisis:} \(\sin x = -2\) no tiene solución (\(-1 \le \sin x \le 1\)).\\
+    \(\sin x = 1\) sí es válida.
+    \item \textbf{Resolver \(\sin x = 1\):}
+    \[
+    x = \frac{\pi}{2} + 2k\pi.
+    \]
+    En \([0,2\pi)\): \(x = \frac{\pi}{2}\).
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\frac{\pi}{2}}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  {(0,1.2)/{\frac{\pi}{2}}}%
+}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 4
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 4}
+\textbf{Ecuación:} \(2\cos^2 x - 5\cos x + 2 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \cos x\) \(\Rightarrow\) \(2u^2 - 5u + 2 = 0\).
+    \item \textbf{Factorización:} \((2u - 1)(u - 2) = 0\).
+    \item \textbf{Raíces:} \(u = \frac{1}{2}\) o \(u = 2\).
+    \item \textbf{Análisis:} \(\cos x = 2\) no tiene solución.\\
+    \(\cos x = \frac{1}{2}\) es válida.
+    \item \textbf{Resolver \(\cos x = \frac{1}{2}\):}
+    Ángulo de referencia \(\frac{\pi}{3}\); coseno positivo en I y IV:
+    \begin{align*}
+        x &= \frac{\pi}{3} + 2k\pi,\\
+        x &= -\frac{\pi}{3} + 2k\pi \quad (\text{equivalentemente } \frac{5\pi}{3} + 2k\pi).
+    \end{align*}
+    En \([0,2\pi)\): \(x = \frac{\pi}{3},\ \frac{5\pi}{3}\).
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\frac{\pi}{3},\ \frac{5\pi}{3}}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  ({1.2*cos(60)},{1.2*sin(60)})/\frac{\pi}{3},
+  ({1.2*cos(300)},{1.2*sin(300)})/\frac{5\pi}{3}%
+}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 5
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 5}
+\textbf{Ecuación:} \(4\sin^2 x - 4\sin x + 1 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \sin x\) \(\Rightarrow\) \(4u^2 - 4u + 1 = 0\).
+    \item \textbf{Factorización:} \((2u - 1)^2 = 0\).
+    \item \textbf{Raíz doble:} \(u = \frac{1}{2}\).
+    \item \textbf{Resolver \(\sin x = \frac{1}{2}\):}
+    Ángulo de referencia \(\frac{\pi}{6}\); seno positivo en I y II:
+    \begin{align*}
+        x &= \frac{\pi}{6} + 2k\pi,\\
+        x &= \pi - \frac{\pi}{6} + 2k\pi = \frac{5\pi}{6} + 2k\pi.
+    \end{align*}
+    En \([0,2\pi)\): \(x = \frac{\pi}{6},\ \frac{5\pi}{6}\).
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\frac{\pi}{6},\ \frac{5\pi}{6}}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  ({1.2*cos(30)},{1.2*sin(30)})/\frac{\pi}{6},
+  ({1.2*cos(150)},{1.2*sin(150)})/\frac{5\pi}{6}%
+}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 6
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 6}
+\textbf{Ecuación:} \(\sec^2 x - 3\sec x + 2 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \sec x\) \(\Rightarrow\) \(u^2 - 3u + 2 = 0\).
+    \item \textbf{Factorización:} \((u - 1)(u - 2) = 0\).
+    \item \textbf{Raíces:} \(u = 1\) o \(u = 2\).
+    \item \textbf{Volver a \(\cos x\):} Como \(\sec x = \frac{1}{\cos x}\),
+    \begin{itemize}
+        \item \(\sec x = 1 \Rightarrow \cos x = 1\).
+        \item \(\sec x = 2 \Rightarrow \cos x = \frac{1}{2}\).
+    \end{itemize}
+    \item \textbf{Resolver \(\cos x = 1\):}
+    \(x = 0 + 2k\pi\). En \([0,2\pi)\): \(x = 0\).
+    \item \textbf{Resolver \(\cos x = \frac{1}{2}\):}
+    \begin{align*}
+        x &= \frac{\pi}{3} + 2k\pi,\\
+        x &= \frac{5\pi}{3} + 2k\pi.
+    \end{align*}
+    En \([0,2\pi)\): \(x = \frac{\pi}{3},\ \frac{5\pi}{3}\).
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{0,\ \frac{\pi}{3},\ \frac{5\pi}{3}}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  {(1.2,0)/0},
+  ({1.2*cos(60)},{1.2*sin(60)})/\frac{\pi}{3},
+  ({1.2*cos(300)},{1.2*sin(300)})/\frac{5\pi}{3}%
+}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 7
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 7}
+\textbf{Ecuación:} \(2\csc^2 x - 3\csc x - 2 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \csc x\) \(\Rightarrow\) \(2u^2 - 3u - 2 = 0\).
+    \item \textbf{Factorización:} \((2u + 1)(u - 2) = 0\).
+    \item \textbf{Raíces:} \(u = -\frac{1}{2}\) o \(u = 2\).
+    \item \textbf{Volver a \(\sin x\):} \(\csc x = \frac{1}{\sin x}\).
+    \begin{itemize}
+        \item \(\csc x = -\frac{1}{2} \Rightarrow \sin x = -2\) (no válido, \(|\sin x|\le 1\)).
+        \item \(\csc x = 2 \Rightarrow \sin x = \frac{1}{2}\).
+    \end{itemize}
+    \item \textbf{Resolver \(\sin x = \frac{1}{2}\):}
+    \begin{align*}
+        x &= \frac{\pi}{6} + 2k\pi,\\
+        x &= \frac{5\pi}{6} + 2k\pi.
+    \end{align*}
+    En \([0,2\pi)\): \(x = \frac{\pi}{6},\ \frac{5\pi}{6}\).
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\frac{\pi}{6},\ \frac{5\pi}{6}}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  ({1.2*cos(30)},{1.2*sin(30)})/\frac{\pi}{6},
+  ({1.2*cos(150)},{1.2*sin(150)})/\frac{5\pi}{6}%
+}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 8
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 8}
+\textbf{Ecuación:} \(3\sin^2 x + \sin x - 2 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \sin x\) \(\Rightarrow\) \(3u^2 + u - 2 = 0\).
+    \item \textbf{Factorización:}
+    \[
+    3u^2 + u - 2 = (3u - 2)(u + 1) = 0.
+    \]
+    \item \textbf{Raíces:} \(u = \frac{2}{3}\) o \(u = -1\).
+    \item \textbf{Resolver \(\sin x = -1\):}
+    \[
+    x = \frac{3\pi}{2} + 2k\pi.
+    \]
+    En \([0,2\pi)\): \(x = \frac{3\pi}{2}\).
+    \item \textbf{Resolver \(\sin x = \frac{2}{3}\):} No es ángulo especial. Usamos la función \(\arcsin\):
+    \begin{align*}
+        x &= \arcsin\!\left(\frac{2}{3}\right) + 2k\pi,\\
+        x &= \pi - \arcsin\!\left(\frac{2}{3}\right) + 2k\pi.
+    \end{align*}
+    En \([0,2\pi)\) con \(k=0\):
+    \[
+    x_1 = \arcsin\!\left(\frac{2}{3}\right) \quad\text{(cuadrante I)},\qquad
+    x_2 = \pi - \arcsin\!\left(\frac{2}{3}\right) \quad\text{(cuadrante II)}.
+    \]
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\frac{3\pi}{2},\ \arcsin\!\left(\frac{2}{3}\right),\ \pi - \arcsin\!\left(\frac{2}{3}\right)}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  {(0,-1.2)/\frac{3\pi}{2}},
+  ({1.2*cos(41.8103)},{1.2*sin(41.8103)})/\beta,
+  ({1.2*cos(138.1897)},{1.2*sin(138.1897)})/\pi{-}\beta%
+} \\[2mm]
+{\small $\beta = \arcsin\frac23$.}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 9
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 9}
+\textbf{Ecuación:} \(1 - \cos^2 x - \cos x = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Usar identidad:} \(1 - \cos^2 x = \sin^2 x\), pero conviene expresar todo en coseno.
+    Sea \(u = \cos x\):
+    \[
+    1 - u^2 - u = 0 \quad\Longrightarrow\quad -u^2 - u + 1 = 0.
+    \]
+    Multiplicando por \(-1\):
+    \[
+    u^2 + u - 1 = 0.
+    \]
+    \item \textbf{Resolver la cuadrática:}
+    \[
+    u = \frac{-1 \pm \sqrt{1^2 - 4(1)(-1)}}{2} = \frac{-1 \pm \sqrt{5}}{2}.
+    \]
+    \item \textbf{Analizar los valores:}
+    \begin{itemize}
+        \item \(u = \frac{-1 - \sqrt{5}}{2} \approx -1.618\) (está fuera del rango de \(\cos x\)).
+        \item \(u = \frac{-1 + \sqrt{5}}{2} = \frac{\sqrt{5} - 1}{2} \approx 0.618\) (válido).
+    \end{itemize}
+    Entonces \(\cos x = \frac{\sqrt{5} - 1}{2}\).
+    \item \textbf{Resolver \(\cos x = a\) con \(a = \frac{\sqrt{5}-1}{2}\):}
+    Usando la función \(\arccos\):
+    \[
+    x = \arccos\!\left(\frac{\sqrt{5} - 1}{2}\right) + 2k\pi,\qquad
+    x = 2\pi - \arccos\!\left(\frac{\sqrt{5} - 1}{2}\right) + 2k\pi.
+    \]
+    En \([0,2\pi)\) con \(k=0\):
+    \[
+    x_1 = \arccos\!\left(\frac{\sqrt{5} - 1}{2}\right),\qquad
+    x_2 = 2\pi - \arccos\!\left(\frac{\sqrt{5} - 1}{2}\right).
+    \]
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\displaystyle \arccos\!\left(\frac{\sqrt{5} - 1}{2}\right),\ 2\pi - \arccos\!\left(\frac{\sqrt{5} - 1}{2}\right)}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  ({1.2*cos(51.827)},{1.2*sin(51.827)})/\gamma,
+  ({1.2*cos(308.173)},{1.2*sin(308.173)})/2\pi{-}\gamma%
+} \\[2mm]
+{\small $\gamma = \arccos\!\left(\frac{\sqrt{5} - 1}{2}\right)$.}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 10
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 10}
+\textbf{Ecuación:} \(2\sin^2 x + 5\sin x - 3 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \sin x\) \(\Rightarrow\) \(2u^2 + 5u - 3 = 0\).
+    \item \textbf{Factorización:} \((2u - 1)(u + 3) = 0\).
+    \item \textbf{Raíces:} \(u = \frac{1}{2}\) o \(u = -3\).
+    \item \textbf{Análisis:} \(\sin x = -3\) no tiene solución.\\
+    \(\sin x = \frac{1}{2}\) es válida.
+    \item \textbf{Resolver \(\sin x = \frac{1}{2}\):}
+    \begin{align*}
+        x &= \frac{\pi}{6} + 2k\pi,\\
+        x &= \frac{5\pi}{6} + 2k\pi.
+    \end{align*}
+    En \([0,2\pi)\): \(x = \frac{\pi}{6},\ \frac{5\pi}{6}\).
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\frac{\pi}{6},\ \frac{5\pi}{6}}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  ({1.2*cos(30)},{1.2*sin(30)})/\frac{\pi}{6},
+  ({1.2*cos(150)},{1.2*sin(150)})/\frac{5\pi}{6}%
+}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 11
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 11}
+\textbf{Ecuación:} \(\tan^2 x + 2\tan x - 3 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \tan x\) \(\Rightarrow\) \(u^2 + 2u - 3 = 0\).
+    \item \textbf{Factorización:} \((u + 3)(u - 1) = 0\).
+    \item \textbf{Raíces:} \(u = -3\) o \(u = 1\).
+    \item \textbf{Resolver \(\tan x = 1\):}
+    Solución general: \(x = \frac{\pi}{4} + k\pi\). En \([0,2\pi)\): \(x = \frac{\pi}{4},\ \frac{5\pi}{4}\).
+    \item \textbf{Resolver \(\tan x = -3\):}
+    Usamos \(\arctan\):
+    \[
+    x = \arctan(-3) + k\pi.
+    \]
+    El valor principal \(\arctan(-3)\) es negativo (≈ \(-1.249\) rad). Para obtener ángulos en \([0,2\pi)\):
+    \begin{itemize}
+        \item Con \(k = 1\): \(x = \arctan(-3) + \pi = \pi - \arctan(3)\) (cuadrante II).
+        \item Con \(k = 2\): \(x = \arctan(-3) + 2\pi = 2\pi - \arctan(3)\) (cuadrante IV).
+    \end{itemize}
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\frac{\pi}{4},\ \frac{5\pi}{4},\ \pi - \arctan(3),\ 2\pi - \arctan(3)}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  ({1.2*cos(45)},{1.2*sin(45)})/\frac{\pi}{4},
+  ({1.2*cos(225)},{1.2*sin(225)})/\frac{5\pi}{4},
+  ({1.2*cos(108.4349)},{1.2*sin(108.4349)})/\pi{-}\delta,
+  ({1.2*cos(288.4349)},{1.2*sin(288.4349)})/2\pi{-}\delta%
+} \\[2mm]
+{\small $\delta = \arctan 3$.}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 12
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 12}
+\textbf{Ecuación:} \(\cos^2 x - \sin x = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Usar identidad pitagórica:} \(\cos^2 x = 1 - \sin^2 x\).
+    \[
+    (1 - \sin^2 x) - \sin x = 0 \quad\Longrightarrow\quad -\sin^2 x - \sin x + 1 = 0.
+    \]
+    Multiplicando por \(-1\):
+    \[
+    \sin^2 x + \sin x - 1 = 0.
+    \]
+    \item \textbf{Sustitución:} \(u = \sin x\) \(\Rightarrow\) \(u^2 + u - 1 = 0\).
+    \item \textbf{Resolver la cuadrática:}
+    \[
+    u = \frac{-1 \pm \sqrt{1 + 4}}{2} = \frac{-1 \pm \sqrt{5}}{2}.
+    \]
+    \item \textbf{Analizar valores:}
+    \begin{itemize}
+        \item \(u = \frac{-1 - \sqrt{5}}{2} \approx -1.618\) (fuera de rango).
+        \item \(u = \frac{-1 + \sqrt{5}}{2} = \frac{\sqrt{5} - 1}{2} \approx 0.618\) (válido).
+    \end{itemize}
+    Entonces \(\sin x = \frac{\sqrt{5} - 1}{2}\).
+    \item \textbf{Resolver \(\sin x = a\) con \(a = \frac{\sqrt{5}-1}{2}\):}
+    \begin{align*}
+        x &= \arcsin(a) + 2k\pi,\\
+        x &= \pi - \arcsin(a) + 2k\pi.
+    \end{align*}
+    En \([0,2\pi)\) con \(k=0\):
+    \[
+    x_1 = \arcsin\!\left(\frac{\sqrt{5} - 1}{2}\right),\qquad
+    x_2 = \pi - \arcsin\!\left(\frac{\sqrt{5} - 1}{2}\right).
+    \]
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\displaystyle \arcsin\!\left(\frac{\sqrt{5} - 1}{2}\right),\ \pi - \arcsin\!\left(\frac{\sqrt{5} - 1}{2}\right)}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  ({1.2*cos(38.1727)},{1.2*sin(38.1727)})/\varepsilon,
+  ({1.2*cos(141.8273)},{1.2*sin(141.8273)})/\pi{-}\varepsilon%
+} \\[2mm]
+{\small $\varepsilon = \arcsin\!\left(\frac{\sqrt{5} - 1}{2}\right)$.}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 13
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 13}
+\textbf{Ecuación:} \(3\cos^2 x + 2\cos x - 1 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \cos x\) \(\Rightarrow\) \(3u^2 + 2u - 1 = 0\).
+    \item \textbf{Factorización:}
+    \[
+    3u^2 + 2u - 1 = (3u - 1)(u + 1) = 0.
+    \]
+    \item \textbf{Raíces:} \(u = \frac{1}{3}\) o \(u = -1\).
+    \item \textbf{Resolver \(\cos x = -1\):}
+    \[
+    x = \pi + 2k\pi.
+    \]
+    En \([0,2\pi)\): \(x = \pi\).
+    \item \textbf{Resolver \(\cos x = \frac{1}{3}\):}
+    No es ángulo especial. Usamos \(\arccos\):
+    \begin{align*}
+        x &= \arccos\!\left(\frac{1}{3}\right) + 2k\pi,\\
+        x &= 2\pi - \arccos\!\left(\frac{1}{3}\right) + 2k\pi.
+    \end{align*}
+    En \([0,2\pi)\) con \(k=0\):
+    \[
+    x_1 = \arccos\!\left(\frac{1}{3}\right),\qquad
+    x_2 = 2\pi - \arccos\!\left(\frac{1}{3}\right).
+    \]
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\pi,\ \arccos\!\left(\frac{1}{3}\right),\ 2\pi - \arccos\!\left(\frac{1}{3}\right)}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  {(-1.2,0)/\pi},
+  ({1.2*cos(70.5288)},{1.2*sin(70.5288)})/\zeta,
+  ({1.2*cos(289.4712)},{1.2*sin(289.4712)})/2\pi{-}\zeta%
+} \\[2mm]
+{\small $\zeta = \arccos\frac13$.}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 14
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 14}
+\textbf{Ecuación:} \(2\sec^2 x + 5\sec x + 2 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \sec x\) \(\Rightarrow\) \(2u^2 + 5u + 2 = 0\).
+    \item \textbf{Factorización:} \((2u + 1)(u + 2) = 0\).
+    \item \textbf{Raíces:} \(u = -\frac{1}{2}\) o \(u = -2\).
+    \item \textbf{Volver a \(\cos x\):} \(\sec x = \frac{1}{\cos x}\).
+    \begin{itemize}
+        \item \(\sec x = -\frac{1}{2} \Rightarrow \cos x = -2\) (no válido).
+        \item \(\sec x = -2 \Rightarrow \cos x = -\frac{1}{2}\).
+    \end{itemize}
+    \item \textbf{Resolver \(\cos x = -\frac{1}{2}\):}
+    \begin{align*}
+        x &= \frac{2\pi}{3} + 2k\pi,\\
+        x &= \frac{4\pi}{3} + 2k\pi.
+    \end{align*}
+    En \([0,2\pi)\): \(x = \frac{2\pi}{3},\ \frac{4\pi}{3}\).
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\frac{2\pi}{3},\ \frac{4\pi}{3}}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  ({1.2*cos(120)},{1.2*sin(120)})/\frac{2\pi}{3},
+  ({1.2*cos(240)},{1.2*sin(240)})/\frac{4\pi}{3}%
+}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 15
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 15}
+\textbf{Ecuación:} \(2\csc^2 x - 7\csc x + 3 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \csc x\) \(\Rightarrow\) \(2u^2 - 7u + 3 = 0\).
+    \item \textbf{Factorización:} \((2u - 1)(u - 3) = 0\).
+    \item \textbf{Raíces:} \(u = \frac{1}{2}\) o \(u = 3\).
+    \item \textbf{Volver a \(\sin x\):} \(\csc x = \frac{1}{\sin x}\).
+    \begin{itemize}
+        \item \(\csc x = \frac{1}{2} \Rightarrow \sin x = 2\) (no válido).
+        \item \(\csc x = 3 \Rightarrow \sin x = \frac{1}{3}\).
+    \end{itemize}
+    \item \textbf{Resolver \(\sin x = \frac{1}{3}\):}
+    \begin{align*}
+        x &= \arcsin\!\left(\frac{1}{3}\right) + 2k\pi,\\
+        x &= \pi - \arcsin\!\left(\frac{1}{3}\right) + 2k\pi.
+    \end{align*}
+    En \([0,2\pi)\) con \(k=0\):
+    \[
+    x_1 = \arcsin\!\left(\frac{1}{3}\right),\qquad
+    x_2 = \pi - \arcsin\!\left(\frac{1}{3}\right).
+    \]
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\arcsin\!\left(\frac{1}{3}\right),\ \pi - \arcsin\!\left(\frac{1}{3}\right)}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  ({1.2*cos(19.4712)},{1.2*sin(19.4712)})/\eta,
+  ({1.2*cos(160.5288)},{1.2*sin(160.5288)})/\pi{-}\eta%
+} \\[2mm]
+{\small $\eta = \arcsin\frac13$.}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 16
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 16}
+\textbf{Ecuación:} \(3\tan^2 x + \tan x - 2 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \tan x\) \(\Rightarrow\) \(3u^2 + u - 2 = 0\).
+    \item \textbf{Factorización:} \((3u - 2)(u + 1) = 0\).
+    \item \textbf{Raíces:} \(u = \frac{2}{3}\) o \(u = -1\).
+    \item \textbf{Resolver \(\tan x = -1\):}
+    Solución general: \(x = -\frac{\pi}{4} + k\pi\). En \([0,2\pi)\):
+    \begin{align*}
+        k=1 &: x = -\frac{\pi}{4} + \pi = \frac{3\pi}{4},\\
+        k=2 &: x = -\frac{\pi}{4} + 2\pi = \frac{7\pi}{4}.
+    \end{align*}
+    \item \textbf{Resolver \(\tan x = \frac{2}{3}\):}
+    \begin{align*}
+        x &= \arctan\!\left(\frac{2}{3}\right) + k\pi.
+    \end{align*}
+    En \([0,2\pi)\):
+    \begin{align*}
+        k=0 &: x = \arctan\!\left(\frac{2}{3}\right),\\
+        k=1 &: x = \arctan\!\left(\frac{2}{3}\right) + \pi.
+    \end{align*}
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\frac{3\pi}{4},\ \frac{7\pi}{4},\ \arctan\!\left(\frac{2}{3}\right),\ \pi + \arctan\!\left(\frac{2}{3}\right)}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  ({1.2*cos(135)},{1.2*sin(135)})/\frac{3\pi}{4},
+  ({1.2*cos(315)},{1.2*sin(315)})/\frac{7\pi}{4},
+  ({1.2*cos(33.6901)},{1.2*sin(33.6901)})/\theta,
+  ({1.2*cos(213.6901)},{1.2*sin(213.6901)})/\pi{+}\theta%
+} \\[2mm]
+{\small $\theta = \arctan\frac23$.}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 17
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 17}
+\textbf{Ecuación:} \(\cos^2 x - 2\cos x - 2 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \cos x\) \(\Rightarrow\) \(u^2 - 2u - 2 = 0\).
+    \item \textbf{Resolver la cuadrática:}
+    \[
+    u = \frac{2 \pm \sqrt{4 + 8}}{2} = \frac{2 \pm \sqrt{12}}{2} = \frac{2 \pm 2\sqrt{3}}{2} = 1 \pm \sqrt{3}.
+    \]
+    \item \textbf{Analizar valores:}
+    \begin{itemize}
+        \item \(1 + \sqrt{3} \approx 2.732\) (no válido).
+        \item \(1 - \sqrt{3} \approx -0.732\) (válido).
+    \end{itemize}
+    Entonces \(\cos x = 1 - \sqrt{3}\).
+    \item \textbf{Resolver \(\cos x = 1-\sqrt{3}\):}
+    \begin{align*}
+        x &= \arccos(1 - \sqrt{3}) + 2k\pi,\\
+        x &= 2\pi - \arccos(1 - \sqrt{3}) + 2k\pi.
+    \end{align*}
+    En \([0,2\pi)\) con \(k=0\):
+    \[
+    x_1 = \arccos(1 - \sqrt{3}),\qquad
+    x_2 = 2\pi - \arccos(1 - \sqrt{3}).
+    \]
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\arccos(1 - \sqrt{3}),\ 2\pi - \arccos(1 - \sqrt{3})}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  ({1.2*cos(137.304)},{1.2*sin(137.304)})/\iota,
+  ({1.2*cos(222.696)},{1.2*sin(222.696)})/2\pi{-}\iota%
+} \\[2mm]
+{\small $\iota = \arccos(1 - \sqrt{3})$.}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 18
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 18}
+\textbf{Ecuación:} \(5\sin^2 x - 4\sin x - 1 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \sin x\) \(\Rightarrow\) \(5u^2 - 4u - 1 = 0\).
+    \item \textbf{Factorización:} \((5u + 1)(u - 1) = 0\).
+    \item \textbf{Raíces:} \(u = -\frac{1}{5}\) o \(u = 1\).
+    \item \textbf{Resolver \(\sin x = 1\):}
+    \[
+    x = \frac{\pi}{2} + 2k\pi.
+    \]
+    En \([0,2\pi)\): \(x = \frac{\pi}{2}\).
+    \item \textbf{Resolver \(\sin x = -\frac{1}{5}\):}
+    Usamos \(\arcsin\):
+    \begin{align*}
+        x &= \arcsin\!\left(-\frac{1}{5}\right) + 2k\pi,\\
+        x &= \pi - \arcsin\!\left(-\frac{1}{5}\right) + 2k\pi.
+    \end{align*}
+    Como \(\arcsin(-a) = -\arcsin(a)\), las expresiones quedan:
+    \begin{align*}
+        x &= -\arcsin\!\left(\frac{1}{5}\right) + 2k\pi,\\
+        x &= \pi + \arcsin\!\left(\frac{1}{5}\right) + 2k\pi.
+    \end{align*}
+    Para estar en \([0,2\pi)\):
+    \begin{itemize}
+        \item De la primera, con \(k=1\): \(x = 2\pi - \arcsin\!\left(\frac{1}{5}\right)\).
+        \item De la segunda, con \(k=0\): \(x = \pi + \arcsin\!\left(\frac{1}{5}\right)\).
+    \end{itemize}
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\frac{\pi}{2},\ \pi + \arcsin\!\left(\frac{1}{5}\right),\ 2\pi - \arcsin\!\left(\frac{1}{5}\right)}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  {(0,1.2)/\frac{\pi}{2}},
+  ({1.2*cos(191.537)},{1.2*sin(191.537)})/\pi{+}\kappa,
+  ({1.2*cos(348.463)},{1.2*sin(348.463)})/2\pi{-}\kappa%
+} \\[2mm]
+{\small $\kappa = \arcsin\frac15$.}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 19
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 19}
+\textbf{Ecuación:} \(3\tan^2 x - 1 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Despejar \(\tan^2 x\):}
+    \[
+    3\tan^2 x = 1 \quad\Longrightarrow\quad \tan^2 x = \frac{1}{3}.
+    \]
+    \item \textbf{Tomar raíz cuadrada:}
+    \[
+    \tan x = \pm \frac{1}{\sqrt{3}} = \pm \frac{\sqrt{3}}{3}.
+    \]
+    \item \textbf{Resolver \(\tan x = \frac{\sqrt{3}}{3}\):}
+    Ángulo de referencia \(\frac{\pi}{6}\). Tangente positiva en I y III:
+    \begin{align*}
+        x &= \frac{\pi}{6} + k\pi,\\
+        \text{en }[0,2\pi): &\quad \frac{\pi}{6},\ \frac{7\pi}{6}.
+    \end{align*}
+    \item \textbf{Resolver \(\tan x = -\frac{\sqrt{3}}{3}\):}
+    Ángulo de referencia \(\frac{\pi}{6}\). Tangente negativa en II y IV:
+    \begin{align*}
+        x &= -\frac{\pi}{6} + k\pi,\\
+        \text{en }[0,2\pi): &\quad \frac{5\pi}{6} \ (k=1),\ \frac{11\pi}{6} \ (k=2).
+    \end{align*}
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\frac{\pi}{6},\ \frac{5\pi}{6},\ \frac{7\pi}{6},\ \frac{11\pi}{6}}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  ({1.2*cos(30)},{1.2*sin(30)})/\frac{\pi}{6},
+  ({1.2*cos(150)},{1.2*sin(150)})/\frac{5\pi}{6},
+  ({1.2*cos(210)},{1.2*sin(210)})/\frac{7\pi}{6},
+  ({1.2*cos(330)},{1.2*sin(330)})/\frac{11\pi}{6}%
+}
+\end{minipage}
+
+\vspace{1cm}
+
+% Solución 20
+\begin{minipage}{\textwidth}
+\section*{Ejercicio 20}
+\textbf{Ecuación:} \(2\sin^2 x - \sin x - 1 = 0\) en \([0,2\pi)\).
+
+\textbf{Solución:}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Sustitución:} \(u = \sin x\) \(\Rightarrow\) \(2u^2 - u - 1 = 0\).
+    \item \textbf{Factorización:} \((2u + 1)(u - 1) = 0\).
+    \item \textbf{Raíces:} \(u = -\frac{1}{2}\) o \(u = 1\).
+    \item \textbf{Resolver \(\sin x = 1\):}
+    \[
+    x = \frac{\pi}{2} + 2k\pi.
+    \]
+    En \([0,2\pi)\): \(x = \frac{\pi}{2}\).
+    \item \textbf{Resolver \(\sin x = -\frac{1}{2}\):}
+    Ángulo de referencia \(\frac{\pi}{6}\). Seno negativo en III y IV:
+    \begin{align*}
+        x &= \pi + \frac{\pi}{6} + 2k\pi = \frac{7\pi}{6} + 2k\pi,\\
+        x &= 2\pi - \frac{\pi}{6} + 2k\pi = \frac{11\pi}{6} + 2k\pi.
+    \end{align*}
+    En \([0,2\pi)\): \(x = \frac{7\pi}{6},\ \frac{11\pi}{6}\).
+    \item \textbf{Conjunto solución:}
+    \[
+    \boxed{\frac{\pi}{2},\ \frac{7\pi}{6},\ \frac{11\pi}{6}}
+    \]
+\end{enumerate}
+
+\unitcircle{%
+  {(0,1.2)/\frac{\pi}{2}},
+  ({1.2*cos(210)},{1.2*sin(210)})/\frac{7\pi}{6},
+  ({1.2*cos(330)},{1.2*sin(330)})/\frac{11\pi}{6}%
+}
+\end{minipage}
+
+\end{document}

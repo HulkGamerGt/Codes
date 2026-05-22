@@ -1,0 +1,999 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\usepackage{colortbl}
+
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tikz}
+
+\tcbuselibrary{skins, breakable, theorems}
+
+\geometry{margin=2.2cm, top=2.5cm, bottom=2.5cm}
+\setlength{\headheight}{24.01996pt}
+\addtolength{\topmargin}{-12pt}
+
+% Paleta de colores
+\definecolor{azulOscuro}{RGB}{25, 60, 110}
+\definecolor{azulMedio}{RGB}{52, 101, 164}
+\definecolor{azulClaro}{RGB}{214, 229, 248}
+\definecolor{dorado}{RGB}{180, 140, 40}
+\definecolor{grisClaro}{RGB}{245, 246, 250}
+\definecolor{grisBorde}{RGB}{200, 210, 225}
+\definecolor{rojoGrafico}{RGB}{180, 30, 30}
+\definecolor{verdeGrafico}{RGB}{30, 130, 60}
+
+% Encabezado
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{azulMedio}\leaders\hrule height \headrulewidth\hfill}}
+\rhead{\color{azulOscuro}\small\thepage}
+\lhead{\color{azulOscuro}\small\textit{Formulario Unidad II --- Trigonometría}}
+
+% Títulos
+\titleformat{\section}
+  {\color{azulOscuro}\large\bfseries}
+  {\color{dorado}\thesection.}{0.5em}{}
+  [\vspace{-4pt}\textcolor{azulMedio}{\rule{\linewidth}{0.5pt}}\vspace{2pt}]
+
+\titleformat{\subsection}
+  {\color{azulMedio}\normalsize\bfseries}
+  {\thesubsection.}{0.5em}{}
+
+% Cajas
+\tcbset{
+  formulabox/.style={
+    enhanced, breakable,
+    colback=grisClaro, colframe=azulMedio,
+    fonttitle=\bfseries\color{white},
+    coltitle=white, colbacktitle=azulOscuro,
+    boxrule=0.6pt, arc=4pt,
+    left=6pt, right=6pt, top=4pt, bottom=4pt,
+  },
+  notabox/.style={
+    enhanced,
+    colback=azulClaro!40, colframe=azulMedio,
+    boxrule=0.5pt, arc=3pt,
+    left=6pt, right=6pt, top=3pt, bottom=3pt,
+    fontupper=\small,
+  },
+  ejercbox/.style={
+    enhanced, breakable,
+    colback=white, colframe=dorado,
+    boxrule=0.7pt, arc=4pt,
+    left=6pt, right=6pt, top=4pt, bottom=4pt,
+  }
+}
+
+\begin{document}
+
+% ── PORTADA ──────────────────────────────────────────────────────
+\begin{titlepage}
+  \pagecolor{azulOscuro}
+  \centering
+  \vspace*{3cm}
+  {\color{white}\fontsize{13}{16}\selectfont\scshape
+    Cálculo I --- Ingeniería Civil e Informática\par}
+  \vspace{0.4cm}
+  {\color{grisBorde}\rule{0.6\linewidth}{0.4pt}\par}
+  \vspace{0.8cm}
+  {\color{white}\fontsize{32}{38}\selectfont\bfseries Formulario\par}
+  {\color{dorado}\fontsize{28}{34}\selectfont\bfseries Unidad II\par}
+  \vspace{0.5cm}
+  {\color{azulClaro}\fontsize{16}{20}\selectfont Trigonometría\par}
+  \vspace{0.3cm}
+  {\color{grisBorde}\small
+    Identidades Trigonométricas $\cdot$
+    Teorema del Seno y Coseno $\cdot$ Aplicaciones\par}
+  \vspace{1.2cm}
+  {\color{grisBorde}\small
+    Preparado por : Diego Solís S1 $\cdot$
+    Joaquin Vasquez S2 $\cdot$ Benjamin Romo S3 \par}
+  \vspace{1.2cm}
+  {\color{grisBorde}\rule{0.4\linewidth}{0.3pt}\par}
+  \vspace{0.6cm}
+  {\color{white}\normalsize 2025 --- 2026\par}
+  \vfill
+\end{titlepage}
+\nopagecolor
+
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════════════
+\section{Introducción}
+
+Suponemos conocidas las medidas de los ángulos y su relación con los
+arcos que provienen de la geometría elemental.
+
+La medida $\alpha$ de un ángulo $AOB$ es la \textit{cantidad de
+rotación} que efectúa el lado $OA$ al girar en torno a $O$ hasta
+coincidir con $OB$. Es positiva en sentido antihorario y negativa en
+sentido horario.
+
+\subsection{Sistema Sexagesimal}
+\[
+  1^\circ = \frac{1}{360}\ \text{de circunferencia completa}
+\]
+
+\subsection{Sistema Radiánico}
+\[
+  1\ \text{rad} = \frac{\text{arco}}{\text{radio}}
+  \qquad\Rightarrow\qquad \text{arco} = r
+\]
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════
+\section{Razones Trigonométricas}
+
+\begin{tcolorbox}[formulabox,
+  title={Definiciones en triángulo rectángulo con ángulo $\alpha$}]
+\begin{align*}
+\sin\alpha &= \frac{\text{cateto opuesto}}{\text{hipotenusa}}
+           = \frac{PQ}{OP} &
+\cos\alpha &= \frac{\text{cateto adyacente}}{\text{hipotenusa}}
+           = \frac{OQ}{OP} \\[6pt]
+\tan\alpha &= \frac{\text{cateto opuesto}}{\text{cateto adyacente}}
+           = \frac{PQ}{OQ} &
+\cot\alpha &= \frac{\text{cateto adyacente}}{\text{cateto opuesto}}
+           = \frac{OQ}{PQ} \\[6pt]
+\sec\alpha &= \frac{\text{hipotenusa}}{\text{cateto adyacente}}
+           = \frac{OP}{OQ} &
+\csc\alpha &= \frac{\text{hipotenusa}}{\text{cateto opuesto}}
+           = \frac{OP}{PQ}
+\end{align*}
+\end{tcolorbox}
+
+% ══════════════════════════════════════════════════════════════════
+\section{Identidades Trigonométricas Básicas}
+
+\subsection{Identidades Pitagóricas}
+
+\begin{tcolorbox}[formulabox, title={Identidades Pitagóricas}]
+\begin{align*}
+\sin^2\alpha + \cos^2\alpha &= 1 \tag{1} \\
+1 + \tan^2\alpha            &= \sec^2\alpha \tag{2} \\
+1 + \cot^2\alpha            &= \csc^2\alpha \tag{3}
+\end{align*}
+\end{tcolorbox}
+
+\subsection{Identidades Recíprocas y de Cociente}
+
+\begin{tcolorbox}[formulabox]
+\begin{align*}
+\sin\alpha\cdot\csc\alpha &= 1 &
+\cos\alpha\cdot\sec\alpha &= 1 &
+\tan\alpha\cdot\cot\alpha &= 1 \\[4pt]
+\tan\alpha &= \dfrac{\sin\alpha}{\cos\alpha} &
+\cot\alpha &= \dfrac{\cos\alpha}{\sin\alpha}
+\end{align*}
+\end{tcolorbox}
+
+\begin{tcolorbox}[notabox]
+\textbf{Nota:} $\sin^2\alpha = (\sin\alpha)^2 \neq \sin(\alpha^2)$
+\end{tcolorbox}
+
+% ══════════════════════════════════════════════════════════════════
+\section{Signos según Cuadrantes}
+
+\begin{center}
+\begin{tabular}{>{\centering\bfseries\color{azulOscuro}}m{2cm}
+                >{\centering}m{3.4cm}
+                >{\centering}m{3.4cm}
+                >{\centering\arraybackslash}m{3.6cm}}
+\toprule
+\rowcolor{azulOscuro}
+\color{white}\textbf{Cuadrante} &
+\color{white}\textbf{Seno / Cosecante} &
+\color{white}\textbf{Coseno / Secante} &
+\color{white}\textbf{Tangente / Cotangente} \\
+\midrule
+\rowcolor{grisClaro}
+I   & $+$ & $+$ & $+$ \\
+II  & $+$ & $-$ & $-$ \\
+\rowcolor{grisClaro}
+III & $-$ & $-$ & $+$ \\
+IV  & $-$ & $+$ & $-$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ══════════════════════════════════════════════════════════════════
+\section{Fórmulas de Reducción y Cofunciones}
+
+Para $0 < \alpha < \dfrac{\pi}{2}$:
+
+\begin{tcolorbox}[formulabox]
+\begin{align*}
+\sin\!\left(\tfrac{\pi}{2}-\alpha\right) &= \cos\alpha, &
+\cos\!\left(\tfrac{\pi}{2}-\alpha\right) &= \sin\alpha, &
+\tan\!\left(\tfrac{\pi}{2}-\alpha\right) &= \cot\alpha \\[4pt]
+\sec\!\left(\tfrac{\pi}{2}-\alpha\right) &= \csc\alpha, &
+\csc\!\left(\tfrac{\pi}{2}-\alpha\right) &= \sec\alpha
+\end{align*}
+\end{tcolorbox}
+
+\subsection{Reglas Generales de Reducción}
+
+\begin{tcolorbox}[formulabox]
+\begin{align*}
+\sin(\pi\pm\alpha) &= \mp\sin\alpha &
+\cos(\pi\pm\alpha) &= \mp\cos\alpha &
+\tan(\pi\pm\alpha) &= \pm\tan\alpha \\[4pt]
+\sin(2\pi\pm\alpha) &= \pm\sin\alpha &
+\cos(2\pi\pm\alpha) &= \pm\cos\alpha
+\end{align*}
+\end{tcolorbox}
+
+\subsection{Ángulos Negativos}
+
+\begin{tcolorbox}[formulabox]
+\begin{align*}
+\sin(-\theta) &= -\sin\theta &
+\cos(-\theta) &= \cos\theta &
+\tan(-\theta) &= -\tan\theta \\[4pt]
+\csc(-\theta) &= -\csc\theta &
+\sec(-\theta) &= \sec\theta &
+\cot(-\theta) &= -\cot\theta
+\end{align*}
+\end{tcolorbox}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════
+\section{Identidades de Doble, Triple y Semángulo}
+
+\subsection{Doble Ángulo}
+
+\begin{tcolorbox}[formulabox, title={Doble ángulo}]
+\begin{align*}
+\sin 2\alpha &= 2\sin\alpha\cos\alpha \\[4pt]
+\cos 2\alpha &= \cos^2\alpha - \sin^2\alpha
+             = 2\cos^2\alpha - 1
+             = 1 - 2\sin^2\alpha \\[4pt]
+\tan 2\alpha &= \frac{2\tan\alpha}{1-\tan^2\alpha}
+\end{align*}
+\end{tcolorbox}
+
+\subsection{Triple Ángulo}
+
+\begin{tcolorbox}[formulabox, title={Triple ángulo}]
+\begin{align*}
+\sin 3\alpha &= 3\sin\alpha - 4\sin^3\alpha \\[4pt]
+\cos 3\alpha &= 4\cos^3\alpha - 3\cos\alpha
+\end{align*}
+\end{tcolorbox}
+
+\subsection{Semángulo}
+
+\begin{tcolorbox}[formulabox, title={Mitad de ángulo}]
+\begin{align*}
+\sin^2\frac{\alpha}{2} &= \frac{1-\cos\alpha}{2} \\[8pt]
+\cos^2\frac{\alpha}{2} &= \frac{1+\cos\alpha}{2} \\[8pt]
+\tan\frac{\alpha}{2}   &= \frac{\sin\alpha}{1+\cos\alpha}
+                        = \frac{1-\cos\alpha}{\sin\alpha}
+                        = \pm\sqrt{\frac{1-\cos\alpha}{1+\cos\alpha}}
+\end{align*}
+\end{tcolorbox}
+
+% ══════════════════════════════════════════════════════════════════
+\section{Identidades de Suma y Diferencia}
+
+\begin{tcolorbox}[formulabox, title={Suma y diferencia de ángulos}]
+\begin{align*}
+\sin(\alpha\pm\beta) &= \sin\alpha\cos\beta \pm \cos\alpha\sin\beta \\[6pt]
+\cos(\alpha\pm\beta) &= \cos\alpha\cos\beta \mp \sin\alpha\sin\beta \\[6pt]
+\tan(\alpha\pm\beta) &= \frac{\tan\alpha\pm\tan\beta}
+                            {1\mp\tan\alpha\tan\beta}
+\end{align*}
+\end{tcolorbox}
+
+% ══════════════════════════════════════════════════════════════════
+\section{Fórmulas Producto a Suma}
+
+\subsection{Producto hacia Suma}
+
+\begin{tcolorbox}[formulabox]
+\begin{align*}
+\sin\alpha\cos\beta &= \tfrac{1}{2}\bigl[\sin(\alpha-\beta)+\sin(\alpha+\beta)\bigr] \\[6pt]
+\cos\alpha\cos\beta &= \tfrac{1}{2}\bigl[\cos(\alpha-\beta)+\cos(\alpha+\beta)\bigr] \\[6pt]
+\sin\alpha\sin\beta &= \tfrac{1}{2}\bigl[\cos(\alpha-\beta)-\cos(\alpha+\beta)\bigr]
+\end{align*}
+\end{tcolorbox}
+
+\subsection{Suma hacia Producto}
+
+\begin{tcolorbox}[formulabox]
+\begin{align*}
+\sin\alpha+\sin\beta &= 2\sin\!\left(\frac{\alpha+\beta}{2}\right)
+                         \cos\!\left(\frac{\alpha-\beta}{2}\right) \\[8pt]
+\sin\alpha-\sin\beta &= 2\cos\!\left(\frac{\alpha+\beta}{2}\right)
+                         \sin\!\left(\frac{\alpha-\beta}{2}\right) \\[8pt]
+\cos\alpha+\cos\beta &= 2\cos\!\left(\frac{\alpha+\beta}{2}\right)
+                         \cos\!\left(\frac{\alpha-\beta}{2}\right) \\[8pt]
+\cos\alpha-\cos\beta &= -2\sin\!\left(\frac{\alpha+\beta}{2}\right)
+                          \sin\!\left(\frac{\alpha-\beta}{2}\right)
+\end{align*}
+\end{tcolorbox}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════
+\section{Teoremas del Seno y del Coseno}
+
+\subsection{Teorema del Seno}
+
+\begin{tcolorbox}[formulabox,
+  title={Teorema del Seno --- triángulo $ABC$ oblicuángulo}]
+\[
+  \frac{\sin A}{a} = \frac{\sin B}{b} = \frac{\sin C}{c}
+\]
+\end{tcolorbox}
+
+\subsection{Teorema del Coseno}
+
+\begin{tcolorbox}[formulabox, title={Teorema del Coseno}]
+\begin{align*}
+a^2 &= b^2 + c^2 - 2bc\cos A \\[4pt]
+b^2 &= a^2 + c^2 - 2ac\cos B \\[4pt]
+c^2 &= a^2 + b^2 - 2ab\cos C
+\end{align*}
+\end{tcolorbox}
+
+\subsection{Área del Triángulo}
+
+\begin{tcolorbox}[formulabox]
+\[
+  \text{Área} = \frac{1}{2}\,bc\sin A
+              = \frac{abc}{4R}
+  \qquad R = \text{radio circunscrito}
+\]
+\end{tcolorbox}
+
+% ══════════════════════════════════════════════════════════════════
+\section{Valores Exactos de Ángulos Notables}
+
+\begin{center}
+\begin{tabular}{>{\centering\bfseries}m{2cm}
+                >{\centering}m{3cm}
+                >{\centering}m{3cm}
+                >{\centering\arraybackslash}m{3cm}}
+\toprule
+\rowcolor{azulOscuro}
+\color{white}\textbf{Ángulo} &
+\color{white}$\boldsymbol{\sin}$ &
+\color{white}$\boldsymbol{\cos}$ &
+\color{white}$\boldsymbol{\tan}$ \\
+\midrule
+\rowcolor{grisClaro}
+$0^\circ$  & $0$ & $1$ & $0$ \\
+$30^\circ$ & $\dfrac{1}{2}$ & $\dfrac{\sqrt{3}}{2}$ &
+             $\dfrac{1}{\sqrt{3}}$ \\[10pt]
+\rowcolor{grisClaro}
+$45^\circ$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $1$ \\[10pt]
+$60^\circ$ & $\dfrac{\sqrt{3}}{2}$ & $\dfrac{1}{2}$ & $\sqrt{3}$ \\[6pt]
+\rowcolor{grisClaro}
+$90^\circ$ & $1$ & $0$ & $\infty$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Triángulos Notables}
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item Triángulo equilátero de lado 2
+        $\;\longrightarrow\;$ razones de $30^\circ$ y $60^\circ$
+  \item Triángulo rectángulo isósceles de catetos 1
+        $\;\longrightarrow\;$ razones de $45^\circ$
+\end{itemize}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════
+\section{Otras Identidades Útiles}
+
+\begin{tcolorbox}[formulabox, title={Demostraciones frecuentes}]
+\begin{align*}
+\sec\theta  - \cos\theta  &= \tan\theta\sin\theta \\[4pt]
+\csc\theta  - \sin\theta  &= \cot\theta\cos\theta \\[4pt]
+\tan\theta  + \cot\theta  &= \csc\theta\sec\theta \\[4pt]
+\sin^2\theta - \cos^2\theta &= -\cos 2\theta \\[4pt]
+\sin^3\theta + \cos^3\theta
+  &= \bigl(\sin\theta+\cos\theta\bigr)
+     \bigl(1-\sin\theta\cos\theta\bigr)
+\end{align*}
+\end{tcolorbox}
+
+% ══════════════════════════════════════════════════════════════════
+\section{Funciones Trigonométricas Asociadas --- Ondas}
+
+Forma general:
+\[
+  y = A\sin(Bx+C)+D \qquad\text{o}\qquad y = A\cos(Bx+C)+D
+\]
+
+\begin{tcolorbox}[formulabox]
+\begin{itemize}[leftmargin=*, itemsep=4pt]
+  \item \textbf{Amplitud:} $|A|$
+  \item \textbf{Período:} $\dfrac{2\pi}{|B|}$
+  \item \textbf{Frecuencia:} $\dfrac{|B|}{2\pi}$
+  \item \textbf{Desfase:} $-\dfrac{C}{B}$
+  \item \textbf{Desplazamiento vertical:} $D$
+\end{itemize}
+\end{tcolorbox}
+
+\[
+  A = \frac{\text{Valor máximo} - \text{Valor mínimo}}{2}
+\]
+
+% ══════════════════════════════════════════════════════════════════
+\subsection{Gráfico de la Función Seno}
+
+La función seno base $y = \sin(x)$ tiene amplitud $1$, período $2\pi$,
+desfase $0$ y desplazamiento vertical $0$.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=12cm, height=4.8cm,
+  axis lines=center,
+  xlabel={$x$}, ylabel={$y$},
+  xlabel style={right},
+  ylabel style={above},
+  xtick={-6.2832,-3.1416,0,1.5708,3.1416,6.2832},
+  xticklabels={$-2\pi$,$-\pi$,$0$,$\tfrac{\pi}{2}$,$\pi$,$2\pi$},
+  ytick={-2,-1,1,2},
+  xmin=-7, xmax=7,
+  ymin=-2.5, ymax=2.5,
+  grid=major,
+  grid style={line width=0.4pt, draw=gray!40},
+  tick label style={font=\small},
+  domain=-6.5:6.5,
+  samples=80,
+  legend pos=north east,
+  legend style={font=\small, fill=grisClaro, draw=azulMedio}
+]
+  \addplot[color=azulOscuro, thick, smooth] {sin(deg(x))};
+  \addlegendentry{$y = \sin(x)$}
+  \addplot[color=rojoGrafico, thick, dashed, smooth] {2*sin(deg(x))};
+  \addlegendentry{$y = 2\sin(x)$ \quad amplitud $= 2$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+% ══════════════════════════════════════════════════════════════════
+\subsection{Gráfico de la Función Coseno}
+
+La función coseno base $y = \cos(x)$ tiene amplitud $1$, período $2\pi$,
+desfase $0$ y desplazamiento vertical $0$. A diferencia del seno,
+comienza en su valor máximo cuando $x = 0$.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=12cm, height=4.8cm,
+  axis lines=center,
+  xlabel={$x$}, ylabel={$y$},
+  xlabel style={right},
+  ylabel style={above},
+  xtick={-6.2832,-3.1416,0,1.5708,3.1416,6.2832},
+  xticklabels={$-2\pi$,$-\pi$,$0$,$\tfrac{\pi}{2}$,$\pi$,$2\pi$},
+  ytick={-2,-1,1,2},
+  xmin=-7, xmax=7,
+  ymin=-2.5, ymax=2.5,
+  grid=major,
+  grid style={line width=0.4pt, draw=gray!40},
+  tick label style={font=\small},
+  domain=-6.5:6.5, samples=80,
+  legend pos=north east,
+  legend style={font=\small, fill=grisClaro, draw=azulMedio}
+]
+  \addplot[color=verdeGrafico, thick, smooth] {cos(deg(x))};
+  \addlegendentry{$y = \cos(x)$}
+  \addplot[color=rojoGrafico, thick, dashed, smooth] {1.5*cos(deg(x))};
+  \addlegendentry{$y = 1.5\cos(x)$ \quad amplitud $= 1.5$}
+  \addplot[color=azulOscuro, thick, dashdotted, smooth] {cos(deg(x))+1};
+  \addlegendentry{$y = \cos(x)+1$ \quad $D = 1$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+% ══════════════════════════════════════════════════════════════════
+\subsection{Efecto del Período y el Desfase}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=12cm, height=4.8cm,
+  axis lines=center,
+  xlabel={$x$}, ylabel={$y$},
+  xlabel style={right},
+  ylabel style={above},
+  xtick={-6.2832,-3.1416,0,1.5708,3.1416,6.2832},
+  xticklabels={$-2\pi$,$-\pi$,$0$,$\tfrac{\pi}{2}$,$\pi$,$2\pi$},
+  ytick={-1,1},
+  xmin=-7, xmax=7,
+  ymin=-1.6, ymax=1.6,
+  grid=major,
+  grid style={line width=0.4pt, draw=gray!40},
+  tick label style={font=\small},
+  domain=-6.5:6.5, samples=80,
+  legend pos=north east,
+  legend style={font=\small, fill=grisClaro, draw=azulMedio}
+]
+  \addplot[color=verdeGrafico, thick, smooth] {cos(deg(x))};
+  \addlegendentry{$y = \cos(x)$ \quad $T = 2\pi$}
+  \addplot[color=azulOscuro, thick, dashed, smooth] {cos(deg(2*x))};
+  \addlegendentry{$y = \cos(2x)$ \quad $T = \pi$}
+  \addplot[color=rojoGrafico, thick, dashdotted, smooth] {cos(deg(x-1.0472))};
+  \addlegendentry{$y = \cos(x - \pi/3)$ \quad desfase $= \pi/3$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[notabox]
+\textbf{Observación clave:} $\cos(x) = \sin\!\left(x + \dfrac{\pi}{2}\right)$.
+El coseno es el seno desplazado $\tfrac{\pi}{2}$ a la \textit{izquierda}.
+\end{tcolorbox}
+
+% ══════════════════════════════════════════════════════════════════
+%  NUEVA SUBSECCIÓN 12.4 — Tangente, Cotangente, Secante, Cosecante
+% ══════════════════════════════════════════════════════════════════
+\subsection{Tangente, Cotangente, Secante y Cosecante}
+
+Forma general para cada función:
+\[
+  y = A\,f(Bx + C) + D
+\]
+donde $f$ representa $\tan$, $\cot$, $\sec$ o $\csc$.
+
+% ── TANGENTE ─────────────────────────────────────────────────────
+\subsubsection*{$y = A\tan(Bx+C)+D$}
+
+\begin{itemize}[leftmargin=*, itemsep=3pt]
+  \item \textbf{Amplitud (factor de escala vertical):} $|A|$
+        \quad{\small(estira/comprime la curva; no existe máximo ni mínimo acotado)}
+  \item \textbf{Período:} $\dfrac{\pi}{|B|}$
+  \item \textbf{Desfase:} $-\dfrac{C}{B}$
+        \quad{\small(positivo $\Rightarrow$ desplaza a la derecha)}
+  \item \textbf{Desplazamiento vertical:} $D$
+  \item \textbf{Asíntotas verticales:}
+        $\displaystyle x = \frac{1}{B}\!\left(\frac{\pi}{2}+n\pi-C\right)$,\;
+        $n\in\mathbb{Z}$
+  \item \textbf{Ejemplos graficados:}\\[2pt]
+        $y=\tan(x)$: $A=1$, $T=\pi$, desfase $=0$\\
+        $y=2\tan(x)$: $A=2$, $T=\pi$, desfase $=0$\\
+        $y=\tan(2x)$: $A=1$, $T=\tfrac{\pi}{2}$, desfase $=0$\\
+        $y=\tan\!\left(x-\tfrac{\pi}{4}\right)$:
+          $A=1$, $T=\pi$, desfase $=\tfrac{\pi}{4}$
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=12cm, height=5cm,
+  axis lines=center,
+  xlabel={$x$}, ylabel={$y$},
+  xlabel style={right}, ylabel style={above},
+  xtick={-4.7124,-3.1416,-1.5708,0,1.5708,3.1416,4.7124},
+  xticklabels={$-\frac{3\pi}{2}$,$-\pi$,$-\frac{\pi}{2}$,$0$,
+               $\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$},
+  ytick={-3,-2,-1,1,2,3},
+  xmin=-5.2, xmax=5.2,
+  ymin=-3.5, ymax=3.5,
+  restrict y to domain=-3.5:3.5,
+  grid=major,
+  grid style={line width=0.4pt, draw=gray!40},
+  tick label style={font=\small},
+  domain=-5.1:5.1, samples=200,
+  legend pos=north east,
+  legend style={font=\small, fill=grisClaro, draw=azulMedio}
+]
+  % Asíntotas verticales
+  \addplot[gray!50, dashed, thick] coordinates {(-1.5708,-3.5)(-1.5708,3.5)};
+  \addplot[gray!50, dashed, thick] coordinates {( 1.5708,-3.5)( 1.5708,3.5)};
+  \addplot[gray!50, dashed, thick] coordinates {(-4.7124,-3.5)(-4.7124,3.5)};
+  \addplot[gray!50, dashed, thick] coordinates {( 4.7124,-3.5)( 4.7124,3.5)};
+  % Curvas
+  \addplot[azulOscuro, thick, smooth]               {tan(deg(x))};
+  \addlegendentry{$y=\tan(x)$\quad $T=\pi$}
+  \addplot[rojoGrafico, thick, dashed, smooth]      {2*tan(deg(x))};
+  \addlegendentry{$y=2\tan(x)$\quad $A=2$}
+  \addplot[verdeGrafico, thick, dashdotted, smooth] {tan(deg(2*x))};
+  \addlegendentry{$y=\tan(2x)$\quad $T=\pi/2$}
+  \addplot[dorado, thick, dotted, smooth]           {tan(deg(x-0.7854))};
+  \addlegendentry{$y=\tan(x-\pi/4)$\quad desfase$\,=\pi/4$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+% ── COTANGENTE ───────────────────────────────────────────────────
+\subsubsection*{$y = A\cot(Bx+C)+D$}
+
+\begin{itemize}[leftmargin=*, itemsep=3pt]
+  \item \textbf{Amplitud (factor de escala vertical):} $|A|$
+        \quad{\small(función \textbf{decreciente} en cada período; sin máximo/mínimo acotado)}
+  \item \textbf{Período:} $\dfrac{\pi}{|B|}$
+  \item \textbf{Desfase:} $-\dfrac{C}{B}$
+  \item \textbf{Desplazamiento vertical:} $D$
+  \item \textbf{Asíntotas verticales:}
+        $\displaystyle x = \frac{n\pi - C}{B}$,\; $n\in\mathbb{Z}$
+  \item \textbf{Diferencia clave:} la cotangente es decreciente en cada intervalo,
+        mientras que la tangente es creciente.
+  \item \textbf{Ejemplos graficados:}\\[2pt]
+        $y=\cot(x)$: $A=1$, $T=\pi$, desfase $=0$\\
+        $y=2\cot(x)$: $A=2$, $T=\pi$, desfase $=0$\\
+        $y=\cot(2x)$: $A=1$, $T=\tfrac{\pi}{2}$, desfase $=0$\\
+        $y=\cot\!\left(x+\tfrac{\pi}{4}\right)$:
+          $A=1$, $T=\pi$, desfase $=-\tfrac{\pi}{4}$
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=12cm, height=5cm,
+  axis lines=center,
+  xlabel={$x$}, ylabel={$y$},
+  xlabel style={right}, ylabel style={above},
+  xtick={-3.1416,-1.5708,0,1.5708,3.1416,4.7124},
+  xticklabels={$-\pi$,$-\frac{\pi}{2}$,$0$,
+               $\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$},
+  ytick={-3,-2,-1,1,2,3},
+  xmin=-3.8, xmax=5.2,
+  ymin=-3.5, ymax=3.5,
+  restrict y to domain=-3.5:3.5,
+  grid=major,
+  grid style={line width=0.4pt, draw=gray!40},
+  tick label style={font=\small},
+  domain=-3.7:5.1, samples=200,
+  legend pos=north east,
+  legend style={font=\small, fill=grisClaro, draw=azulMedio}
+]
+  % Asíntotas verticales
+  \addplot[gray!50, dashed, thick] coordinates {( 0,    -3.5)( 0,    3.5)};
+  \addplot[gray!50, dashed, thick] coordinates {( 3.1416,-3.5)( 3.1416,3.5)};
+  \addplot[gray!50, dashed, thick] coordinates {(-3.1416,-3.5)(-3.1416,3.5)};
+  % Curvas
+  \addplot[azulOscuro, thick, smooth]
+    {cos(deg(x))/sin(deg(x))};
+  \addlegendentry{$y=\cot(x)$\quad $T=\pi$}
+  \addplot[rojoGrafico, thick, dashed, smooth]
+    {2*cos(deg(x))/sin(deg(x))};
+  \addlegendentry{$y=2\cot(x)$\quad $A=2$}
+  \addplot[verdeGrafico, thick, dashdotted, smooth]
+    {cos(deg(2*x))/sin(deg(2*x))};
+  \addlegendentry{$y=\cot(2x)$\quad $T=\pi/2$}
+  \addplot[dorado, thick, dotted, smooth]
+    {cos(deg(x+0.7854))/sin(deg(x+0.7854))};
+  \addlegendentry{$y=\cot(x+\pi/4)$\quad desfase$\,=-\pi/4$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\newpage
+
+% ── SECANTE ──────────────────────────────────────────────────────
+\subsubsection*{$y = A\sec(Bx+C)+D$}
+
+\begin{itemize}[leftmargin=*, itemsep=3pt]
+  \item \textbf{Amplitud (factor de escala vertical):} $|A|$
+        \quad{\small(los vértices de las ramas se ubican en $\pm|A|+D$)}
+  \item \textbf{Período:} $\dfrac{2\pi}{|B|}$
+  \item \textbf{Desfase:} $-\dfrac{C}{B}$
+  \item \textbf{Desplazamiento vertical:} $D$
+  \item \textbf{Asíntotas verticales:}
+        $\displaystyle x = \frac{1}{B}\!\left(\frac{\pi}{2}+n\pi-C\right)$,\;
+        $n\in\mathbb{Z}$ \quad{\small(donde $\cos = 0$)}
+  \item \textbf{Relación:} $\sec(x)=\dfrac{1}{\cos(x)}$;\;
+        la curva \textit{toca} al coseno en sus máximos y mínimos.
+  \item \textbf{Ejemplos graficados:}\\[2pt]
+        $y=\sec(x)$: $A=1$, $T=2\pi$, desfase $=0$\\
+        $y=1{,}5\sec(x)$: $A=1{,}5$, $T=2\pi$, desfase $=0$\\
+        $y=\sec(2x)$: $A=1$, $T=\pi$, desfase $=0$\\
+        $y=\sec\!\left(x-\tfrac{\pi}{3}\right)$:
+          $A=1$, $T=2\pi$, desfase $=\tfrac{\pi}{3}$
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=12cm, height=5cm,
+  axis lines=center,
+  xlabel={$x$}, ylabel={$y$},
+  xlabel style={right}, ylabel style={above},
+  xtick={-4.7124,-3.1416,-1.5708,0,1.5708,3.1416,4.7124},
+  xticklabels={$-\frac{3\pi}{2}$,$-\pi$,$-\frac{\pi}{2}$,$0$,
+               $\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$},
+  ytick={-3,-2,-1,1,2,3},
+  xmin=-5.2, xmax=5.2,
+  ymin=-3.5, ymax=3.5,
+  restrict y to domain=-3.5:3.5,
+  grid=major,
+  grid style={line width=0.4pt, draw=gray!40},
+  tick label style={font=\small},
+  domain=-5.1:5.1, samples=200,
+  legend pos=north east,
+  legend style={font=\small, fill=grisClaro, draw=azulMedio}
+]
+  % Asíntotas verticales
+  \addplot[gray!50, dashed, thick] coordinates {(-1.5708,-3.5)(-1.5708,3.5)};
+  \addplot[gray!50, dashed, thick] coordinates {( 1.5708,-3.5)( 1.5708,3.5)};
+  \addplot[gray!50, dashed, thick] coordinates {(-4.7124,-3.5)(-4.7124,3.5)};
+  \addplot[gray!50, dashed, thick] coordinates {( 4.7124,-3.5)( 4.7124,3.5)};
+  % cos(x) de referencia
+  \addplot[gray!55, thin, dotted, smooth] {cos(deg(x))};
+  % Curvas
+  \addplot[azulOscuro, thick, smooth]               {1/cos(deg(x))};
+  \addlegendentry{$y=\sec(x)$\quad $T=2\pi$}
+  \addplot[rojoGrafico, thick, dashed, smooth]      {1.5/cos(deg(x))};
+  \addlegendentry{$y=1{,}5\sec(x)$\quad $A=1{,}5$}
+  \addplot[verdeGrafico, thick, dashdotted, smooth] {1/cos(deg(2*x))};
+  \addlegendentry{$y=\sec(2x)$\quad $T=\pi$}
+  \addplot[dorado, thick, dotted, smooth]           {1/cos(deg(x-1.0472))};
+  \addlegendentry{$y=\sec(x-\pi/3)$\quad desfase$\,=\pi/3$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[notabox]
+\textbf{Nota:} La línea punteada gris es $y=\cos(x)$ como referencia.
+La secante toca los vértices del coseno y se extiende hacia $\pm\infty$
+en sus asíntotas.
+\end{tcolorbox}
+
+\newpage
+
+% ── COSECANTE ────────────────────────────────────────────────────
+\subsubsection*{$y = A\csc(Bx+C)+D$}
+
+\begin{itemize}[leftmargin=*, itemsep=3pt]
+  \item \textbf{Amplitud (factor de escala vertical):} $|A|$
+        \quad{\small(los vértices de las ramas se ubican en $\pm|A|+D$)}
+  \item \textbf{Período:} $\dfrac{2\pi}{|B|}$
+  \item \textbf{Desfase:} $-\dfrac{C}{B}$
+  \item \textbf{Desplazamiento vertical:} $D$
+  \item \textbf{Asíntotas verticales:}
+        $\displaystyle x = \frac{n\pi - C}{B}$,\; $n\in\mathbb{Z}$
+        \quad{\small(donde $\sin = 0$)}
+  \item \textbf{Relación:} $\csc(x)=\dfrac{1}{\sin(x)}$;\;
+        la curva \textit{toca} al seno en sus máximos y mínimos.
+  \item \textbf{Ejemplos graficados:}\\[2pt]
+        $y=\csc(x)$: $A=1$, $T=2\pi$, desfase $=0$\\
+        $y=1{,}5\csc(x)$: $A=1{,}5$, $T=2\pi$, desfase $=0$\\
+        $y=\csc(2x)$: $A=1$, $T=\pi$, desfase $=0$\\
+        $y=\csc\!\left(x+\tfrac{\pi}{6}\right)$:
+          $A=1$, $T=2\pi$, desfase $=-\tfrac{\pi}{6}$
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+  width=12cm, height=5cm,
+  axis lines=center,
+  xlabel={$x$}, ylabel={$y$},
+  xlabel style={right}, ylabel style={above},
+  xtick={-3.1416,-1.5708,0,1.5708,3.1416,4.7124,6.2832},
+  xticklabels={$-\pi$,$-\frac{\pi}{2}$,$0$,
+               $\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
+  ytick={-3,-2,-1,1,2,3},
+  xmin=-3.8, xmax=6.8,
+  ymin=-3.5, ymax=3.5,
+  restrict y to domain=-3.5:3.5,
+  grid=major,
+  grid style={line width=0.4pt, draw=gray!40},
+  tick label style={font=\small},
+  domain=-3.7:6.7, samples=200,
+  legend pos=north east,
+  legend style={font=\small, fill=grisClaro, draw=azulMedio}
+]
+  % Asíntotas verticales
+  \addplot[gray!50, dashed, thick] coordinates {( 0,    -3.5)( 0,    3.5)};
+  \addplot[gray!50, dashed, thick] coordinates {( 3.1416,-3.5)( 3.1416,3.5)};
+  \addplot[gray!50, dashed, thick] coordinates {( 6.2832,-3.5)( 6.2832,3.5)};
+  \addplot[gray!50, dashed, thick] coordinates {(-3.1416,-3.5)(-3.1416,3.5)};
+  % sin(x) de referencia
+  \addplot[gray!55, thin, dotted, smooth] {sin(deg(x))};
+  % Curvas
+  \addplot[azulOscuro, thick, smooth]               {1/sin(deg(x))};
+  \addlegendentry{$y=\csc(x)$\quad $T=2\pi$}
+  \addplot[rojoGrafico, thick, dashed, smooth]      {1.5/sin(deg(x))};
+  \addlegendentry{$y=1{,}5\csc(x)$\quad $A=1{,}5$}
+  \addplot[verdeGrafico, thick, dashdotted, smooth] {1/sin(deg(2*x))};
+  \addlegendentry{$y=\csc(2x)$\quad $T=\pi$}
+  \addplot[dorado, thick, dotted, smooth]           {1/sin(deg(x+0.5236))};
+  \addlegendentry{$y=\csc(x+\pi/6)$\quad desfase$\,=-\pi/6$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[notabox]
+\textbf{Nota:} La línea punteada gris es $y=\sin(x)$ como referencia.
+La cosecante toca los vértices del seno y se extiende hacia $\pm\infty$
+en los ceros del seno.
+\end{tcolorbox}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════
+\section{Identidades para Demostrar}
+
+\begin{tcolorbox}[ejercbox,
+  title={\color{dorado}\bfseries Ejercicios en clases}]
+\begin{align*}
+a)\quad
+  &\frac{\csc\alpha}{1+\csc\alpha}
+   - \frac{1}{\sin\alpha-1} = 2\sec^2\alpha \\[8pt]
+b)\quad
+  &\frac{\tan\alpha-\cot\alpha}{1-2\cos^2\alpha}
+   = \tan\alpha+\cot\alpha \\[8pt]
+c)\quad
+  &\frac{\sin\alpha}{1+\cos\alpha}+\cot\alpha = \csc\alpha \\[8pt]
+d)\quad
+  &\frac{\sec\alpha+1}{\sec\alpha-1}
+   -\frac{\sec\alpha-1}{\sec\alpha+1}
+   -4\cot^2\alpha
+   = \frac{4}{1+\sec\alpha} \\[8pt]
+e)\quad
+  &\frac{1+\tan^2\alpha}{1+\cot^2\alpha}
+   = \left(\frac{1-\tan\alpha}{1-\cot\alpha}\right)^{\!2} \\[8pt]
+f)\quad
+  &\frac{1-\sin\alpha\cos\alpha}{\cos\alpha\,(\sec\alpha-\csc\alpha)}
+   \cdot
+   \frac{\sin^2\alpha-\cos^2\alpha}{\sin^3\alpha+\cos^3\alpha}
+   = \sin\alpha
+\end{align*}
+\end{tcolorbox}
+
+% ══════════════════════════════════════════════════════════════════
+\section{Trabajo Autónomo --- Identidades Adicionales}
+
+\begin{tcolorbox}[ejercbox,
+  title={\color{dorado}\bfseries Trabajo autónomo}]
+\begin{align*}
+g)\quad
+  &2\sec^2\alpha - \sec^4\alpha - 2\cot^2\alpha + \cot^4\alpha
+   = \cot^4\alpha - \tan^4\alpha \\[8pt]
+h)\quad
+  &\frac{1}{1+\sin^2\alpha}+\frac{1}{1+\cos^2\alpha}
+   = \csc^4\alpha - \cot^2\alpha\,(2+\cot^2\alpha) \\[8pt]
+i)\quad
+  &\frac{\sin^6\alpha-\cos^6\alpha}{\sin^2\alpha-\cos^2\alpha}
+   +\sin^2\alpha\cos^2\alpha = 1 \\[8pt]
+j)\quad
+  &\frac{\tan^3\alpha}{1+\tan^2\alpha}
+   +\frac{\cot^3\alpha}{1+\cot^2\alpha}
+   = \sec\alpha\,\csc\alpha - 2\sin\alpha\cos\alpha
+\end{align*}
+\end{tcolorbox}
+
+\vspace{4pt}
+
+\begin{tcolorbox}[ejercbox, title={\color{dorado}\bfseries Identidades adicionales (65--73)}]
+\begin{align*}
+k)\quad &\sec\theta - \cos\theta = \tan\theta\sin\theta \\[6pt]
+l)\quad &\csc\theta - \sin\theta = \cot\theta\cos\theta \\[6pt]
+m)\quad &\frac{\sin\theta + \cos\theta}{\sin\theta} = 1 + \cot\theta \\[8pt]
+n)\quad &\frac{\sin\theta + \cos\theta}{\cos\theta} = 1 + \tan\theta \\[8pt]
+\~{n})\quad &\bigl(\cot\theta + \csc\theta\bigr)\bigl(\tan\theta - \sin\theta\bigr)
+          = \sec\theta - \cos\theta \\[6pt]
+o)\quad &\cot\theta + \tan\theta = \csc\theta\sec\theta \\[6pt]
+p)\quad &\sec^2 3\theta\,\csc^2 3\theta = \sec^2 3\theta + \csc^2 3\theta \\[6pt]
+q)\quad &\frac{1 + \cos^2 3\theta}{\sin^2 3\theta} = 2\csc^2 3\theta - 1 \\[8pt]
+r)\quad &\log\csc\theta = -\log\sin\theta
+\end{align*}
+\end{tcolorbox}
+
+\newpage
+
+% ══════════════════════════════════════════════════════════════════
+\section{Ejercicios de Aplicación}
+
+\begin{tcolorbox}[ejercbox,
+  title={\color{dorado}\bfseries Problemas propuestos}]
+
+\begin{enumerate}[leftmargin=*, itemsep=10pt]
+
+  \item \textbf{Dos observadores y un avión.}
+  Dos observadores en tierra, separados $d = 1{,}5\ \text{km}$ entre sí,
+  observan simultáneamente un avión que vuela horizontalmente entre ellos
+  en el mismo plano vertical. El primer observador mide un ángulo de
+  elevación de $\alpha = 55{,}3^\circ$ y el segundo uno de $\beta = 72{,}1^\circ$.
+  Determine: \textbf{(a)} la altura de vuelo del avión, y
+  \textbf{(b)} la velocidad del avión si, al cabo de $t = 10\ \text{s}$
+  desde la primera medición, el avión se encuentra exactamente sobre
+  el segundo observador.
+
+  \item \textbf{Altura de una torre.}
+  Desde un punto $P$ en el suelo se mide un ángulo de elevación de
+  $\theta_1 = 38{,}2^\circ$ hasta la cima de una torre vertical.
+  Al avanzar $d = 50\ \text{m}$ en línea recta hacia la base de la torre,
+  el nuevo ángulo de elevación es $\theta_2 = 61{,}7^\circ$.
+  Calcule la altura de la torre.
+
+  \item \textbf{Ancho de un río.}
+  Un topógrafo desea medir el ancho de un río. Desde el punto $A$,
+  en una orilla, mide un ángulo de $\alpha = 73{,}4^\circ$ hacia una
+  piedra $C$ en la orilla opuesta. Luego se desplaza $b = 30\ \text{m}$
+  a lo largo de la orilla hasta el punto $B$, desde donde el ángulo
+  hacia $C$ es $\beta = 51{,}2^\circ$. Suponiendo que $A$, $B$ y la
+  base de la perpendicular desde $C$ son colineales, halle el ancho
+  del río.
+
+  \item \textbf{Altura de un acantilado (forma general).}
+  Desde el pie de un acantilado vertical, en un punto $P$ del llano,
+  se mide el ángulo de elevación $\alpha$ a la cima. Al alejarse una
+  distancia $h$ en dirección horizontal hasta el punto $Q$, el ángulo
+  de elevación disminuye a $\beta$ ($\beta < \alpha$).
+  Demuestre que la altura del acantilado es:
+  \[
+    H = \frac{h\,\tan\alpha\,\tan\beta}{\tan\alpha - \tan\beta}}
+  \]
+
+  \item \textbf{Faro y dos botes.}
+  Un faro se encuentra en el punto $F$ de la costa. Dos botes $A$ y $B$
+  están en el mar; desde el faro, el ángulo $\angle AFB = 42{,}7^\circ$.
+  Se sabe que $FA = 28{,}4\ \text{m}$ y $FB = 20{,}9\ \text{m}$.
+  Halle la distancia $AB$ entre los dos botes.
+
+  \item \textbf{Ancho de un río (hombre caminando).}
+  Un hombre en la orilla sur de un río observa un árbol en la orilla norte
+  con un ángulo de $30^\circ$ al este del norte. Camina $100\ \text{m}$ hacia
+  el este a lo largo de la orilla y ahora el árbol se encuentra al norte exacto.
+  ¿Cuál es el ancho del río?
+
+  \item \textbf{Acera inclinada.}
+  Una acera plana une dos edificios: uno de altura $H_1 = 15\ \text{m}$
+  y otro de altura $H_2 = 8\ \text{m}$, cuyas bases están separadas
+  horizontalmente $D = 18\ \text{m}$.
+  Encuentre el ángulo $\alpha$ de inclinación que forma la acera con
+  la horizontal.
+
+\end{enumerate}
+\end{tcolorbox}
+
+% ══════════════════════════════════════════════════════════════════
+\section{Respuestas}
+
+\begin{tcolorbox}[ejercbox,
+  title={\color{dorado}\bfseries Respuestas}]
+\begin{enumerate}[leftmargin=*, itemsep=6pt]
+  \item Dos observadores y avión:\quad
+        altura $1{,}477\ \text{km}$;\quad
+        velocidad $= 47{,}7\ \text{m/s}$
+  \item Altura de torre: $68{,}3\ \text{m}$
+  \item Ancho del río: $27{,}2\ \text{m}$
+  \item Altura de acantilado: $H = \dfrac{h\,\tan\alpha\,\tan\beta}{\tan\alpha - \tan\beta}$
+  \item Faro y botes: distancia $= 19{,}3\ \text{m}$
+  \item Ancho río (hombre caminando): $100\sqrt{3}\ \text{m}$
+  \item Acera inclinada: $\alpha \approx 21{,}25^\circ$
+\end{enumerate}
+\end{tcolorbox}
+
+\vspace{0.8cm}
+
+\begin{tcolorbox}[formulabox, title={Ejercicio avanzado --- Bandas y poleas}]
+\[
+  \theta + 2\cot\frac{\theta}{2} = \frac{L}{R+r} - \pi
+\]
+\end{tcolorbox}
+
+\end{document}

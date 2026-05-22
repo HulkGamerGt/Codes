@@ -1,0 +1,218 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{caption}
+\usepackage{hyperref}
+
+% Para graficar funciones trigonométricas inversas en radianes
+\usetikzlibrary{arrows.meta}
+
+\newtheorem{ejemplo}{Ejemplo}
+\newtheorem*{sol}{Solución}
+
+\title{\textbf{Guía de Ecuaciones Trigonométricas Cuadráticas\\ 
+y Funciones Trigonométricas Inversas}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introducción}
+En esta guía aprenderás a resolver ecuaciones trigonométricas que pueden transformarse en ecuaciones cuadráticas mediante un cambio de variable. Además, repasaremos las funciones trigonométricas inversas, sus dominios, recorridos y gráficas, herramientas indispensables para expresar soluciones no exactas en el intervalo $[0,2\pi)$.
+
+\section{Ecuaciones trigonométricas reducibles a cuadráticas}
+El método consiste en:
+\begin{enumerate}
+    \item Identificar una función trigonométrica que aparece repetida, por ejemplo $\sin x$, $\cos x$, $\tan x$, etc.
+    \item Realizar el cambio $u = \text{función trigonométrica}$.
+    \item Resolver la ecuación cuadrática resultante en $u$.
+    \item Volver a la variable original y resolver las ecuaciones trigonométricas elementales.
+    \item Expresar todas las soluciones en el intervalo $[0,2\pi)$, usando funciones trigonométricas inversas si los valores no son ángulos especiales.
+\end{enumerate}
+
+\begin{ejemplo}
+Resolver $2\sin^2 x - 3\sin x + 1 = 0$ en $[0,2\pi)$.
+\end{ejemplo}
+\begin{sol}
+Sea $u = \sin x$. Entonces la ecuación se transforma en
+\[
+2u^2 - 3u + 1 = 0,
+\]
+que factoriza como $(2u-1)(u-1)=0$. Luego $u = \frac{1}{2}$ o $u = 1$.
+Volviendo a la variable original:
+\begin{itemize}
+    \item $\sin x = \frac{1}{2} \;\Rightarrow\; x = \frac{\pi}{6},\; \frac{5\pi}{6}$ (en $[0,2\pi)$).
+    \item $\sin x = 1 \;\Rightarrow\; x = \frac{\pi}{2}$.
+\end{itemize}
+Conjunto solución: $\left\{\frac{\pi}{6},\; \frac{\pi}{2},\; \frac{5\pi}{6}\right\}$.
+\end{sol}
+
+\section{Funciones trigonométricas inversas}
+Para manejar soluciones no exactas necesitamos las funciones inversas $\arcsin$, $\arccos$ y $\arctan$. Se definen restringiendo el dominio de las funciones originales para que sean biyectivas.
+
+\subsection{Arcoseno, $y = \arcsin x$}
+\begin{minipage}{0.45\textwidth}
+    \begin{itemize}
+        \item \textbf{Dominio:} $[-1,1]$
+        \item \textbf{Recorrido:} $\left[-\frac{\pi}{2},\frac{\pi}{2}\right]$
+        \item \textbf{Definición:} $\arcsin x = y \iff \sin y = x$,\, $y\in\left[-\frac{\pi}{2},\frac{\pi}{2}\right]$.
+    \end{itemize}
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+        \draw[->] (0,-2) -- (0,2) node[above] {$y$};
+        \draw[domain=-1:1,smooth,variable=\x,blue,thick] plot ({\x},{rad(asin(\x))});
+        \node at (1.2, {pi/2}) [right] {$\frac{\pi}{2}$};
+        \node at (-1.2, {-pi/2}) [left] {$-\frac{\pi}{2}$};
+        \foreach \x in {-1,1} \draw (\x,0.1) -- (\x,-0.1) node[below] {$\x$};
+        \node at (0,-2.5) {$y = \arcsin x$};
+    \end{tikzpicture}
+\end{minipage}
+
+\subsection{Arcocoseno, $y = \arccos x$}
+\begin{minipage}{0.45\textwidth}
+    \begin{itemize}
+        \item \textbf{Dominio:} $[-1,1]$
+        \item \textbf{Recorrido:} $[0,\pi]$
+        \item \textbf{Definición:} $\arccos x = y \iff \cos y = x$,\, $y\in[0,\pi]$.
+    \end{itemize}
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+        \draw[->] (0,-0.5) -- (0,4) node[above] {$y$};
+        \draw[domain=-1:1,smooth,variable=\x,blue,thick] plot ({\x},{rad(acos(\x))});
+        \node at (1.2, 0) [right] {$0$};
+        \node at (-1.2, {pi}) [left] {$\pi$};
+        \foreach \x in {-1,1} \draw (\x,0.1) -- (\x,-0.1) node[below] {$\x$};
+        \node at (0,-0.8) {$y = \arccos x$};
+    \end{tikzpicture}
+\end{minipage}
+
+\subsection{Arcotangente, $y = \arctan x$}
+\begin{minipage}{0.45\textwidth}
+    \begin{itemize}
+        \item \textbf{Dominio:} $\mathbb{R}$
+        \item \textbf{Recorrido:} $\left(-\frac{\pi}{2},\frac{\pi}{2}\right)$
+        \item \textbf{Definición:} $\arctan x = y \iff \tan y = x$,\, $y\in\left(-\frac{\pi}{2},\frac{\pi}{2}\right)$.
+    \end{itemize}
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.8]
+        \draw[->] (-3.5,0) -- (3.5,0) node[right] {$x$};
+        \draw[->] (0,-2) -- (0,2) node[above] {$y$};
+        \draw[domain=-3:3,smooth,variable=\x,blue,thick] plot ({\x},{rad(atan(\x))});
+        \draw[dashed] (-3,{pi/2}) -- (3,{pi/2});
+        \draw[dashed] (-3,{-pi/2}) -- (3,{-pi/2});
+        \node at (0.3, {pi/2}) [left] {$\frac{\pi}{2}$};
+        \node at (0.3, {-pi/2}) [left] {$-\frac{\pi}{2}$};
+        \node at (0,-2.5) {$y = \arctan x$};
+    \end{tikzpicture}
+\end{minipage}
+
+\subsection{Fórmulas generales para soluciones en $[0,2\pi)$}
+Dado un valor $a$ dentro del dominio adecuado:
+\begin{align*}
+\sin x &= a \quad \Rightarrow \quad x = 
+\begin{cases}
+\arcsin a + 2k\pi,\\
+\pi - \arcsin a + 2k\pi,
+\end{cases} k\in\mathbb{Z}.\\
+\cos x &= a \quad \Rightarrow \quad x = 
+\pm \arccos a + 2k\pi,\; k\in\mathbb{Z}.\\
+\tan x &= a \quad \Rightarrow \quad x = 
+\arctan a + k\pi,\; k\in\mathbb{Z}.
+\end{align*}
+Para obtener las soluciones en $[0,2\pi)$, se toma $k=0,1$ o el valor que corresponda, descartando las que caigan fuera del intervalo.
+
+\newpage
+\section{Ejercicios propuestos}
+Resuelve cada ecuación en el intervalo $[0,2\pi)$. Cuando la solución no corresponda a un ángulo especial, exprésala usando funciones trigonométricas inversas.
+
+\begin{enumerate}[leftmargin=*,label=\arabic*.]
+
+\item $2\cos^2 x - \cos x - 1 = 0$
+
+\item $3\tan^2 x - 4\tan x + 1 = 0$
+
+\item $\sin^2 x + \sin x - 2 = 0$
+
+\item $2\cos^2 x - 5\cos x + 2 = 0$
+
+\item $4\sin^2 x - 4\sin x + 1 = 0$
+
+\item $\sec^2 x - 3\sec x + 2 = 0$
+
+\item $2\csc^2 x - 3\csc x - 2 = 0$
+
+\item $3\sin^2 x + \sin x - 2 = 0$
+
+\item $1 - \cos^2 x - \cos x = 0$ \quad (Sugerencia: usa $\sin^2 x = 1-\cos^2 x$)
+
+\item $2\sin^2 x + 5\sin x - 3 = 0$
+
+\item $\tan^2 x + 2\tan x - 3 = 0$
+
+\item $\cos^2 x - \sin x = 0$
+
+\item $3\cos^2 x + 2\cos x - 1 = 0$
+
+\item $2\sec^2 x + 5\sec x + 2 = 0$
+
+\item $2\csc^2 x - 7\csc x + 3 = 0$
+
+\item $3\tan^2 x + \tan x - 2 = 0$
+
+\item $\cos^2 x - 2\cos x - 2 = 0$
+
+\item $5\sin^2 x - 4\sin x - 1 = 0$
+
+\item $3\tan^2 x - 1 = 0$
+
+\item $2\sin^2 x - \sin x - 1 = 0$
+\end{enumerate}
+
+\newpage
+\section*{Soluciones}
+A continuación se presentan las soluciones finales en $[0,2\pi)$. Para los ángulos no exactos se ha empleado la notación de funciones inversas.
+
+\begin{multicols}{2}
+\begin{enumerate}[leftmargin=*,label=\arabic*.]
+    \item $\displaystyle 0,\; \frac{2\pi}{3},\; \frac{4\pi}{3}$
+    \item $\displaystyle \frac{\pi}{4},\; \frac{5\pi}{4},\; \arctan\!\left(\frac{1}{3}\right),\; \pi + \arctan\!\left(\frac{1}{3}\right)$
+    \item $\displaystyle \frac{\pi}{2}$
+    \item $\displaystyle \frac{\pi}{3},\; \frac{5\pi}{3}$
+    \item $\displaystyle \frac{\pi}{6},\; \frac{5\pi}{6}$
+    \item $\displaystyle 0,\; \frac{\pi}{3},\; \frac{5\pi}{3}$
+    \item $\displaystyle \frac{\pi}{6},\; \frac{5\pi}{6}$
+    \item $\displaystyle \frac{3\pi}{2},\; \arcsin\!\left(\frac{2}{3}\right),\; \pi - \arcsin\!\left(\frac{2}{3}\right)$
+    \item $\displaystyle \arccos\!\left(\frac{\sqrt{5}-1}{2}\right),\; 2\pi - \arccos\!\left(\frac{\sqrt{5}-1}{2}\right)$
+    \item $\displaystyle \frac{\pi}{6},\; \frac{5\pi}{6}$
+    \item $\displaystyle \frac{\pi}{4},\; \frac{5\pi}{4},\; \pi - \arctan 3,\; 2\pi - \arctan 3$
+    \item $\displaystyle \arcsin\!\left(\frac{\sqrt{5}-1}{2}\right),\; \pi - \arcsin\!\left(\frac{\sqrt{5}-1}{2}\right)$
+    \item $\displaystyle \pi,\; \arccos\!\left(\frac{1}{3}\right),\; 2\pi - \arccos\!\left(\frac{1}{3}\right)$
+    \item $\displaystyle \frac{2\pi}{3},\; \frac{4\pi}{3}$
+    \item $\displaystyle \arcsin\!\left(\frac{1}{3}\right),\; \pi - \arcsin\!\left(\frac{1}{3}\right)$
+    \item $\displaystyle \frac{3\pi}{4},\; \frac{7\pi}{4},\; \arctan\!\left(\frac{2}{3}\right),\; \pi + \arctan\!\left(\frac{2}{3}\right)$
+    \item $\displaystyle \arccos(1-\sqrt{3}),\; 2\pi - \arccos(1-\sqrt{3})$
+    \item $\displaystyle \frac{\pi}{2},\; \pi + \arcsin\!\left(\frac{1}{5}\right),\; 2\pi - \arcsin\!\left(\frac{1}{5}\right)$
+    \item $\displaystyle \frac{\pi}{6},\; \frac{5\pi}{6},\; \frac{7\pi}{6},\; \frac{11\pi}{6}$
+    \item $\displaystyle \frac{\pi}{2},\; \frac{7\pi}{6},\; \frac{11\pi}{6}$
+\end{enumerate}
+\end{multicols}
+
+\vspace{1cm}
+{\small Nota: En los ejercicios 12, 13 y 17 se usó la identidad pitagórica para convertir la ecuación a una cuadrática en una sola función. En todos los casos, las soluciones se ajustaron al intervalo $[0,2\pi)$ descartando ángulos fuera de rango.}
+
+\end{document}
