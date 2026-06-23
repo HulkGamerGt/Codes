@@ -1,0 +1,14 @@
+ESTADISTICAS DE ATENCION
+
+Total de clientes cargados inicialmente: 59
+Total de clientes agendados: 30
+Total de clientes ingresados por cola: 31
+Total de clientes atendidos: 9
+Total de clientes cancelados: 0
+Total de atenciones anuladas: 4
+Total de clientes pendientes: 48
+
+Cantidad de reclamos atendidos: 2
+Cantidad de pagos atendidos: 2
+Cantidad de consultas atendidas: 3
+Cantidad de tramites atendidos: 2

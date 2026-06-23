@@ -1,0 +1,5 @@
+# ninja log v7
+21	291	1780491011594336245	CMakeFiles/serviexpress.dir/main.c.o	d21d3a8b8cabfb6e
+1	672	1780528777947974078	CMakeFiles/serviexpress.dir/serviexpress.c.o	11dcb47c261ba55
+675	787	1780528778606971993	serviexpress	5443699ebe85e8ae
+1	80	1780535585249780940	build.ninja	1df91d96162323cb

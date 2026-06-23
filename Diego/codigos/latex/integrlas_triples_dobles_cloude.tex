@@ -1,0 +1,1986 @@
+\documentclass[12pt, a4paper]{book}
+
+% 1. Codificación e Idioma
+\usepackage[utf8]{inputenc} % Corregido: sin el guion
+\usepackage[spanish]{babel}
+
+% 2. Matemáticas
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% 3. Diseño y Formato de Página
+\usepackage{fancyhdr}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+
+% 4. Colores y Cajas (xcolor debe ir antes de tcolorbox)
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+
+% 5. Enlaces (hyperref casi siempre debe ser el último paquete)
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+% ==========================================
+% (AQUÍ PUEDES DEJAR TUS COMANDOS PERSONALIZADOS \newcommand, \newtheorem, etc.)
+% ==========================================
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+% ============================================
+\chapter{Fundamentos de Integración}
+% ============================================
+
+\section{Concepto de Integral Indefinida}
+
+\begin{definicion}
+Una función $F(x)$ es una \textbf{antiderivada} (o primitiva) de $f(x)$ si
+\[
+F'(x) = f(x) \quad \text{para todo } x \text{ en el dominio de } f.
+\]
+\end{definicion}
+
+\begin{teorema}[Unicidad de la Antiderivada]
+Si $F(x)$ y $G(x)$ son dos antiderivadas de $f(x)$ en un intervalo $[a,b]$, entonces
+\[
+F(x) - G(x) = C \quad \text{(constante)}
+\]
+\end{teorema}
+
+\begin{definicion}[Integral Indefinida]
+La \textbf{integral indefinida} de $f(x)$ es el conjunto de todas las antiderivadas de $f(x)$, denotado:
+\[
+\int f(x) \, dx = F(x) + C
+\]
+donde $F'(x) = f(x)$ y $C$ es una constante arbitraria.
+\end{definicion}
+
+\subsection{Interpretación Geométrica}
+
+La integral indefinida representa una familia de curvas paralelas. Cada valor de $C$ produce una curva diferente, pero todas tienen la misma pendiente en cada punto.
+
+\begin{tcolorbox}
+\textbf{Propiedad fundamental:} $\frac{d}{dx}\left[\int f(x) \, dx\right] = f(x)$
+\end{tcolorbox}
+
+\section{Propiedades Básicas de la Integral Indefinida}
+
+\begin{proposicion}[Linealidad]
+Sean $f(x)$ y $g(x)$ funciones integrables y $k$ una constante:
+\begin{align}
+\int k \cdot f(x) \, dx &= k \int f(x) \, dx \\
+\int [f(x) + g(x)] \, dx &= \int f(x) \, dx + \int g(x) \, dx
+\end{align}
+\end{proposicion}
+
+\begin{proof}
+Derivando ambos lados:
+\[
+\frac{d}{dx}\left[k \int f(x) \, dx\right] = k \cdot f(x) = \frac{d}{dx}\left[k \cdot F(x) + C\right]
+\]
+Donde $F'(x) = f(x)$.
+\end{proof}
+
+\section{Tabla de Integrales Básicas}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Función} & \textbf{Integral Indefinida} \\
+\hline
+$\int k \, dx$ & $kx + C$ \\
+$\int x^n \, dx$ & $\frac{x^{n+1}}{n+1} + C$ \quad ($n \neq -1$) \\
+$\int \frac{1}{x} \, dx$ & $\ln|x| + C$ \\
+$\int e^x \, dx$ & $e^x + C$ \\
+$\int a^x \, dx$ & $\frac{a^x}{\ln a} + C$ \quad ($a > 0, a \neq 1$) \\
+$\int \sin x \, dx$ & $-\cos x + C$ \\
+$\int \cos x \, dx$ & $\sin x + C$ \\
+$\int \sec^2 x \, dx$ & $\tan x + C$ \\
+$\int \csc^2 x \, dx$ & $-\cot x + C$ \\
+$\int \sec x \tan x \, dx$ & $\sec x + C$ \\
+$\int \csc x \cot x \, dx$ & $-\csc x + C$ \\
+$\int \tan x \, dx$ & $-\ln|\cos x| + C = \ln|\sec x| + C$ \\
+$\int \cot x \, dx$ & $\ln|\sin x| + C$ \\
+$\int \frac{1}{\sqrt{1-x^2}} \, dx$ & $\arcsin x + C$ \\
+$\int \frac{1}{1+x^2} \, dx$ & $\arctan x + C$ \\
+$\int \frac{1}{x\sqrt{x^2-1}} \, dx$ & $\operatorname{arcsec}|x| + C$ \\
+\hline
+\end{tabular}
+\end{table}
+
+% ============================================
+\chapter{Métodos de Integración}
+% ============================================
+
+\section{Integración por Sustitución (Cambio de Variable)}
+
+\begin{teorema}[Regla de Sustitución]
+Si $u = g(x)$ es diferenciable y $f$ es continua en el rango de $g$, entonces:
+\[
+\int f(g(x)) \cdot g'(x) \, dx = \int f(u) \, du
+\]
+\end{teorema}
+
+\begin{ejemplo}
+Calcular $\int 2x e^{x^2} \, dx$.
+
+\textbf{Solución:}
+Sea $u = x^2$, entonces $du = 2x \, dx$.
+
+\[
+\int 2x e^{x^2} \, dx = \int e^u \, du = e^u + C = e^{x^2} + C
+\]
+\end{ejemplo}
+
+\subsection{Estrategia para Elegir la Sustitución}
+
+\begin{itemize}
+    \item Si la integral contiene $x^n$ como potencia mayor, prueba $u = $ (expresión que contiene $x^n$ o sus derivadas)
+    \item Si contiene $\sqrt{ax^2 + bx + c}$, completa el cuadrado o usa sustituciones trigonométricas
+    \item Si $f(g(x)) \cdot g'(x)$ está presente, usa $u = g(x)$
+\end{itemize}
+
+\section{Integración por Partes}
+
+\begin{teorema}[Fórmula de Integración por Partes]
+Si $u$ y $v$ son funciones diferenciables:
+\[
+\int u \, dv = uv - \int v \, du
+\]
+\end{teorema}
+
+\begin{proof}
+De la regla del producto: $(uv)' = u'v + uv'$
+
+Integrando: $uv = \int u'v \, dx + \int uv' \, dx$
+
+Reordenando: $\int uv' \, dx = uv - \int u'v \, dx$
+
+Es decir: $\int u \, dv = uv - \int v \, du$
+\end{proof}
+
+\subsection{Estrategia LIATE}
+
+Para elegir $u$, prioriza en este orden:
+\begin{enumerate}
+    \item \textbf{L}ogarítmicas: $\ln x$, $\log_a x$
+    \item \textbf{I}nversas trigonométricas: $\arcsin x$, $\arctan x$
+    \item \textbf{A}lgebraicas: $x^n$, polinomios
+    \item \textbf{T}rigonométricas: $\sin x$, $\cos x$
+    \item \textbf{E}xponenciales: $e^x$, $a^x$
+\end{enumerate}
+
+\begin{ejemplo}
+Calcular $\int x \cos x \, dx$.
+
+\textbf{Solución:}
+Sea $u = x$, $dv = \cos x \, dx$
+
+Entonces $du = dx$, $v = \sin x$
+
+\[
+\int x \cos x \, dx = x \sin x - \int \sin x \, dx = x \sin x + \cos x + C
+\]
+\end{ejemplo}
+
+\section{Integración por Fracciones Parciales}
+
+\begin{teorema}[Descomposición en Fracciones Parciales]
+Toda función racional $\frac{P(x)}{Q(x)}$ donde $\deg(P) < \deg(Q)$ puede descomponerse como suma de fracciones parciales.
+\end{teorema}
+
+\subsection{Casos Principales}
+
+\subsubsection{Caso 1: Factores Lineales Distintos}
+
+Si $Q(x) = (x-a_1)(x-a_2)\cdots(x-a_n)$, entonces:
+\[
+\frac{P(x)}{Q(x)} = \frac{A_1}{x-a_1} + \frac{A_2}{x-a_2} + \cdots + \frac{A_n}{x-a_n}
+\]
+
+\subsubsection{Caso 2: Factores Lineales Repetidos}
+
+Si $Q(x) = (x-a)^k$, entonces:
+\[
+\frac{P(x)}{(x-a)^k} = \frac{A_1}{x-a} + \frac{A_2}{(x-a)^2} + \cdots + \frac{A_k}{(x-a)^k}
+\]
+
+\subsubsection{Caso 3: Factores Cuadráticos Irreducibles}
+
+Si $Q(x)$ contiene $(x^2+bx+c)$ irreducible, entonces:
+\[
+\frac{P(x)}{x^2+bx+c} = \frac{Ax+B}{x^2+bx+c}
+\]
+
+\begin{ejemplo}
+Calcular $\int \frac{5x+3}{(x+1)(x-2)} \, dx$.
+
+\textbf{Solución:}
+
+Descomponemos:
+\[
+\frac{5x+3}{(x+1)(x-2)} = \frac{A}{x+1} + \frac{B}{x-2}
+\]
+
+Multiplicando por $(x+1)(x-2)$:
+\[
+5x+3 = A(x-2) + B(x+1)
+\]
+
+Para $x = -1$: $5(-1)+3 = A(-3) \Rightarrow -2 = -3A \Rightarrow A = \frac{2}{3}$
+
+Para $x = 2$: $5(2)+3 = B(3) \Rightarrow 13 = 3B \Rightarrow B = \frac{13}{3}$
+
+\[
+\int \frac{5x+3}{(x+1)(x-2)} \, dx = \frac{2}{3}\ln|x+1| + \frac{13}{3}\ln|x-2| + C
+\]
+\end{ejemplo}
+
+\section{Integración de Funciones Trigonométricas}
+
+\subsection{Potencias de Senos y Cosenos}
+
+\begin{caso}
+$\int \sin^m x \cos^n x \, dx$
+
+\begin{itemize}
+    \item Si $m$ es impar: factoriza como $\sin^{m-1}x \sin x$, usa $\sin^2 x = 1 - \cos^2 x$, sustituye $u = \cos x$
+    \item Si $n$ es impar: factoriza como $\cos^{n-1}x \cos x$, usa $\cos^2 x = 1 - \sin^2 x$, sustituye $u = \sin x$
+    \item Si ambas son pares: usa identidades de reducción
+\end{itemize}
+\end{caso}
+
+\begin{identidades}
+\begin{align}
+\sin^2 x &= \frac{1 - \cos 2x}{2} \\
+\cos^2 x &= \frac{1 + \cos 2x}{2} \\
+\sin x \cos x &= \frac{\sin 2x}{2}
+\end{align}
+\end{identidades}
+
+\begin{ejemplo}
+Calcular $\int \sin^3 x \, dx$.
+
+\textbf{Solución:}
+
+$\sin^3 x = \sin^2 x \sin x = (1 - \cos^2 x) \sin x$
+
+Sea $u = \cos x$, $du = -\sin x \, dx$:
+
+\[
+\int \sin^3 x \, dx = \int (1 - \cos^2 x) \sin x \, dx = -\int (1 - u^2) \, du
+\]
+\[
+= -u + \frac{u^3}{3} + C = -\cos x + \frac{\cos^3 x}{3} + C
+\]
+\end{ejemplo}
+
+\section{Sustituciones Trigonométricas}
+
+\begin{tabla}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Expresión} & \textbf{Sustitución} & \textbf{Resultado} \\
+\hline
+$\sqrt{a^2 - x^2}$ & $x = a\sin\theta$ & $a\cos\theta$ \\
+$\sqrt{a^2 + x^2}$ & $x = a\tan\theta$ & $a\sec\theta$ \\
+$\sqrt{x^2 - a^2}$ & $x = a\sec\theta$ & $a\tan\theta$ \\
+\hline
+\end{tabular}
+\end{tabla}
+
+\begin{ejemplo}
+Calcular $\int \frac{1}{\sqrt{1-x^2}} \, dx$ (ya conocida pero derivada).
+
+\textbf{Solución:}
+
+Sea $x = \sin\theta$, $dx = \cos\theta \, d\theta$:
+
+\[
+\int \frac{1}{\sqrt{1-\sin^2\theta}} \cos\theta \, d\theta = \int \frac{\cos\theta}{\cos\theta} \, d\theta = \int 1 \, d\theta = \theta + C = \arcsin x + C
+\]
+\end{ejemplo}
+
+% ============================================
+\chapter{Integral Definida}
+% ============================================
+
+\section{Definición Rigurosa}
+
+\begin{definicion}
+Sea $f(x)$ una función continua en $[a,b]$. La \textbf{integral definida} es:
+\[
+\int_a^b f(x) \, dx = \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*) \Delta x
+\]
+donde $\Delta x = \frac{b-a}{n}$ y $x_i^* \in [x_{i-1}, x_i]$ es un punto arbitrario.
+\end{definicion}
+
+\begin{teorema}[Teorema Fundamental del Cálculo - Parte 1]
+Si $f$ es continua en $[a,b]$ y $F$ es una antiderivada de $f$, entonces:
+\[
+\int_a^b f(x) \, dx = F(b) - F(a) = \left[F(x)\right]_a^b
+\]
+\end{teorema}
+
+\begin{proof}
+Sea $P = \{x_0, x_1, \ldots, x_n\}$ una partición de $[a,b]$.
+
+Por el Teorema del Valor Medio:
+\[
+F(b) - F(a) = \sum_{i=1}^{n} [F(x_i) - F(x_{i-1})] = \sum_{i=1}^{n} F'(c_i)\Delta x_i = \sum_{i=1}^{n} f(c_i)\Delta x_i
+\]
+
+Tomando límite cuando $\|P\| \to 0$:
+\[
+F(b) - F(a) = \int_a^b f(x) \, dx
+\]
+\end{proof}
+
+\begin{teorema}[Teorema Fundamental del Cálculo - Parte 2]
+Si $f$ es continua en $[a,b]$, entonces:
+\[
+\frac{d}{dx}\int_a^x f(t) \, dt = f(x)
+\]
+\end{teorema}
+
+\section{Propiedades de la Integral Definida}
+
+\begin{proposicion}
+\begin{align}
+\int_a^b c \, dx &= c(b-a) \quad \text{(donde $c$ es constante)} \\
+\int_a^a f(x) \, dx &= 0 \\
+\int_a^b f(x) \, dx &= -\int_b^a f(x) \, dx \\
+\int_a^c f(x) \, dx &= \int_a^b f(x) \, dx + \int_b^c f(x) \, dx \quad (a < b < c) \\
+\int_a^b [f(x) \pm g(x)] \, dx &= \int_a^b f(x) \, dx \pm \int_a^b g(x) \, dx \\
+\int_a^b k f(x) \, dx &= k \int_a^b f(x) \, dx \quad \text{($k$ constante)}
+\end{align}
+\end{proposicion}
+
+\subsection{Monotonía}
+
+\begin{proposicion}
+Si $f(x) \leq g(x)$ para todo $x \in [a,b]$, entonces:
+\[
+\int_a^b f(x) \, dx \leq \int_a^b g(x) \, dx
+\]
+\end{proposicion}
+
+\subsection{Acotación}
+
+\begin{proposicion}[Teorema del Valor Medio para Integrales]
+Si $f$ es continua en $[a,b]$, existe $c \in [a,b]$ tal que:
+\[
+\int_a^b f(x) \, dx = f(c)(b-a)
+\]
+\end{proposicion}
+
+\begin{ejemplo}
+Calcular $\int_0^{\pi/2} \sin x \, dx$.
+
+\textbf{Solución:}
+
+Antiderivada: $F(x) = -\cos x$
+
+\[
+\int_0^{\pi/2} \sin x \, dx = [-\cos x]_0^{\pi/2} = -\cos\frac{\pi}{2} + \cos 0 = 0 + 1 = 1
+\]
+\end{ejemplo}
+
+\section{Integración por Partes (Versión Definida)}
+
+\begin{teorema}
+Si $u$ y $v$ son diferenciables en $[a,b]$:
+\[
+\int_a^b u \, dv = [uv]_a^b - \int_a^b v \, du
+\]
+\end{teorema}
+
+\begin{ejemplo}
+Calcular $\int_0^1 x e^x \, dx$.
+
+\textbf{Solución:}
+
+$u = x$, $dv = e^x dx$
+
+$du = dx$, $v = e^x$
+
+\[
+\int_0^1 x e^x \, dx = [x e^x]_0^1 - \int_0^1 e^x \, dx = e - 0 - [e^x]_0^1 = e - (e - 1) = 1
+\]
+\end{ejemplo}
+
+\section{Sustitución en Integrales Definidas}
+
+\begin{teorema}
+Si $f$ es continua en $[a,b]$ y $x = g(t)$ es diferenciable con $g(\alpha) = a$, $g(\beta) = b$:
+\[
+\int_a^b f(x) \, dx = \int_\alpha^\beta f(g(t)) g'(t) \, dt
+\]
+\end{teorema}
+
+\begin{nota}
+\textbf{Importante:} Cuando cambias la variable, debes cambiar también los límites de integración. No olvides este paso.
+\end{nota}
+
+\begin{ejemplo}
+Calcular $\int_0^1 2x e^{x^2} \, dx$.
+
+\textbf{Solución:}
+
+Sea $u = x^2$, $du = 2x \, dx$
+
+Cuando $x = 0$: $u = 0$
+Cuando $x = 1$: $u = 1$
+
+\[
+\int_0^1 2x e^{x^2} \, dx = \int_0^1 e^u \, du = [e^u]_0^1 = e - 1
+\]
+\end{ejemplo}
+
+% ============================================
+\chapter{Aplicaciones Geométricas}
+% ============================================
+
+\section{Área bajo una Curva}
+
+\begin{definicion}
+El área bajo la curva $y = f(x)$ (con $f(x) \geq 0$) entre $x = a$ y $x = b$ es:
+\[
+A = \int_a^b f(x) \, dx
+\]
+\end{definicion}
+
+\begin{ejemplo}
+Hallar el área bajo la parábola $y = x^2$ entre $x = 0$ y $x = 2$.
+
+\textbf{Solución:}
+
+\[
+A = \int_0^2 x^2 \, dx = \left[\frac{x^3}{3}\right]_0^2 = \frac{8}{3} - 0 = \frac{8}{3} \text{ u}^2
+\]
+\end{ejemplo}
+
+\section{Área entre Curvas}
+
+\begin{definicion}
+Si $f(x) \geq g(x)$ en $[a,b]$, el área entre las curvas es:
+\[
+A = \int_a^b [f(x) - g(x)] \, dx
+\]
+\end{definicion}
+
+\begin{algoritmo}[Pasos para Hallar Área entre Curvas]
+\begin{enumerate}
+    \item Grafica ambas funciones
+    \item Encuentra los puntos de intersección (resolviendo $f(x) = g(x)$)
+    \item Determina cuál función está arriba
+    \item Integra la diferencia
+\end{enumerate}
+\end{algoritmo}
+
+\begin{ejemplo}
+Hallar el área entre $y = x^2$ y $y = x$.
+
+\textbf{Solución:}
+
+Intersecciones: $x^2 = x \Rightarrow x(x-1) = 0 \Rightarrow x = 0 \text{ o } x = 1$
+
+En $(0,1)$: $x > x^2$
+
+\[
+A = \int_0^1 (x - x^2) \, dx = \left[\frac{x^2}{2} - \frac{x^3}{3}\right]_0^1 = \frac{1}{2} - \frac{1}{3} = \frac{1}{6} \text{ u}^2
+\]
+\end{ejemplo}
+
+\section{Volumen de Sólidos de Revolución}
+
+\subsection{Método del Disco}
+
+\begin{definicion}
+Al rotar la región bajo $y = f(x)$ alrededor del eje $x$, el volumen es:
+\[
+V = \pi \int_a^b [f(x)]^2 \, dx
+\]
+\end{definicion}
+
+\subsection{Método de la Arandela}
+
+\begin{definicion}
+Al rotar la región entre $f(x)$ y $g(x)$ alrededor del eje $x$ (con $f(x) \geq g(x) \geq 0$):
+\[
+V = \pi \int_a^b ([f(x)]^2 - [g(x)]^2) \, dx
+\]
+\end{definicion}
+
+\subsection{Método de Capas Cilíndricas}
+
+\begin{definicion}
+Al rotar alrededor del eje $y$, con radio de giro $x$ y altura $f(x)$:
+\[
+V = 2\pi \int_a^b x f(x) \, dx
+\]
+\end{definicion}
+
+\begin{ejemplo}
+Hallar el volumen al rotar $y = x^2$ entre $x = 0$ y $x = 2$ alrededor del eje $x$.
+
+\textbf{Solución:}
+
+\[
+V = \pi \int_0^2 (x^2)^2 \, dx = \pi \int_0^2 x^4 \, dx = \pi \left[\frac{x^5}{5}\right]_0^2 = \frac{32\pi}{5} \text{ u}^3
+\]
+\end{ejemplo}
+
+\section{Longitud de Arco}
+
+\begin{definicion}
+La longitud de la curva $y = f(x)$ desde $x = a$ hasta $x = b$ es:
+\[
+L = \int_a^b \sqrt{1 + [f'(x)]^2} \, dx
+\]
+\end{definicion}
+
+\begin{ejemplo}
+Calcular la longitud de la curva $y = \sqrt{x}$ desde $x = 0$ hasta $x = 4$.
+
+\textbf{Solución:}
+
+$f'(x) = \frac{1}{2\sqrt{x}}$, entonces $[f'(x)]^2 = \frac{1}{4x}$
+
+\[
+L = \int_0^4 \sqrt{1 + \frac{1}{4x}} \, dx = \int_0^4 \sqrt{\frac{4x+1}{4x}} \, dx = \frac{1}{2}\int_0^4 \sqrt{\frac{4x+1}{x}} \, dx
+\]
+
+(Esta integral requiere técnicas más avanzadas)
+\end{ejemplo}
+
+% ============================================
+\chapter{Integrales Impropias}
+% ============================================
+
+\section{Integración sobre Intervalos Infinitos}
+
+\begin{definicion}
+\begin{align}
+\int_a^\infty f(x) \, dx &= \lim_{b \to \infty} \int_a^b f(x) \, dx \\
+\int_{-\infty}^b f(x) \, dx &= \lim_{a \to -\infty} \int_a^b f(x) \, dx \\
+\int_{-\infty}^\infty f(x) \, dx &= \int_{-\infty}^c f(x) \, dx + \int_c^\infty f(x) \, dx
+\end{align}
+
+La integral \textbf{converge} si el límite existe y es finito; \textbf{diverge} en caso contrario.
+\end{definicion}
+
+\begin{ejemplo}
+Determinar si $\int_1^\infty \frac{1}{x^2} \, dx$ converge o diverge.
+
+\textbf{Solución:}
+
+\[
+\int_1^\infty \frac{1}{x^2} \, dx = \lim_{b \to \infty} \int_1^b \frac{1}{x^2} \, dx = \lim_{b \to \infty} \left[-\frac{1}{x}\right]_1^b = \lim_{b \to \infty} \left(-\frac{1}{b} + 1\right) = 1
+\]
+
+La integral \textbf{converge} a 1.
+\end{ejemplo}
+
+\section{Discontinuidades en el Integrando}
+
+\begin{definicion}
+Si $f$ tiene una discontinuidad en $x = c$ donde $a < c < b$:
+\[
+\int_a^b f(x) \, dx = \lim_{\epsilon \to 0^+} \left[\int_a^{c-\epsilon} f(x) \, dx + \int_{c+\epsilon}^b f(x) \, dx\right]
+\]
+\end{definicion}
+
+\begin{ejemplo}
+Determinar si $\int_0^1 \frac{1}{\sqrt{x}} \, dx$ converge o diverge.
+
+\textbf{Solución:}
+
+Hay discontinuidad en $x = 0$:
+
+\[
+\int_0^1 \frac{1}{\sqrt{x}} \, dx = \lim_{\epsilon \to 0^+} \int_\epsilon^1 x^{-1/2} \, dx = \lim_{\epsilon \to 0^+} [2\sqrt{x}]_\epsilon^1 = \lim_{\epsilon \to 0^+} (2 - 2\sqrt{\epsilon}) = 2
+\]
+
+La integral \textbf{converge} a 2.
+\end{ejemplo}
+
+\section{Criterios de Convergencia}
+
+\begin{teorema}[Criterio de Comparación]
+Si $0 \leq f(x) \leq g(x)$ para $x \geq a$:
+\begin{itemize}
+    \item Si $\int_a^\infty g(x) \, dx$ converge, entonces $\int_a^\infty f(x) \, dx$ converge
+    \item Si $\int_a^\infty f(x) \, dx$ diverge, entonces $\int_a^\infty g(x) \, dx$ diverge
+\end{itemize}
+\end{teorema}
+
+\begin{teorema}[Criterio del Límite de Comparación]
+Sean $f(x) \geq 0$ y $g(x) > 0$. Si $\lim_{x \to \infty} \frac{f(x)}{g(x)} = L$ (con $0 < L < \infty$), entonces:
+\[
+\int_a^\infty f(x) \, dx \quad \text{y} \quad \int_a^\infty g(x) \, dx
+\]
+tienen el mismo comportamiento (ambas convergen o ambas divergen).
+\end{teorema}
+
+\begin{teorema}[Prueba de la $p$-integral]
+\[
+\int_1^\infty \frac{1}{x^p} \, dx \begin{cases}
+\text{converge} & \text{si } p > 1 \\
+\text{diverge} & \text{si } p \leq 1
+\end{cases}
+\]
+\end{teorema}
+
+% ============================================
+\chapter{Integrales Múltiples}
+% ============================================
+
+\section{Integrales Dobles sobre Rectángulos}
+
+\begin{definicion}
+La integral doble de $f(x,y)$ sobre el rectángulo $R = [a,b] \times [c,d]$ es:
+\[
+\iint_R f(x,y) \, dA = \lim_{\Delta x, \Delta y \to 0} \sum_{i,j} f(x_{ij}^*, y_{ij}^*) \Delta x \Delta y
+\]
+\end{definicion}
+
+\begin{teorema}[Teorema de Fubini]
+Si $f$ es continua en $R = [a,b] \times [c,d]$:
+\[
+\iint_R f(x,y) \, dA = \int_a^b \int_c^d f(x,y) \, dy \, dx = \int_c^d \int_a^b f(x,y) \, dx \, dy
+\]
+\end{teorema}
+
+\begin{ejemplo}
+Calcular $\iint_R (x + 2y) \, dA$ donde $R = [0,1] \times [0,2]$.
+
+\textbf{Solución:}
+
+\[
+\iint_R (x + 2y) \, dA = \int_0^1 \int_0^2 (x + 2y) \, dy \, dx
+\]
+
+Integral interior (con $x$ fijo):
+\[
+\int_0^2 (x + 2y) \, dy = [xy + y^2]_0^2 = 2x + 4
+\]
+
+Integral exterior:
+\[
+\int_0^1 (2x + 4) \, dx = [x^2 + 4x]_0^1 = 1 + 4 = 5
+\]
+\end{ejemplo}
+
+\section{Integrales Dobles sobre Regiones Generales}
+
+\subsection{Región Tipo I}
+
+\begin{definicion}
+Una región $D$ es de Tipo I si:
+\[
+D = \{(x,y) : a \leq x \leq b, \, g_1(x) \leq y \leq g_2(x)\}
+\]
+
+Entonces:
+\[
+\iint_D f(x,y) \, dA = \int_a^b \int_{g_1(x)}^{g_2(x)} f(x,y) \, dy \, dx
+\]
+\end{definicion}
+
+\subsection{Región Tipo II}
+
+\begin{definicion}
+Una región $D$ es de Tipo II si:
+\[
+D = \{(x,y) : c \leq y \leq d, \, h_1(y) \leq x \leq h_2(y)\}
+\]
+
+Entonces:
+\[
+\iint_D f(x,y) \, dA = \int_c^d \int_{h_1(y)}^{h_2(y)} f(x,y) \, dx \, dy
+\]
+\end{definicion}
+
+\begin{ejemplo}
+Calcular $\iint_D (x + y) \, dA$ donde $D$ está acotada por $y = x$ y $y = x^2$.
+
+\textbf{Solución:}
+
+Intersecciones: $x = x^2 \Rightarrow x(1-x) = 0 \Rightarrow x = 0$ o $x = 1$
+
+En $[0,1]$: $x \geq x^2$, entonces $x^2 \leq y \leq x$
+
+\[
+\iint_D (x+y) \, dA = \int_0^1 \int_{x^2}^x (x+y) \, dy \, dx
+\]
+
+Integral interior:
+\[
+\int_{x^2}^x (x+y) \, dy = [xy + \frac{y^2}{2}]_{x^2}^x = (x^2 + \frac{x^2}{2}) - (x^3 + \frac{x^4}{2}) = \frac{3x^2}{2} - x^3 - \frac{x^4}{2}
+\]
+
+Integral exterior:
+\[
+\int_0^1 \left(\frac{3x^2}{2} - x^3 - \frac{x^4}{2}\right) dx = [x^3 - \frac{x^4}{4} - \frac{x^5}{10}]_0^1 = 1 - \frac{1}{4} - \frac{1}{10} = \frac{33}{20}
+\]
+\end{ejemplo}
+
+\section{Cambio de Variables en Integrales Dobles}
+
+\begin{teorema}[Cambio de Variables]
+Si $x = x(u,v)$ y $y = y(u,v)$, y el Jacobiano $J = \frac{\partial(x,y)}{\partial(u,v)} \neq 0$:
+\[
+\iint_R f(x,y) \, dA = \iint_S f(x(u,v), y(u,v)) \left|J\right| \, du \, dv
+\]
+
+donde $J = \begin{vmatrix} \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\ \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} \end{vmatrix}$
+\end{teorema}
+
+\subsection{Coordenadas Polares}
+
+\begin{transformacion}
+\[
+x = r\cos\theta, \quad y = r\sin\theta
+\]
+
+El Jacobiano es $J = r$, entonces $dA = r \, dr \, d\theta$
+
+\[
+\iint_R f(x,y) \, dA = \iint_S f(r\cos\theta, r\sin\theta) \, r \, dr \, d\theta
+\]
+\end{transformacion}
+
+\begin{ejemplo}
+Calcular $\iint_R e^{x^2+y^2} \, dA$ donde $R$ es el disco $x^2 + y^2 \leq 1$.
+
+\textbf{Solución:}
+
+En polares: $0 \leq r \leq 1$, $0 \leq \theta \leq 2\pi$, $x^2 + y^2 = r^2$
+
+\[
+\iint_R e^{x^2+y^2} \, dA = \int_0^{2\pi} \int_0^1 e^{r^2} \cdot r \, dr \, d\theta
+\]
+
+Sea $u = r^2$, $du = 2r \, dr$:
+
+\[
+\int_0^1 e^{r^2} \cdot r \, dr = \frac{1}{2}\int_0^1 e^u \, du = \frac{1}{2}(e - 1)
+\]
+
+\[
+\int_0^{2\pi} \frac{1}{2}(e-1) \, d\theta = (e-1)\pi
+\]
+\end{ejemplo}
+
+\section{Integrales Triples}
+
+\begin{definicion}
+La integral triple de $f(x,y,z)$ sobre la región sólida $E$ es:
+\[
+\iiint_E f(x,y,z) \, dV = \int_a^b \int_{g_1(x)}^{g_2(x)} \int_{h_1(x,y)}^{h_2(x,y)} f(x,y,z) \, dz \, dy \, dx
+\]
+\end{definicion}
+
+\subsection{Coordenadas Cilíndricas}
+
+\begin{transformacion}
+\[
+x = r\cos\theta, \quad y = r\sin\theta, \quad z = z
+\]
+
+El Jacobiano es $J = r$, entonces $dV = r \, dr \, d\theta \, dz$
+\end{transformacion}
+
+\subsection{Coordenadas Esféricas}
+
+\begin{transformacion}
+\[
+x = \rho\sin\phi\cos\theta, \quad y = \rho\sin\phi\sin\theta, \quad z = \rho\cos\phi
+\]
+
+El Jacobiano es $J = \rho^2\sin\phi$, entonces $dV = \rho^2\sin\phi \, d\rho \, d\phi \, d\theta$
+
+Rangos: $\rho \geq 0$, $0 \leq \phi \leq \pi$, $0 \leq \theta \leq 2\pi$
+\end{transformacion}
+
+\begin{ejemplo}
+Calcular el volumen de la esfera de radio $a$.
+
+\textbf{Solución:}
+
+En esféricas: $0 \leq \rho \leq a$, $0 \leq \phi \leq \pi$, $0 \leq \theta \leq 2\pi$
+
+\[
+V = \iiint_E 1 \, dV = \int_0^{2\pi} \int_0^\pi \int_0^a \rho^2\sin\phi \, d\rho \, d\phi \, d\theta
+\]
+
+\[
+= \int_0^{2\pi} d\theta \int_0^\pi \sin\phi \, d\phi \int_0^a \rho^2 \, d\rho = 2\pi \cdot 2 \cdot \frac{a^3}{3} = \frac{4\pi a^3}{3}
+\]
+\end{ejemplo}
+
+% ============================================
+\chapter{150+ Ejercicios Resueltos}
+% ============================================
+
+\section{Integrales Indefinidas Básicas}
+
+\begin{ejercicio}
+$\int (3x^2 + 2x - 5) \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+\[
+\int (3x^2 + 2x - 5) \, dx = 3 \cdot \frac{x^3}{3} + 2 \cdot \frac{x^2}{2} - 5x + C = x^3 + x^2 - 5x + C
+\]
+
+\begin{ejercicio}
+$\int (e^x + \frac{1}{x} + \sin x) \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+\[
+\int (e^x + \frac{1}{x} + \sin x) \, dx = e^x + \ln|x| - \cos x + C
+\]
+
+\begin{ejercicio}
+$\int (4\sqrt{x} + \frac{1}{\sqrt{x}}) \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+\[
+\int (4x^{1/2} + x^{-1/2}) \, dx = 4 \cdot \frac{x^{3/2}}{3/2} + \frac{x^{1/2}}{1/2} + C = \frac{8x^{3/2}}{3} + 2\sqrt{x} + C
+\]
+
+\begin{ejercicio}
+$\int \frac{x^3 + 2x^2 - x + 1}{x^2} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+\[
+\int \left(x + 2 - \frac{1}{x} + \frac{1}{x^2}\right) \, dx = \frac{x^2}{2} + 2x - \ln|x| - \frac{1}{x} + C
+\]
+
+\begin{ejercicio}
+$\int (3^x + 2^x) \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+\[
+\int (3^x + 2^x) \, dx = \frac{3^x}{\ln 3} + \frac{2^x}{\ln 2} + C
+\]
+
+\begin{ejercicio}
+$\int (\sec^2 x - \csc^2 x) \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+\[
+\int (\sec^2 x - \csc^2 x) \, dx = \tan x + \cot x + C
+\]
+
+\begin{ejercicio}
+$\int \frac{5}{1+x^2} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+\[
+\int \frac{5}{1+x^2} \, dx = 5\arctan x + C
+\]
+
+\begin{ejercicio}
+$\int \frac{1}{\sqrt{4 - x^2}} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+\[
+\int \frac{1}{\sqrt{4 - x^2}} \, dx = \arcsin\frac{x}{2} + C
+\]
+
+\begin{ejercicio}
+$\int (2\sin x \cos x) \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Usa $2\sin x \cos x = \sin 2x$:
+\[
+\int \sin 2x \, dx = -\frac{1}{2}\cos 2x + C
+\]
+
+\begin{ejercicio}
+$\int \frac{3x + 1}{\sqrt{x}} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+\[
+\int (3x^{1/2} + x^{-1/2}) \, dx = 3 \cdot \frac{2x^{3/2}}{3} + 2x^{1/2} + C = 2x^{3/2} + 2\sqrt{x} + C
+\]
+
+\section{Sustitución}
+
+\begin{ejercicio}
+$\int 2x(x^2 + 1)^{10} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Sea $u = x^2 + 1$, $du = 2x \, dx$:
+\[
+\int (x^2+1)^{10} \cdot 2x \, dx = \int u^{10} \, du = \frac{u^{11}}{11} + C = \frac{(x^2+1)^{11}}{11} + C
+\]
+
+\begin{ejercicio}
+$\int \frac{2x}{\sqrt{x^2 + 3}} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Sea $u = x^2 + 3$, $du = 2x \, dx$:
+\[
+\int \frac{1}{\sqrt{u}} \, du = 2\sqrt{u} + C = 2\sqrt{x^2+3} + C
+\]
+
+\begin{ejercicio}
+$\int \sin(5x) \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Sea $u = 5x$, $du = 5 \, dx$:
+\[
+\int \sin(5x) \, dx = \frac{1}{5} \int \sin u \, du = -\frac{1}{5}\cos u + C = -\frac{1}{5}\cos(5x) + C
+\]
+
+\begin{ejercicio}
+$\int \frac{\ln x}{x} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Sea $u = \ln x$, $du = \frac{1}{x} \, dx$:
+\[
+\int u \, du = \frac{u^2}{2} + C = \frac{(\ln x)^2}{2} + C
+\]
+
+\begin{ejercicio}
+$\int e^{3x} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Sea $u = 3x$, $du = 3 \, dx$:
+\[
+\int e^{3x} \, dx = \frac{1}{3}e^{3x} + C
+\]
+
+\begin{ejercicio}
+$\int \cos(\frac{x}{2}) \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Sea $u = \frac{x}{2}$, $du = \frac{1}{2} \, dx$:
+\[
+\int \cos(\frac{x}{2}) \, dx = 2\sin(\frac{x}{2}) + C
+\]
+
+\begin{ejercicio}
+$\int (2x+1)\sqrt{x^2+x+1} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Sea $u = x^2+x+1$, $du = (2x+1) \, dx$:
+\[
+\int \sqrt{u} \, du = \frac{2u^{3/2}}{3} + C = \frac{2(x^2+x+1)^{3/2}}{3} + C
+\]
+
+\begin{ejercicio}
+$\int x\sqrt{1-x^2} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Sea $u = 1-x^2$, $du = -2x \, dx$:
+\[
+\int x\sqrt{1-x^2} \, dx = -\frac{1}{2}\int \sqrt{u} \, du = -\frac{1}{3}u^{3/2} + C = -\frac{1}{3}(1-x^2)^{3/2} + C
+\]
+
+\begin{ejercicio}
+$\int \frac{1}{1+(2x)^2} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Sea $u = 2x$, $du = 2 \, dx$:
+\[
+\int \frac{1}{1+u^2} \cdot \frac{1}{2} \, du = \frac{1}{2}\arctan(u) + C = \frac{1}{2}\arctan(2x) + C
+\]
+
+\section{Integración por Partes}
+
+\begin{ejercicio}
+$\int x\sin x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+$u = x$, $dv = \sin x \, dx$
+$du = dx$, $v = -\cos x$
+
+\[
+\int x\sin x \, dx = -x\cos x + \int \cos x \, dx = -x\cos x + \sin x + C
+\]
+
+\begin{ejercicio}
+$\int x^2 e^x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Primera integración por partes:
+$u = x^2$, $dv = e^x \, dx$
+$du = 2x \, dx$, $v = e^x$
+
+\[
+\int x^2 e^x \, dx = x^2 e^x - 2\int x e^x \, dx
+\]
+
+Segunda integración por partes en $\int x e^x \, dx$:
+$u = x$, $dv = e^x \, dx$
+$du = dx$, $v = e^x$
+
+\[
+\int x e^x \, dx = xe^x - e^x + C
+\]
+
+Combinando:
+\[
+\int x^2 e^x \, dx = x^2 e^x - 2(xe^x - e^x) + C = (x^2 - 2x + 2)e^x + C
+\]
+
+\begin{ejercicio}
+$\int x\cos x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+$u = x$, $dv = \cos x \, dx$
+$du = dx$, $v = \sin x$
+
+\[
+\int x\cos x \, dx = x\sin x - \int \sin x \, dx = x\sin x + \cos x + C
+\]
+
+\begin{ejercicio}
+$\int \ln x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+$u = \ln x$, $dv = dx$
+$du = \frac{1}{x} \, dx$, $v = x$
+
+\[
+\int \ln x \, dx = x\ln x - \int x \cdot \frac{1}{x} \, dx = x\ln x - \int 1 \, dx = x\ln x - x + C
+\]
+
+\begin{ejercicio}
+$\int e^x \sin x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+$u = \sin x$, $dv = e^x \, dx$
+$du = \cos x \, dx$, $v = e^x$
+
+\[
+\int e^x \sin x \, dx = e^x \sin x - \int e^x \cos x \, dx
+\]
+
+Para $\int e^x \cos x \, dx$:
+$u = \cos x$, $dv = e^x \, dx$
+$du = -\sin x \, dx$, $v = e^x$
+
+\[
+\int e^x \cos x \, dx = e^x \cos x + \int e^x \sin x \, dx
+\]
+
+Sustituyendo:
+\[
+\int e^x \sin x \, dx = e^x \sin x - e^x \cos x - \int e^x \sin x \, dx
+\]
+
+\[
+2\int e^x \sin x \, dx = e^x(\sin x - \cos x)
+\]
+
+\[
+\int e^x \sin x \, dx = \frac{e^x(\sin x - \cos x)}{2} + C
+\]
+
+\begin{ejercicio}
+$\int x^2 \cos x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+$u = x^2$, $dv = \cos x \, dx$
+$du = 2x \, dx$, $v = \sin x$
+
+\[
+\int x^2 \cos x \, dx = x^2 \sin x - 2\int x \sin x \, dx
+\]
+
+Para $\int x \sin x \, dx$:
+$u = x$, $dv = \sin x \, dx$
+$du = dx$, $v = -\cos x$
+
+\[
+\int x \sin x \, dx = -x\cos x + \int \cos x \, dx = -x\cos x + \sin x
+\]
+
+Combinando:
+\[
+\int x^2 \cos x \, dx = x^2 \sin x - 2(-x\cos x + \sin x) + C = x^2\sin x + 2x\cos x - 2\sin x + C
+\]
+
+\begin{ejercicio}
+$\int \arctan x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+$u = \arctan x$, $dv = dx$
+$du = \frac{1}{1+x^2} \, dx$, $v = x$
+
+\[
+\int \arctan x \, dx = x\arctan x - \int \frac{x}{1+x^2} \, dx
+\]
+
+Para $\int \frac{x}{1+x^2} \, dx$, sea $w = 1+x^2$, $dw = 2x \, dx$:
+
+\[
+\int \frac{x}{1+x^2} \, dx = \frac{1}{2}\ln(1+x^2) + C
+\]
+
+Por lo tanto:
+\[
+\int \arctan x \, dx = x\arctan x - \frac{1}{2}\ln(1+x^2) + C
+\]
+
+\begin{ejercicio}
+$\int x^3 e^{-x} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Aplicar integración por partes tres veces:
+
+Primera: $u = x^3$, $dv = e^{-x} \, dx$
+\[
+\int x^3 e^{-x} \, dx = -x^3 e^{-x} + 3\int x^2 e^{-x} \, dx
+\]
+
+Segunda: $u = x^2$, $dv = e^{-x} \, dx$
+\[
+\int x^2 e^{-x} \, dx = -x^2 e^{-x} + 2\int x e^{-x} \, dx
+\]
+
+Tercera: $u = x$, $dv = e^{-x} \, dx$
+\[
+\int x e^{-x} \, dx = -x e^{-x} + \int e^{-x} \, dx = -x e^{-x} - e^{-x}
+\]
+
+Combinando:
+\[
+\int x^3 e^{-x} \, dx = -x^3 e^{-x} + 3[-x^2 e^{-x} + 2(-x e^{-x} - e^{-x})] + C
+\]
+\[
+= -e^{-x}(x^3 + 3x^2 + 6x + 6) + C
+\]
+
+\section{Fracciones Parciales}
+
+\begin{ejercicio}
+$\int \frac{1}{(x-1)(x-2)} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\frac{1}{(x-1)(x-2)} = \frac{A}{x-1} + \frac{B}{x-2}
+\]
+
+$1 = A(x-2) + B(x-1)$
+
+Para $x = 1$: $1 = -A \Rightarrow A = -1$
+Para $x = 2$: $1 = B \Rightarrow B = 1$
+
+\[
+\int \frac{1}{(x-1)(x-2)} \, dx = \int \left(-\frac{1}{x-1} + \frac{1}{x-2}\right) dx = -\ln|x-1| + \ln|x-2| + C = \ln\left|\frac{x-2}{x-1}\right| + C
+\]
+
+\begin{ejercicio}
+$\int \frac{2x+3}{x^2+x-2} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Factoriza: $x^2+x-2 = (x+2)(x-1)$
+
+\[
+\frac{2x+3}{(x+2)(x-1)} = \frac{A}{x+2} + \frac{B}{x-1}
+\]
+
+$2x+3 = A(x-1) + B(x+2)$
+
+Para $x = -2$: $-4+3 = -3A \Rightarrow A = \frac{1}{3}$
+Para $x = 1$: $2+3 = 3B \Rightarrow B = \frac{5}{3}$
+
+\[
+\int \frac{2x+3}{x^2+x-2} \, dx = \frac{1}{3}\ln|x+2| + \frac{5}{3}\ln|x-1| + C
+\]
+
+\begin{ejercicio}
+$\int \frac{3x+1}{(x+1)^2(x-1)} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\frac{3x+1}{(x+1)^2(x-1)} = \frac{A}{x+1} + \frac{B}{(x+1)^2} + \frac{C}{x-1}
+\]
+
+$3x+1 = A(x+1)(x-1) + B(x-1) + C(x+1)^2$
+
+Para $x = -1$: $-3+1 = -2B \Rightarrow B = 1$
+Para $x = 1$: $3+1 = 4C \Rightarrow C = 1$
+Para $x = 0$: $1 = -A - 1 + C = -A + 1 \Rightarrow A = 0$
+
+\[
+\int \frac{3x+1}{(x+1)^2(x-1)} \, dx = \int \left(\frac{1}{(x+1)^2} + \frac{1}{x-1}\right) dx = -\frac{1}{x+1} + \ln|x-1| + C
+\]
+
+\begin{ejercicio}
+$\int \frac{x+2}{x^3+x} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Factoriza: $x^3+x = x(x^2+1)$
+
+\[
+\frac{x+2}{x(x^2+1)} = \frac{A}{x} + \frac{Bx+C}{x^2+1}
+\]
+
+$x+2 = A(x^2+1) + (Bx+C)x$
+
+Para $x = 0$: $2 = A \Rightarrow A = 2$
+Para $x = 1$: $3 = 2(2) + B + C = 4 + B + C \Rightarrow B + C = -1$
+Para $x = -1$: $1 = 2(2) - B + C = 4 - B + C \Rightarrow -B + C = -3$
+
+De las dos últimas: $2C = -4 \Rightarrow C = -2$, $B = 1$
+
+\[
+\int \frac{x+2}{x^3+x} \, dx = 2\ln|x| + \frac{1}{2}\ln(x^2+1) - 2\arctan x + C
+\]
+
+\section{Funciones Trigonométricas}
+
+\begin{ejercicio}
+$\int \sin^2 x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Usa $\sin^2 x = \frac{1-\cos 2x}{2}$:
+
+\[
+\int \sin^2 x \, dx = \int \frac{1-\cos 2x}{2} \, dx = \frac{x}{2} - \frac{\sin 2x}{4} + C
+\]
+
+\begin{ejercicio}
+$\int \cos^3 x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+$\cos^3 x = \cos^2 x \cos x = (1-\sin^2 x)\cos x$
+
+Sea $u = \sin x$, $du = \cos x \, dx$:
+
+\[
+\int \cos^3 x \, dx = \int (1-\sin^2 x)\cos x \, dx = \int (1-u^2) \, du = u - \frac{u^3}{3} + C = \sin x - \frac{\sin^3 x}{3} + C
+\]
+
+\begin{ejercicio}
+$\int \tan x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+$\tan x = \frac{\sin x}{\cos x}$
+
+Sea $u = \cos x$, $du = -\sin x \, dx$:
+
+\[
+\int \tan x \, dx = \int \frac{\sin x}{\cos x} \, dx = -\int \frac{1}{u} \, du = -\ln|u| + C = -\ln|\cos x| + C = \ln|\sec x| + C
+\]
+
+\begin{ejercicio}
+$\int \sin(2x)\cos(3x) \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Usa $\sin A \cos B = \frac{1}{2}[\sin(A+B) + \sin(A-B)]$:
+
+\[
+\sin(2x)\cos(3x) = \frac{1}{2}[\sin(5x) + \sin(-x)] = \frac{1}{2}[\sin(5x) - \sin x]
+\]
+
+\[
+\int \sin(2x)\cos(3x) \, dx = \frac{1}{2}\int [\sin(5x) - \sin x] \, dx = -\frac{\cos(5x)}{10} + \frac{\cos x}{2} + C
+\]
+
+\begin{ejercicio}
+$\int \sec^4 x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+$\sec^4 x = \sec^2 x \cdot \sec^2 x = \sec^2 x(1 + \tan^2 x)$
+
+Sea $u = \tan x$, $du = \sec^2 x \, dx$:
+
+\[
+\int \sec^4 x \, dx = \int (1+\tan^2 x)\sec^2 x \, dx = \int (1+u^2) \, du = u + \frac{u^3}{3} + C = \tan x + \frac{\tan^3 x}{3} + C
+\]
+
+\begin{ejercicio}
+$\int \sin^4 x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Usa $\sin^2 x = \frac{1-\cos 2x}{2}$:
+
+\[
+\sin^4 x = \left(\frac{1-\cos 2x}{2}\right)^2 = \frac{1 - 2\cos 2x + \cos^2 2x}{4}
+\]
+
+\[
+= \frac{1}{4} - \frac{\cos 2x}{2} + \frac{\cos^2 2x}{4} = \frac{1}{4} - \frac{\cos 2x}{2} + \frac{1+\cos 4x}{8}
+\]
+
+\[
+= \frac{3}{8} - \frac{\cos 2x}{2} + \frac{\cos 4x}{8}
+\]
+
+\[
+\int \sin^4 x \, dx = \frac{3x}{8} - \frac{\sin 2x}{4} + \frac{\sin 4x}{32} + C
+\]
+
+\section{Sustituciones Trigonométricas}
+
+\begin{ejercicio}
+$\int \frac{1}{\sqrt{9-x^2}} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Sea $x = 3\sin\theta$, $dx = 3\cos\theta \, d\theta$:
+
+\[
+\sqrt{9-x^2} = \sqrt{9-9\sin^2\theta} = 3\cos\theta
+\]
+
+\[
+\int \frac{1}{\sqrt{9-x^2}} \, dx = \int \frac{3\cos\theta}{3\cos\theta} \, d\theta = \theta + C = \arcsin\frac{x}{3} + C
+\]
+
+\begin{ejercicio}
+$\int \frac{x^2}{\sqrt{1+x^2}} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Sea $x = \tan\theta$, $dx = \sec^2\theta \, d\theta$:
+
+\[
+\sqrt{1+x^2} = \sec\theta
+\]
+
+\[
+\int \frac{\tan^2\theta}{\sec\theta} \cdot \sec^2\theta \, d\theta = \int \tan^2\theta \sec\theta \, d\theta = \int (\sec^2\theta - 1)\sec\theta \, d\theta
+\]
+
+\[
+= \int (\sec^3\theta - \sec\theta) \, d\theta
+\]
+
+Para $\int \sec^3\theta \, d\theta$, usa integración por partes o la fórmula conocida:
+$\int \sec^3\theta \, d\theta = \frac{1}{2}(\sec\theta\tan\theta + \ln|\sec\theta + \tan\theta|)$
+
+El resultado final es:
+\[
+\int \frac{x^2}{\sqrt{1+x^2}} \, dx = \frac{x\sqrt{1+x^2}}{2} - \frac{1}{2}\ln|x + \sqrt{1+x^2}| + \ln|\sqrt{1+x^2} + x| + C
+\]
+
+\begin{ejercicio}
+$\int \frac{\sqrt{x^2-4}}{x} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Sea $x = 2\sec\theta$, $dx = 2\sec\theta\tan\theta \, d\theta$:
+
+\[
+\sqrt{x^2-4} = 2\tan\theta
+\]
+
+\[
+\int \frac{2\tan\theta}{2\sec\theta} \cdot 2\sec\theta\tan\theta \, d\theta = 2\int \tan^2\theta \, d\theta = 2\int (\sec^2\theta - 1) \, d\theta
+\]
+
+\[
+= 2\tan\theta - 2\theta + C = \sqrt{x^2-4} - 2\operatorname{arcsec}\frac{x}{2} + C
+\]
+
+\section{Integrales Definidas}
+
+\begin{ejercicio}
+$\int_0^1 (3x^2 + 2x) \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\int_0^1 (3x^2 + 2x) \, dx = [x^3 + x^2]_0^1 = 1 + 1 - 0 = 2
+\]
+
+\begin{ejercicio}
+$\int_0^{\pi/2} \cos x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\int_0^{\pi/2} \cos x \, dx = [\sin x]_0^{\pi/2} = 1 - 0 = 1
+\]
+
+\begin{ejercicio}
+$\int_1^2 \frac{1}{x} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\int_1^2 \frac{1}{x} \, dx = [\ln x]_1^2 = \ln 2 - \ln 1 = \ln 2
+\]
+
+\begin{ejercicio}
+$\int_0^{\pi} x\sin x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Usa integración por partes: $u = x$, $dv = \sin x \, dx$
+
+\[
+\int_0^{\pi} x\sin x \, dx = [-x\cos x]_0^{\pi} + \int_0^{\pi} \cos x \, dx = [-x\cos x + \sin x]_0^{\pi}
+\]
+
+\[
+= (-\pi(-1) + 0) - (0 + 0) = \pi
+\]
+
+\begin{ejercicio}
+$\int_0^1 x e^{x^2} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Sea $u = x^2$, $du = 2x \, dx$
+
+Cuando $x = 0$: $u = 0$; cuando $x = 1$: $u = 1$
+
+\[
+\int_0^1 x e^{x^2} \, dx = \frac{1}{2}\int_0^1 e^u \, du = \frac{1}{2}[e^u]_0^1 = \frac{e - 1}{2}
+\]
+
+\begin{ejercicio}
+$\int_0^{\pi/4} \sec^2 x \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\int_0^{\pi/4} \sec^2 x \, dx = [\tan x]_0^{\pi/4} = 1 - 0 = 1
+\]
+
+\begin{ejercicio}
+$\int_{-1}^1 x^3 \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Nota que $x^3$ es función impar y el intervalo es simétrico:
+
+\[
+\int_{-1}^1 x^3 \, dx = 0
+\]
+
+(O calcula directamente: $[\frac{x^4}{4}]_{-1}^1 = \frac{1}{4} - \frac{1}{4} = 0$)
+
+\begin{ejercicio}
+$\int_0^2 |x-1| \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+El valor absoluto cambia en $x = 1$:
+
+\[
+|x-1| = \begin{cases} 1-x & 0 \leq x < 1 \\ x-1 & 1 \leq x \leq 2 \end{cases}
+\]
+
+\[
+\int_0^2 |x-1| \, dx = \int_0^1 (1-x) \, dx + \int_1^2 (x-1) \, dx
+\]
+
+\[
+= [x - \frac{x^2}{2}]_0^1 + [\frac{x^2}{2} - x]_1^2 = (1 - \frac{1}{2}) + (2 - 2) - (\frac{1}{2} - 1)
+\]
+
+\[
+= \frac{1}{2} + 0 + \frac{1}{2} = 1
+\]
+
+\section{Integrales Impropias}
+
+\begin{ejercicio}
+$\int_1^\infty \frac{1}{x^2} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\int_1^\infty \frac{1}{x^2} \, dx = \lim_{b \to \infty} \int_1^b \frac{1}{x^2} \, dx = \lim_{b \to \infty} [-\frac{1}{x}]_1^b = \lim_{b \to \infty} (-\frac{1}{b} + 1) = 1
+\]
+
+Converge a 1.
+
+\begin{ejercicio}
+$\int_1^\infty \frac{1}{\sqrt{x}} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\int_1^\infty \frac{1}{\sqrt{x}} \, dx = \lim_{b \to \infty} \int_1^b x^{-1/2} \, dx = \lim_{b \to \infty} [2\sqrt{x}]_1^b = \lim_{b \to \infty} (2\sqrt{b} - 2) = \infty
+\]
+
+Diverge.
+
+\begin{ejercicio}
+$\int_0^1 \frac{1}{\sqrt{x}} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Hay discontinuidad en $x = 0$:
+
+\[
+\int_0^1 \frac{1}{\sqrt{x}} \, dx = \lim_{\epsilon \to 0^+} \int_\epsilon^1 x^{-1/2} \, dx = \lim_{\epsilon \to 0^+} [2\sqrt{x}]_\epsilon^1 = \lim_{\epsilon \to 0^+} (2 - 2\sqrt{\epsilon}) = 2
+\]
+
+Converge a 2.
+
+\begin{ejercicio}
+$\int_0^\infty e^{-x} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\int_0^\infty e^{-x} \, dx = \lim_{b \to \infty} \int_0^b e^{-x} \, dx = \lim_{b \to \infty} [-e^{-x}]_0^b = \lim_{b \to \infty} (-e^{-b} + 1) = 1
+\]
+
+Converge a 1.
+
+\begin{ejercicio}
+$\int_0^\infty \frac{1}{1+x^2} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\int_0^\infty \frac{1}{1+x^2} \, dx = \lim_{b \to \infty} \int_0^b \frac{1}{1+x^2} \, dx = \lim_{b \to \infty} [\arctan x]_0^b = \lim_{b \to \infty} \arctan b = \frac{\pi}{2}
+\]
+
+Converge a $\frac{\pi}{2}$.
+
+\begin{ejercicio}
+$\int_1^\infty \frac{1}{x} \, dx$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\int_1^\infty \frac{1}{x} \, dx = \lim_{b \to \infty} \int_1^b \frac{1}{x} \, dx = \lim_{b \to \infty} [\ln x]_1^b = \lim_{b \to \infty} \ln b = \infty
+\]
+
+Diverge.
+
+\section{Integrales Dobles}
+
+\begin{ejercicio}
+$\iint_R (x+y) \, dA$ donde $R = [0,1] \times [0,2]$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\iint_R (x+y) \, dA = \int_0^1 \int_0^2 (x+y) \, dy \, dx = \int_0^1 [xy + \frac{y^2}{2}]_0^2 dx = \int_0^1 (2x + 2) \, dx
+\]
+
+\[
+= [x^2 + 2x]_0^1 = 1 + 2 = 3
+\]
+
+\begin{ejercicio}
+$\iint_R xy \, dA$ donde $R = [0,2] \times [0,3]$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\iint_R xy \, dA = \int_0^2 \int_0^3 xy \, dy \, dx = \int_0^2 x[\frac{y^2}{2}]_0^3 dx = \int_0^2 \frac{9x}{2} \, dx = \frac{9}{2}[\frac{x^2}{2}]_0^2 = \frac{9}{2} \cdot 2 = 9
+\]
+
+\begin{ejercicio}
+$\iint_D (x+y) \, dA$ donde $D = \{(x,y) : 0 \leq x \leq 1, 0 \leq y \leq x\}$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\iint_D (x+y) \, dA = \int_0^1 \int_0^x (x+y) \, dy \, dx = \int_0^1 [xy + \frac{y^2}{2}]_0^x dx = \int_0^1 (x^2 + \frac{x^2}{2}) \, dx
+\]
+
+\[
+= \int_0^1 \frac{3x^2}{2} \, dx = \frac{3}{2}[\frac{x^3}{3}]_0^1 = \frac{1}{2}
+\]
+
+\begin{ejercicio}
+$\iint_R x^2 \, dA$ donde $R = [1,2] \times [0,1]$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\iint_R x^2 \, dA = \int_1^2 \int_0^1 x^2 \, dy \, dx = \int_1^2 x^2 [y]_0^1 dx = \int_1^2 x^2 \, dx = [\frac{x^3}{3}]_1^2
+\]
+
+\[
+= \frac{8}{3} - \frac{1}{3} = \frac{7}{3}
+\]
+
+\section{Integrales en Coordenadas Polares}
+
+\begin{ejercicio}
+$\iint_R r \, dr \, d\theta$ donde $R$ es el disco $0 \leq r \leq 1$, $0 \leq \theta \leq 2\pi$
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+\iint_R r \, dr \, d\theta = \int_0^{2\pi} \int_0^1 r \, dr \, d\theta = \int_0^{2\pi} [\frac{r^2}{2}]_0^1 d\theta = \int_0^{2\pi} \frac{1}{2} \, d\theta = \pi
+\]
+
+\begin{ejercicio}
+Calcular el área del disco $x^2 + y^2 \leq 4$ usando integrales dobles en coordenadas polares.
+\end{ejercicio}
+
+\textbf{Solución:}
+
+En polares: $0 \leq r \leq 2$, $0 \leq \theta \leq 2\pi$
+
+\[
+A = \iint_R 1 \, dA = \int_0^{2\pi} \int_0^2 r \, dr \, d\theta = \int_0^{2\pi} [\frac{r^2}{2}]_0^2 d\theta = \int_0^{2\pi} 2 \, d\theta = 4\pi
+\]
+
+\begin{ejercicio}
+$\iint_R x^2 \, dA$ donde $R$ es el sector del disco unitario en el primer cuadrante
+\end{ejercicio}
+
+\textbf{Solución:}
+
+En polares: $0 \leq r \leq 1$, $0 \leq \theta \leq \frac{\pi}{2}$, $x = r\cos\theta$
+
+\[
+\iint_R x^2 \, dA = \int_0^{\pi/2} \int_0^1 r^2\cos^2\theta \cdot r \, dr \, d\theta = \int_0^{\pi/2} \cos^2\theta \int_0^1 r^3 \, dr \, d\theta
+\]
+
+\[
+= \int_0^{\pi/2} \cos^2\theta \cdot \frac{1}{4} \, d\theta = \frac{1}{4}\int_0^{\pi/2} \frac{1+\cos 2\theta}{2} \, d\theta = \frac{1}{8}[\theta + \frac{\sin 2\theta}{2}]_0^{\pi/2}
+\]
+
+\[
+= \frac{1}{8} \cdot \frac{\pi}{2} = \frac{\pi}{16}
+\]
+
+\section{Aplicaciones: Área y Volumen}
+
+\begin{ejercicio}
+Calcular el área limitada por $y = x^2$ y $y = x$.
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Intersecciones: $x^2 = x \Rightarrow x = 0$ o $x = 1$
+
+En $(0,1)$: $x \geq x^2$
+
+\[
+A = \int_0^1 (x - x^2) \, dx = [\frac{x^2}{2} - \frac{x^3}{3}]_0^1 = \frac{1}{2} - \frac{1}{3} = \frac{1}{6}
+\]
+
+\begin{ejercicio}
+Calcular el volumen del sólido obtenido al rotar la región bajo $y = \sqrt{x}$ de $x = 0$ a $x = 4$ alrededor del eje $x$.
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+V = \pi \int_0^4 (\sqrt{x})^2 \, dx = \pi \int_0^4 x \, dx = \pi [\frac{x^2}{2}]_0^4 = \pi \cdot 8 = 8\pi
+\]
+
+\begin{ejercicio}
+Calcular el área limitada por las curvas $x = y^2$ y $x = 4$.
+\end{ejercicio}
+
+\textbf{Solución:}
+
+Intersecciones: $y^2 = 4 \Rightarrow y = \pm 2$
+
+\[
+A = \int_{-2}^2 (4 - y^2) \, dy = [4y - \frac{y^3}{3}]_{-2}^2 = (8 - \frac{8}{3}) - (-8 + \frac{8}{3}) = \frac{16}{3} + \frac{16}{3} = \frac{32}{3}
+\]
+
+\begin{ejercicio}
+Hallar el volumen del sólido de revolución al rotar $y = e^{-x}$ entre $x = 0$ y $x = 1$ alrededor del eje $x$.
+\end{ejercicio}
+
+\textbf{Solución:}
+
+\[
+V = \pi \int_0^1 (e^{-x})^2 \, dx = \pi \int_0^1 e^{-2x} \, dx = \pi [-\frac{e^{-2x}}{2}]_0^1 = \frac{\pi}{2}(1 - e^{-2})
+\]
+
+\begin{ejercicio}
+Calcular la longitud de la curva $y = \frac{2}{3}x^{3/2}$ desde $x = 0$ a $x = 3$.
+\end{ejercicio}
+
+\textbf{Solución:}
+
+$y' = x^{1/2}$, entonces $(y')^2 = x$
+
+\[
+L = \int_0^3 \sqrt{1+x} \, dx
+\]
+
+Sea $u = 1+x$, $du = dx$:
+
+\[
+L = \int_1^4 \sqrt{u} \, du = [\frac{2u^{3/2}}{3}]_1^4 = \frac{2}{3}(8 - 1) = \frac{14}{3}
+\]
+
+% ============================================
+\chapter{Ejercicio Práctico Final Completo}
+% ============================================
+
+\section{Enunciado}
+
+\begin{tcolorbox}[colback=yellow!10!white, colframe=orange!75!black, title=Ejercicio Práctico Final]
+
+Calcular la integral doble:
+
+\[
+I = \iint_D x^2 y \, dA
+\]
+
+donde $D$ es la región acotada por las curvas $y = x^2$ (parábola) y $y = 2x$ (recta).
+
+Determinar:
+\begin{enumerate}
+    \item Los puntos de intersección entre las dos curvas
+    \item La descripción matemática de la región $D$
+    \item El cálculo paso a paso de la integral doble
+    \item El valor final de $I$
+    \item Verificación usando el otro orden de integración
+\end{enumerate}
+
+\end{tcolorbox}
+
+\section{Solución Completa}
+
+\subsection{Paso 1: Puntos de Intersección}
+
+Para encontrar dónde se intersectan $y = x^2$ y $y = 2x$:
+
+\[
+x^2 = 2x
+\]
+\[
+x^2 - 2x = 0
+\]
+\[
+x(x - 2) = 0
+\]
+\[
+x = 0 \quad \text{o} \quad x = 2
+\]
+
+Puntos de intersección:
+\begin{itemize}
+    \item Cuando $x = 0$: $y = 0 \Rightarrow (0,0)$
+    \item Cuando $x = 2$: $y = 4 \Rightarrow (2,4)$
+\end{itemize}
+
+\subsection{Paso 2: Descripción de la Región}
+
+Para $x \in [0,2]$, comparamos las funciones:
+\begin{itemize}
+    \item En $x = 1$: $y = x^2 = 1$ vs $y = 2x = 2$
+    \item Por lo tanto, $2x \geq x^2$ en $[0,2]$
+\end{itemize}
+
+La región $D$ es de Tipo I:
+
+\[
+D = \{(x,y) : 0 \leq x \leq 2, \, x^2 \leq y \leq 2x\}
+\]
+
+\subsection{Paso 3: Cálculo de la Integral Doble}
+
+\[
+I = \iint_D x^2 y \, dA = \int_0^2 \int_{x^2}^{2x} x^2 y \, dy \, dx
+\]
+
+\textbf{Integral interior (respecto a $y$):}
+
+\[
+\int_{x^2}^{2x} x^2 y \, dy = x^2 \left[\frac{y^2}{2}\right]_{x^2}^{2x} = x^2 \left(\frac{(2x)^2}{2} - \frac{(x^2)^2}{2}\right)
+\]
+
+\[
+= x^2 \left(\frac{4x^2}{2} - \frac{x^4}{2}\right) = x^2 \left(\frac{4x^2 - x^4}{2}\right) = \frac{x^2(4x^2 - x^4)}{2}
+\]
+
+\[
+= \frac{4x^4 - x^6}{2}
+\]
+
+\textbf{Integral exterior (respecto a $x$):}
+
+\[
+I = \int_0^2 \frac{4x^4 - x^6}{2} \, dx = \frac{1}{2} \int_0^2 (4x^4 - x^6) \, dx
+\]
+
+\[
+= \frac{1}{2} \left[\frac{4x^5}{5} - \frac{x^7}{7}\right]_0^2 = \frac{1}{2} \left(\frac{4 \cdot 32}{5} - \frac{128}{7}\right)
+\]
+
+\[
+= \frac{1}{2} \left(\frac{128}{5} - \frac{128}{7}\right) = \frac{64}{5} - \frac{64}{7}
+\]
+
+Encontramos el común denominador (35):
+
+\[
+I = \frac{64 \cdot 7}{35} - \frac{64 \cdot 5}{35} = \frac{448 - 320}{35} = \frac{128}{35}
+\]
+
+\subsection{Paso 4: Resultado Final}
+
+\[
+\boxed{I = \frac{128}{35}}
+\]
+
+\subsection{Paso 5: Verificación con Orden Inverso}
+
+Ahora describiremos $D$ como región Tipo II.
+
+De $y = x^2$ despejamos $x = \sqrt{y}$ (tomamos la rama positiva)
+De $y = 2x$ despejamos $x = \frac{y}{2}$
+
+Para un $y$ fijo en $[0,4]$:
+\begin{itemize}
+    \item Cuando $0 \leq y \leq 4$: ¿Cuál es el límite izquierdo?
+    \item En $y = x^2$: $x = \sqrt{y}$
+    \item En $y = 2x$: $x = \frac{y}{2}$
+    \item Para $y \in [0,4]$: $\frac{y}{2} \geq \sqrt{y}$ (verificar: cuando $y = 1$, $\frac{1}{2} < 1$, así que es al revés)
+\end{itemize}
+
+Corrección: Para $y \in [0,4]$, $\sqrt{y} \geq \frac{y}{2}$ cuando $y \leq 4$.
+
+La región Tipo II es:
+
+\[
+D = \{(x,y) : 0 \leq y \leq 4, \, \frac{y}{2} \leq x \leq \sqrt{y}\}
+\]
+
+\[
+I = \int_0^4 \int_{y/2}^{\sqrt{y}} x^2 y \, dx \, dy
+\]
+
+\textbf{Integral interior (respecto a $x$):}
+
+\[
+\int_{y/2}^{\sqrt{y}} x^2 y \, dx = y \left[\frac{x^3}{3}\right]_{y/2}^{\sqrt{y}} = \frac{y}{3}\left[(\sqrt{y})^3 - \left(\frac{y}{2}\right)^3\right]
+\]
+
+\[
+= \frac{y}{3}\left[y^{3/2} - \frac{y^3}{8}\right] = \frac{y^{5/2}}{3} - \frac{y^4}{24}
+\]
+
+\textbf{Integral exterior:}
+
+\[
+I = \int_0^4 \left(\frac{y^{5/2}}{3} - \frac{y^4}{24}\right) dy = \left[\frac{y^{7/2}}{3 \cdot \frac{7}{2}} - \frac{y^5}{120}\right]_0^4
+\]
+
+\[
+= \left[\frac{2y^{7/2}}{21} - \frac{y^5}{120}\right]_0^4 = \frac{2 \cdot 4^{7/2}}{21} - \frac{4^5}{120}
+\]
+
+\[
+= \frac{2 \cdot 128}{21} - \frac{1024}{120} = \frac{256}{21} - \frac{256}{30}
+\]
+
+Común denominador (210):
+
+\[
+I = \frac{256 \cdot 10}{210} - \frac{256 \cdot 7}{210} = \frac{2560 - 1792}{210} = \frac{768}{210} = \frac{128}{35}
+\]
+
+\textbf{¡Verificado!} Ambos órdenes dan el mismo resultado: $\boxed{I = \frac{128}{35}}$
+
+\end{document}

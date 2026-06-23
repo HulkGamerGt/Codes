@@ -1,0 +1,3 @@
+/home/diego-solis-rojas/CLionProjects/RubenSanchez_DiegoSolis_BenjaminVasquez_JoaquinVasquez/cmake-build-debug/CMakeFiles/serviexpress.dir
+/home/diego-solis-rojas/CLionProjects/RubenSanchez_DiegoSolis_BenjaminVasquez_JoaquinVasquez/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/diego-solis-rojas/CLionProjects/RubenSanchez_DiegoSolis_BenjaminVasquez_JoaquinVasquez/cmake-build-debug/CMakeFiles/rebuild_cache.dir

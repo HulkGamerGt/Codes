@@ -1,0 +1,160 @@
+--- Inicio de operaciones ---
+ERROR: Datos invalidos en agendados: 1901234-8;Jorge Contreas;PAO;12:4;1
+Cargados inicialmente: 59 (agendados: 29, llegada: 30)
+
+=== ESTADO ACTUAL ===
+Agendados pendientes:
+  11111111-1 - Juan Perez (CONSULTA) 09:00
+  22222222-2 - Maria Gomez (PAGO) 09:05
+  33333333-3 - Carlos Diaz (RECLAMO) 09:10
+  44444444-4 - Ana Torres (TRAMITE) 09:15
+  15555555-5 - Luis Fuentes (CONSULTA) 09:30
+  16666666-6 - Camila Silva (PAGO) 09:45
+  17777777-7 - Andres Morales (TRAMITE) 10:00
+  18123456-7 - Barbara Jara (RECLAMO) 10:15
+  19234567-8 - Cristian Espinoza (CONSULTA) 10:30
+  20345678-9 - Daniela Castro (PAGO) 10:45
+  12345678-5 - Eduardo Tapia (TRAMITE) 11:00
+  13456789-3 - Fernanda Carrasco (RECLAMO) 11:15
+  14567890-7 - Gabriel Sepulveda (CONSULTA) 11:30
+  15678901-5 - Francisca Reyes (PAGO) 11:45
+  16789012-3 - Gonzalo Herrera (TRAMITE) 12:00
+  17890123-1 - Ignacio Sandoval (RECLAMO) 12:15
+  18901234-K - Javiera Vergara (CONSULTA) 12:30
+  20123456-6 - Karla Baeza (TRAMITE) 14:00
+  21234567-4 - Lucas Alarcon (RECLAMO) 14:15
+  22345678-2 - Macarena Poblete (CONSULTA) 14:30
+  23456789-0 - Nicolas Godoy (PAGO) 14:45
+  24567890-4 - Natalia Fritz (TRAMITE) 15:00
+  25678901-2 - Oscar Valenzuela (RECLAMO) 15:15
+  26789012-0 - Paula Bravo (CONSULTA) 15:30
+  27890123-9 - Ricardo Maturana (PAGO) 15:45
+  28901234-7 - Sofia Cardenas (TRAMITE) 16:00
+  29012345-5 - Tomas Figueroa (RECLAMO) 16:15
+  20555666-4 - Valentina Loyola (CONSULTA) 16:30
+  21666777-2 - Sebastian Henriquez (PAGO) 16:45
+Cola de espera:
+  55555555-5 - Pedro Soto (PAGO) 09:20
+  66666666-6 - Lucia Rojas (CONSULTA) 09:25
+  77777777-7 - Diego Munoz (RECLAMO) 09:30
+  10111222-3 - Matias Gutierrez (TRAMITE) 09:35
+  11222333-4 - Constanza Caceres (PAGO) 09:50
+  12333444-5 - Felipe Munoz (CONSULTA) 10:05
+  13444555-6 - Pia Troncoso (RECLAMO) 10:20
+  14555666-7 - Rodrigo Donoso (TRAMITE) 10:35
+  15666777-8 - Alejandra Pardo (PAGO) 10:50
+  16777888-9 - Alvaro Gatica (CONSULTA) 11:05
+  17888999-K - Beatriz Roman (RECLAMO) 11:20
+  18999000-1 - Claudio Valdes (TRAMITE) 11:35
+  19111222-2 - Denisse Toledo (PAGO) 11:50
+  20222333-3 - Esteban Salazar (CONSULTA) 12:05
+  21333444-4 - Florencia Oses (RECLAMO) 12:20
+  22444555-5 - Guillermo Lagos (TRAMITE) 12:35
+  23555666-6 - Isidora Opazo (PAGO) 12:50
+  24666777-7 - Jaime Campusano (CONSULTA) 14:05
+  25777888-8 - Loreto Villalobos (RECLAMO) 14:20
+  26888999-9 - Manuel Araya (TRAMITE) 14:35
+  27999000-K - Nicole Corvalan (PAGO) 14:50
+  18222333-4 - Patricio Farias (CONSULTA) 15:05
+  19333444-5 - Rocio Meneses (RECLAMO) 15:20
+  11444555-2 - Samuel Garrido (TRAMITE) 15:35
+  12555666-0 - Tatiana Ortiz (PAGO) 15:50
+  13666777-9 - Victor Retamal (CONSULTA) 16:05
+  14777888-7 - Yolanda Pinto (RECLAMO) 16:20
+  15888999-5 - Benjamin Riveros (TRAMITE) 16:35
+  16999000-3 - Catalina Palacios (PAGO) 16:50
+  17111333-2 - Daniel Faúndez (CONSULTA) 17:05
+Historial (ultimos primero):
+  (vacio)
+========================
+ATENDER_PRIORIDAD: Atendido 22222222-2 (PAGO) prioridad 3.
+ATENDER: Atendido 11111111-1 (CONSULTA).
+ATENDER: Atendido 33333333-3 (RECLAMO).
+ATENDER: Atendido 44444444-4 (TRAMITE).
+ATENDER: Atendido 15555555-5 (CONSULTA).
+ATENDER: Atendido 16666666-6 (PAGO).
+BUSCAR 11111111-1: Encontrado en HISTORIAL (ATENDIDO) - Juan Perez, CONSULTA, 09:00, prioridad 2
+BUSCAR 66666666-6: Encontrado en COLA - Lucia Rojas, CONSULTA, 09:25, prioridad 3
+BUSCAR 99999999-9: No encontrado.
+AGENDAR: Cliente 30000000-1 agregado a agendados.
+CANCELAR_AGENDA 33333333-3: No encontrado en agendados.
+CANCELAR_AGENDA 00000000-0: No encontrado en agendados.
+LLEGADA: Cliente 40000000-2 encolado.
+LLEGADA 11111111-1: RUT duplicado.
+ATENDER_PRIORIDAD: Atendido 17777777-7 (TRAMITE) prioridad 3.
+ATENDER: Atendido 18123456-7 (RECLAMO).
+ATENDER: Atendido 19234567-8 (CONSULTA).
+ATENDER: Atendido 20345678-9 (PAGO).
+ATENDER: Atendido 12345678-5 (TRAMITE).
+ATENDER: Atendido 13456789-3 (RECLAMO).
+DESHACER_ATENCION: Atencion de 13456789-3 anulada.
+DESHACER_ATENCION: Atencion de 12345678-5 anulada.
+DESHACER_ATENCION: Atencion de 20345678-9 anulada.
+DESHACER_ATENCION: Atencion de 19234567-8 anulada.
+ATENDER: Atendido 14567890-7 (CONSULTA).
+BUSCAR 22222222-2: Encontrado en HISTORIAL (ATENDIDO) - Maria Gomez, PAGO, 09:05, prioridad 3
+BUSCAR 40000000-2: Encontrado en COLA - Cliente Espontaneo, PAGO, 09:50, prioridad 2
+=== ESTADO ACTUAL ===
+Agendados pendientes:
+  15678901-5 - Francisca Reyes (PAGO) 11:45
+  16789012-3 - Gonzalo Herrera (TRAMITE) 12:00
+  17890123-1 - Ignacio Sandoval (RECLAMO) 12:15
+  18901234-K - Javiera Vergara (CONSULTA) 12:30
+  20123456-6 - Karla Baeza (TRAMITE) 14:00
+  21234567-4 - Lucas Alarcon (RECLAMO) 14:15
+  22345678-2 - Macarena Poblete (CONSULTA) 14:30
+  23456789-0 - Nicolas Godoy (PAGO) 14:45
+  24567890-4 - Natalia Fritz (TRAMITE) 15:00
+  25678901-2 - Oscar Valenzuela (RECLAMO) 15:15
+  26789012-0 - Paula Bravo (CONSULTA) 15:30
+  27890123-9 - Ricardo Maturana (PAGO) 15:45
+  28901234-7 - Sofia Cardenas (TRAMITE) 16:00
+  29012345-5 - Tomas Figueroa (RECLAMO) 16:15
+  20555666-4 - Valentina Loyola (CONSULTA) 16:30
+  21666777-2 - Sebastian Henriquez (PAGO) 16:45
+  30000000-1 - Nueva Persona (CONSULTA) 09:20
+Cola de espera:
+  55555555-5 - Pedro Soto (PAGO) 09:20
+  66666666-6 - Lucia Rojas (CONSULTA) 09:25
+  77777777-7 - Diego Munoz (RECLAMO) 09:30
+  10111222-3 - Matias Gutierrez (TRAMITE) 09:35
+  11222333-4 - Constanza Caceres (PAGO) 09:50
+  12333444-5 - Felipe Munoz (CONSULTA) 10:05
+  13444555-6 - Pia Troncoso (RECLAMO) 10:20
+  14555666-7 - Rodrigo Donoso (TRAMITE) 10:35
+  15666777-8 - Alejandra Pardo (PAGO) 10:50
+  16777888-9 - Alvaro Gatica (CONSULTA) 11:05
+  17888999-K - Beatriz Roman (RECLAMO) 11:20
+  18999000-1 - Claudio Valdes (TRAMITE) 11:35
+  19111222-2 - Denisse Toledo (PAGO) 11:50
+  20222333-3 - Esteban Salazar (CONSULTA) 12:05
+  21333444-4 - Florencia Oses (RECLAMO) 12:20
+  22444555-5 - Guillermo Lagos (TRAMITE) 12:35
+  23555666-6 - Isidora Opazo (PAGO) 12:50
+  24666777-7 - Jaime Campusano (CONSULTA) 14:05
+  25777888-8 - Loreto Villalobos (RECLAMO) 14:20
+  26888999-9 - Manuel Araya (TRAMITE) 14:35
+  27999000-K - Nicole Corvalan (PAGO) 14:50
+  18222333-4 - Patricio Farias (CONSULTA) 15:05
+  19333444-5 - Rocio Meneses (RECLAMO) 15:20
+  11444555-2 - Samuel Garrido (TRAMITE) 15:35
+  12555666-0 - Tatiana Ortiz (PAGO) 15:50
+  13666777-9 - Victor Retamal (CONSULTA) 16:05
+  14777888-7 - Yolanda Pinto (RECLAMO) 16:20
+  15888999-5 - Benjamin Riveros (TRAMITE) 16:35
+  16999000-3 - Catalina Palacios (PAGO) 16:50
+  17111333-2 - Daniel Faúndez (CONSULTA) 17:05
+  40000000-2 - Cliente Espontaneo (PAGO) 09:50
+Historial (ultimos primero):
+  14567890-7 - Gabriel Sepulveda (CONSULTA) estado: ATENDIDO
+  18123456-7 - Barbara Jara (RECLAMO) estado: ATENDIDO
+  17777777-7 - Andres Morales (TRAMITE) estado: ATENDIDO
+  16666666-6 - Camila Silva (PAGO) estado: ATENDIDO
+  15555555-5 - Luis Fuentes (CONSULTA) estado: ATENDIDO
+  44444444-4 - Ana Torres (TRAMITE) estado: ATENDIDO
+  33333333-3 - Carlos Diaz (RECLAMO) estado: ATENDIDO
+  11111111-1 - Juan Perez (CONSULTA) estado: ATENDIDO
+  22222222-2 - Maria Gomez (PAGO) estado: ATENDIDO
+========================
+
+--- Fin de operaciones ---

@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/diego-solis-rojas/CLionProjects/RubenSanchez_DiegoSolis_BenjaminVasquez_JoaquinVasquez/cmake-build-debug",
+  "command": "/usr/bin/cc -g -std=gnu99 -fdiagnostics-color=always -o CMakeFiles/serviexpress.dir/main.c.o -c /home/diego-solis-rojas/CLionProjects/RubenSanchez_DiegoSolis_BenjaminVasquez_JoaquinVasquez/main.c",
+  "file": "/home/diego-solis-rojas/CLionProjects/RubenSanchez_DiegoSolis_BenjaminVasquez_JoaquinVasquez/main.c",
+  "output": "/home/diego-solis-rojas/CLionProjects/RubenSanchez_DiegoSolis_BenjaminVasquez_JoaquinVasquez/cmake-build-debug/CMakeFiles/serviexpress.dir/main.c.o"
+},
+{
+  "directory": "/home/diego-solis-rojas/CLionProjects/RubenSanchez_DiegoSolis_BenjaminVasquez_JoaquinVasquez/cmake-build-debug",
+  "command": "/usr/bin/cc -g -std=gnu99 -fdiagnostics-color=always -o CMakeFiles/serviexpress.dir/serviexpress.c.o -c /home/diego-solis-rojas/CLionProjects/RubenSanchez_DiegoSolis_BenjaminVasquez_JoaquinVasquez/serviexpress.c",
+  "file": "/home/diego-solis-rojas/CLionProjects/RubenSanchez_DiegoSolis_BenjaminVasquez_JoaquinVasquez/serviexpress.c",
+  "output": "/home/diego-solis-rojas/CLionProjects/RubenSanchez_DiegoSolis_BenjaminVasquez_JoaquinVasquez/cmake-build-debug/CMakeFiles/serviexpress.dir/serviexpress.c.o"
+}
+]

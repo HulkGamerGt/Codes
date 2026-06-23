@@ -1,0 +1,61 @@
+{
+	"configurations" : 
+	[
+		{
+			"abstractTargets" : [],
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-9ad1a58d4644cf6543fa.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "serviexpress",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "serviexpress::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-serviexpress-Debug-7e232671f2ebdfdebf86.json",
+					"name" : "serviexpress",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/diego-solis-rojas/CLionProjects/RubenSanchez_DiegoSolis_BenjaminVasquez_JoaquinVasquez/cmake-build-debug",
+		"source" : "/home/diego-solis-rojas/CLionProjects/RubenSanchez_DiegoSolis_BenjaminVasquez_JoaquinVasquez"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 9
+	}
+}

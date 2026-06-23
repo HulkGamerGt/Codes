@@ -1,0 +1,1 @@
+gcc ejercicio_1_main.c ejercicio_1.c -o ejercicio_1
