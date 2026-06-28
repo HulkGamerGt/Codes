@@ -1,0 +1,109 @@
+=== Nodos (5 zonas x 10 ubicaciones) ===
+ID  Nombre                              Latitud       Longitud
+0   UCM - Campus Talca                  -35.428300    -71.653600   
+1   Plaza de Armas                      -35.426400    -71.655400   
+2   Catedral de Talca                   -35.426700    -71.655200   
+3   Museo OBrien                        -35.426700    -71.654100   
+4   Liceo Abate Molina                  -35.428000    -71.656000   
+5   Centro Comercial Centro             -35.425800    -71.654800   
+6   Biblioteca Regional                 -35.427000    -71.653000   
+7   Mercado Central                     -35.425000    -71.657000   
+8   Casa de la Cultura                  -35.427500    -71.652000   
+9   Edificio Consistorial               -35.426200    -71.655800   
+10  Universidad de Talca                -35.396100    -71.664500   
+11  Parque Los Reyes                    -35.399000    -71.660000   
+12  Estadio Bicentenario                -35.415000    -71.665000   
+13  Villa Las Lilas                     -35.402000    -71.662000   
+14  Centro Deportivo Sur                -35.405000    -71.668000   
+15  Liceo Sur                           -35.400000    -71.670000   
+16  Plaza Sur                           -35.408000    -71.663000   
+17  Hospital Sur                        -35.407000    -71.659000   
+18  Feria Sur                           -35.404000    -71.671000   
+19  Colegio San Agustin                 -35.401000    -71.666000   
+20  Terminal de Buses                   -35.423300    -71.660200   
+21  Feria Modelo                        -35.422000    -71.665000   
+22  Estacion de Trenes                  -35.423300    -71.661000   
+23  Parque Norte                        -35.418000    -71.662000   
+24  Villa Norte                         -35.416000    -71.668000   
+25  Colegio Norte                       -35.420000    -71.666000   
+26  Cementerio Municipal                -35.415000    -71.660000   
+27  Plaza Norte                         -35.419000    -71.659000   
+28  Centro de Salud Norte               -35.421000    -71.664000   
+29  Av. San Miguel                      -35.415000    -71.650000   
+30  Mall Plaza Maule                    -35.407200    -71.639000   
+31  Costanera Centro                    -35.405500    -71.637800   
+32  Casino de Talca                     -35.410000    -71.642000   
+33  Parque Ibanez                       -35.431000    -71.648000   
+34  Hospital Regional                   -35.435000    -71.648900   
+35  Plaza Italia                        -35.427500    -71.650000   
+36  Colegio Oriente                     -35.415000    -71.645000   
+37  Villa Oriente                       -35.420000    -71.640000   
+38  Centro Medico Oriente               -35.423000    -71.644000   
+39  Parque OHiggins                     -35.431000    -71.644000   
+40  Cerro La Virgen                     -35.433000    -71.670000   
+41  Villa Poniente                      -35.429000    -71.675000   
+42  Colegio Poniente                    -35.435000    -71.672000   
+43  Parque Poniente                     -35.431000    -71.680000   
+44  Plaza Poniente                      -35.427000    -71.678000   
+45  Centro Comunitario                  -35.438000    -71.665000   
+46  Feria Poniente                      -35.425000    -71.682000   
+47  Estadio Fiscal                      -35.418900    -71.661200   
+48  Villa Don Bosco                     -35.440000    -71.670000   
+49  Camino a San Clemente               -35.450000    -71.610000   
+
+Nodo UCM (inicio y fin del recorrido): 0 - UCM - Campus Talca
+
+=== Mejor circuito encontrado (GRASP, 200 iteraciones, alpha=0.3) ===
+Orden de visita:
+   1. UCM - Campus Talca
+   2. Liceo Abate Molina
+   3. Catedral de Talca
+   4. Centro Deportivo Sur
+   5. Feria Sur
+   6. Liceo Sur
+   7. Parque Norte
+   8. Villa Norte
+   9. Colegio Norte
+  10. Centro de Salud Norte
+  11. Feria Modelo
+  12. Estacion de Trenes
+  13. Terminal de Buses
+  14. Parque Ibanez
+  15. Plaza Italia
+  16. Colegio Oriente
+  17. Parque Poniente
+  18. Villa Poniente
+  19. Cerro La Virgen
+  20. Colegio Poniente
+  21. Villa Don Bosco
+  22. Centro Comunitario
+  23. Camino a San Clemente
+  24. Estadio Fiscal
+  25. Plaza Poniente
+  26. Feria Poniente
+  27. Casino de Talca
+  28. Mall Plaza Maule
+  29. Costanera Centro
+  30. Villa Oriente
+  31. Centro Medico Oriente
+  32. Parque OHiggins
+  33. Hospital Regional
+  34. Plaza Norte
+  35. Av. San Miguel
+  36. Cementerio Municipal
+  37. Colegio San Agustin
+  38. Universidad de Talca
+  39. Parque Los Reyes
+  40. Villa Las Lilas
+  41. Hospital Sur
+  42. Plaza Sur
+  43. Estadio Bicentenario
+  44. Plaza de Armas
+  45. Edificio Consistorial
+  46. Mercado Central
+  47. Centro Comercial Centro
+  48. Museo OBrien
+  49. Biblioteca Regional
+  50. Casa de la Cultura
+  51. UCM - Campus Talca (retorno)
+Distancia total del circuito: 54.377 km
