@@ -1,0 +1,135 @@
+=================================================
+ EJERCICIO 2: PROBLEMA DEL VENDEDOR VIAJERO (TSP)
+ Bus de acercamiento UCM - 5 zonas de Talca
+=================================================
+
+Lista de nodos (id, nombre, lat, lon):
+  [ 0] UCM                            lat=-35.428300 lon=-71.653600
+  [ 1] Plaza de Armas                 lat=-35.426400 lon=-71.655400
+  [ 2] Catedral de Talca              lat=-35.426700 lon=-71.655200
+  [ 3] Museo OBrien                   lat=-35.426700 lon=-71.654100
+  [ 4] Liceo Abate Molina             lat=-35.428000 lon=-71.656000
+  [ 5] Centro Comercial Centro        lat=-35.425800 lon=-71.654800
+  [ 6] Biblioteca Publica             lat=-35.427100 lon=-71.653700
+  [ 7] Mercado Central                lat=-35.422500 lon=-71.660500
+  [ 8] Casa de la Cultura             lat=-35.426200 lon=-71.655000
+  [ 9] Edificio Consistorial          lat=-35.426600 lon=-71.655600
+  [10] Universidad de Talca           lat=-35.396100 lon=-71.664500
+  [11] Parque Los Reyes               lat=-35.440000 lon=-71.658000
+  [12] Estadio Bicentenario           lat=-35.415000 lon=-71.665000
+  [13] Villa Las Lilas                lat=-35.442000 lon=-71.660000
+  [14] Centro Deportivo Sur           lat=-35.438000 lon=-71.662000
+  [15] Liceo Sur                      lat=-35.436000 lon=-71.656000
+  [16] Plaza Sur                      lat=-35.441000 lon=-71.659000
+  [17] Hospital Sur                   lat=-35.443000 lon=-71.661000
+  [18] Feria Sur                      lat=-35.439500 lon=-71.663000
+  [19] Colegio San Agustin            lat=-35.437000 lon=-71.657000
+  [20] Terminal de Buses              lat=-35.423300 lon=-71.660200
+  [21] Feria Modelo                   lat=-35.422000 lon=-71.665000
+  [22] Estacion de Trenes             lat=-35.423300 lon=-71.661000
+  [23] Parque Norte                   lat=-35.410000 lon=-71.662000
+  [24] Villa Norte                    lat=-35.412000 lon=-71.664000
+  [25] Colegio Norte                  lat=-35.414000 lon=-71.660000
+  [26] Cementerio Parque              lat=-35.440000 lon=-71.630000
+  [27] Plaza Norte                    lat=-35.411000 lon=-71.663000
+  [28] Centro de Salud Norte          lat=-35.416000 lon=-71.658000
+  [29] Av. San Miguel                 lat=-35.415000 lon=-71.650000
+  [30] Mall Plaza Maule               lat=-35.407200 lon=-71.639000
+  [31] Costanera Centro               lat=-35.405500 lon=-71.637800
+  [32] Casino de Talca                lat=-35.410000 lon=-71.642000
+  [33] Parque Ibanez                  lat=-35.431000 lon=-71.648000
+  [34] Hospital Regional              lat=-35.435000 lon=-71.648900
+  [35] Plaza Italia                   lat=-35.427500 lon=-71.650000
+  [36] Colegio Oriente                lat=-35.429000 lon=-71.644000
+  [37] Villa Oriente                  lat=-35.426000 lon=-71.641000
+  [38] Centro Medico Oriente          lat=-35.432000 lon=-71.646000
+  [39] Parque OHiggins                lat=-35.431000 lon=-71.644000
+  [40] Cerro La Virgen                lat=-35.433000 lon=-71.670000
+  [41] Villa Poniente                 lat=-35.430000 lon=-71.668000
+  [42] Colegio Poniente               lat=-35.427000 lon=-71.666000
+  [43] Parque Poniente                lat=-35.425000 lon=-71.669000
+  [44] Plaza Poniente                 lat=-35.424000 lon=-71.671000
+  [45] Centro Comunitario Poniente    lat=-35.426000 lon=-71.665000
+  [46] Feria Poniente                 lat=-35.421000 lon=-71.667000
+  [47] Estadio Fiscal                 lat=-35.418900 lon=-71.661200
+  [48] Villa Don Bosco                lat=-35.422000 lon=-71.664000
+  [49] Camino a San Clemente          lat=-35.450000 lon=-71.610000
+
+Nodo UCM: id=0, nombre=UCM, lat=-35.428300, lon=-71.653600
+
+=================================================
+ PRUEBA 1: GRASP con alpha = 0.3, 200 iteraciones
+=================================================
+
+--- Circuito GRASP (TSP) ---
+   1. UCM
+   2. Liceo Sur
+   3. Colegio San Agustin
+   4. Parque Los Reyes
+   5. Plaza Sur
+   6. Villa Las Lilas
+   7. Hospital Sur
+   8. Feria Sur
+   9. Centro Deportivo Sur
+  10. Estadio Bicentenario
+  11. Estadio Fiscal
+  12. Camino a San Clemente
+  13. Cerro La Virgen
+  14. Villa Poniente
+  15. Colegio Poniente
+  16. Centro Comunitario Poniente
+  17. Parque Poniente
+  18. Plaza Poniente
+  19. Feria Poniente
+  20. Villa Don Bosco
+  21. Universidad de Talca
+  22. Biblioteca Publica
+  23. Museo OBrien
+  24. Casa de la Cultura
+  25. Plaza de Armas
+  26. Edificio Consistorial
+  27. Catedral de Talca
+  28. Av. San Miguel
+  29. Cementerio Parque
+  30. Terminal de Buses
+  31. Estacion de Trenes
+  32. Feria Modelo
+  33. Centro de Salud Norte
+  34. Colegio Norte
+  35. Villa Norte
+  36. Plaza Norte
+  37. Parque Norte
+  38. Parque Ibanez
+  39. Plaza Italia
+  40. Hospital Regional
+  41. Centro Medico Oriente
+  42. Parque OHiggins
+  43. Colegio Oriente
+  44. Villa Oriente
+  45. Casino de Talca
+  46. Costanera Centro
+  47. Mall Plaza Maule
+  48. Centro Comercial Centro
+  49. Mercado Central
+  50. Liceo Abate Molina
+  51. UCM (retorno)
+Distancia total del circuito: 56.2558 km
+
+=================================================
+ PRUEBA 2: Comparacion de alpha (0.0, 0.3, 0.7, 1.0), 200 iteraciones c/u
+=================================================
+  alpha = 0.0 -> distancia total = 57.2978 km
+  alpha = 0.3 -> distancia total = 56.2558 km
+  alpha = 0.7 -> distancia total = 56.2558 km
+  alpha = 1.0 -> distancia total = 56.2558 km
+
+  Mejor resultado: alpha = 0.3, con distancia total = 56.2558 km
+  Se observa que valores de alpha bajos (cercanos a 0) tienden a
+  favorecer un comportamiento mas voraz durante la construccion,
+  concentrando la busqueda en las opciones mas prometedoras desde
+  el inicio, lo que en general conduce a mejores resultados para
+  este tipo de instancia del problema.
+
+=================================================
+ FIN DE LA EJECUCION - EJERCICIO 2
+=================================================

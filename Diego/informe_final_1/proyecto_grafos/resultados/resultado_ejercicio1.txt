@@ -1,0 +1,164 @@
+=================================================
+ EJERCICIO 1: ARBOL DE EXPANSION MINIMA (MST)
+ 25 Puntos de Interes de Talca, Chile
+=================================================
+
+Lista de nodos (id, nombre, lat, lon):
+  [ 0] Plaza de Armas                 lat=-35.426400 lon=-71.655400
+  [ 1] Universidad Catolica del Maule lat=-35.428300 lon=-71.653600
+  [ 2] Universidad de Talca           lat=-35.396100 lon=-71.664500
+  [ 3] Terminal de Buses              lat=-35.423300 lon=-71.660200
+  [ 4] Hospital Regional              lat=-35.435000 lon=-71.648900
+  [ 5] Mall Plaza Maule               lat=-35.407200 lon=-71.639000
+  [ 6] Estadio Fiscal                 lat=-35.418900 lon=-71.661200
+  [ 7] Parque Ibanez                  lat=-35.431000 lon=-71.648000
+  [ 8] Estacion de Trenes             lat=-35.423300 lon=-71.661000
+  [ 9] Museo OBrien                   lat=-35.426700 lon=-71.654100
+  [10] Costanera Centro               lat=-35.405500 lon=-71.637800
+  [11] Liceo Abate Molina             lat=-35.428000 lon=-71.656000
+  [12] Catedral de Talca              lat=-35.426700 lon=-71.655200
+  [13] Av. San Miguel                 lat=-35.415000 lon=-71.650000
+  [14] Feria Modelo                   lat=-35.422000 lon=-71.665000
+  [15] Centro Historico               lat=-35.426000 lon=-71.654500
+  [16] Parque OHiggins                lat=-35.431000 lon=-71.644000
+  [17] Villa Cultural Huilquilemu     lat=-35.469000 lon=-71.555000
+  [18] Cementerio Parque              lat=-35.440000 lon=-71.630000
+  [19] Casino de Talca                lat=-35.410000 lon=-71.642000
+  [20] Cerro La Virgen                lat=-35.433000 lon=-71.670000
+  [21] Plaza Italia                   lat=-35.427500 lon=-71.650000
+  [22] Estadio Bicentenario           lat=-35.415000 lon=-71.665000
+  [23] Aerodromo                      lat=-35.395000 lon=-71.690000
+  [24] Camino a San Clemente          lat=-35.450000 lon=-71.610000
+
+Matriz de adyacencia:
+   -1.00    0.27    3.47    0.56    1.12    2.60    0.99    0.84    0.61    0.12    2.82    0.19    0.04    1.36    1.00    0.09    1.15   10.26    2.75    2.19    1.51    0.50    1.54    4.69    4.88
+    0.27   -1.00    3.72    0.82    0.86    2.69    1.25    0.59    0.87    0.18    2.91    0.22    0.23    1.51    1.25    0.27    0.92   10.02    2.50    2.29    1.58    0.34    1.80    4.96    4.63
+    3.47    3.72   -1.00    3.05    4.55    2.62    2.55    4.16    3.04    3.53    2.64    3.63    3.51    2.48    2.88    3.45    4.30   12.82    5.80    2.56    4.13    3.73    2.10    2.32    7.77
+    0.56    0.82    3.05   -1.00    1.66    2.63    0.50    1.40    0.07    0.67    2.84    0.65    0.59    1.31    0.46    0.60    1.70   10.80    3.31    2.22    1.40    1.04    1.02    4.15    5.43
+    1.12    0.86    4.55    1.66   -1.00    3.22    2.11    0.45    1.70    1.04    3.43    1.01    1.09    2.23    2.05    1.12    0.63    9.31    1.80    2.85    1.93    0.84    2.66    5.80    3.90
+    2.60    2.69    2.62    2.63    3.22   -1.00    2.40    2.77    2.68    2.56    0.22    2.78    2.62    1.32    2.87    2.52    2.69   10.26    3.74    0.41    4.02    2.47    2.51    4.82    5.44
+    0.99    1.25    2.55    0.50    2.11    2.40   -1.00    1.80    0.49    1.08    2.59    1.12    1.02    1.10    0.49    1.00    2.06   11.12    3.67    2.00    1.76    1.39    0.55    3.73    5.79
+    0.84    0.59    4.16    1.40    0.45    2.77    1.80   -1.00    1.46    0.73    2.98    0.80    0.81    1.79    1.84    0.81    0.36    9.43    1.91    2.40    2.01    0.43    2.35    5.53    4.04
+    0.61    0.87    3.04    0.07    1.70    2.68    0.49    1.46   -1.00    0.73    2.89    0.69    0.65    1.36    0.39    0.66    1.76   10.87    3.37    2.27    1.35    1.10    0.99    4.10    5.49
+    0.12    0.18    3.53    0.67    1.04    2.56    1.08    0.73    0.73   -1.00    2.78    0.22    0.10    1.35    1.12    0.09    1.03   10.14    2.64    2.16    1.60    0.38    1.63    4.80    4.76
+    2.82    2.91    2.64    2.84    3.43    0.22    2.59    2.98    2.89    2.78   -1.00    3.00    2.84    1.53    3.07    2.74    2.89   10.30    3.90    0.63    4.23    2.69    2.68    4.87    5.55
+    0.19    0.22    3.63    0.65    1.01    2.78    1.12    0.80    0.69    0.22    3.00   -1.00    0.16    1.54    1.05    0.26    1.14   10.22    2.71    2.37    1.39    0.55    1.66    4.79    4.83
+    0.04    0.23    3.51    0.59    1.09    2.62    1.02    0.81    0.65    0.10    2.84    0.16   -1.00    1.38    1.03    0.10    1.12   10.23    2.72    2.21    1.51    0.48    1.58    4.73    4.85
+    1.36    1.51    2.48    1.31    2.23    1.32    1.10    1.79    1.36    1.35    1.53    1.54    1.38   -1.00    1.57    1.29    1.86   10.50    3.32    0.91    2.70    1.39    1.36    4.25    5.32
+    1.00    1.25    2.88    0.46    2.05    2.87    0.49    1.84    0.39    1.12    3.07    1.05    1.03    1.57   -1.00    1.05    2.15   11.26    3.75    2.48    1.30    1.49    0.78    3.76    5.88
+    0.09    0.27    3.45    0.60    1.12    2.52    1.00    0.81    0.66    0.09    2.74    0.26    0.10    1.29    1.05   -1.00    1.10   10.21    2.71    2.11    1.61    0.44    1.55    4.72    4.84
+    1.15    0.92    4.30    1.70    0.63    2.69    2.06    0.36    1.76    1.03    2.89    1.14    1.12    1.86    2.15    1.10   -1.00    9.10    1.62    2.34    2.37    0.67    2.61    5.78    3.74
+   10.26   10.02   12.82   10.80    9.31   10.26   11.12    9.43   10.87   10.14   10.30   10.22   10.23   10.50   11.26   10.21    9.10   -1.00    7.52   10.26   11.16    9.77   11.64   14.75    5.41
+    2.75    2.50    5.80    3.31    1.80    3.74    3.67    1.91    3.37    2.64    3.90    2.71    2.72    3.32    3.75    2.71    1.62    7.52   -1.00    3.51    3.71    2.28    4.22    7.39    2.13
+    2.19    2.29    2.56    2.22    2.85    0.41    2.00    2.40    2.27    2.16    0.63    2.37    2.21    0.91    2.48    2.11    2.34   10.26    3.51   -1.00    3.60    2.08    2.16    4.66    5.31
+    1.51    1.58    4.13    1.40    1.93    4.02    1.76    2.01    1.35    1.60    4.23    1.39    1.51    2.70    1.30    1.61    2.37   11.16    3.71    3.60   -1.00    1.91    2.05    4.60    5.76
+    0.50    0.34    3.73    1.04    0.84    2.47    1.39    0.43    1.10    0.38    2.69    0.55    0.48    1.39    1.49    0.44    0.67    9.77    2.28    2.08    1.91   -1.00    1.94    5.12    4.40
+    1.54    1.80    2.10    1.02    2.66    2.51    0.55    2.35    0.99    1.63    2.68    1.66    1.58    1.36    0.78    1.55    2.61   11.64    4.22    2.16    2.05    1.94   -1.00    3.18    6.32
+    4.69    4.96    2.32    4.15    5.80    4.82    3.73    5.53    4.10    4.80    4.87    4.79    4.73    4.25    3.76    4.72    5.78   14.75    7.39    4.66    4.60    5.12    3.18   -1.00    9.49
+    4.88    4.63    7.77    5.43    3.90    5.44    5.79    4.04    5.49    4.76    5.55    4.83    4.85    5.32    5.88    4.84    3.74    5.41    2.13    5.31    5.76    4.40    6.32    9.49   -1.00
+
+=================================================
+ PRUEBA 1: Prim vs Kruskal vs Boruvka (nodo inicial = 0)
+=================================================
+
+--- Arbol de Expansion Minima (Prim) ---
+  Plaza de Armas                 -- Catedral de Talca               peso=0.0380 km
+  Plaza de Armas                 -- Centro Historico                peso=0.0929 km
+  Centro Historico               -- Museo OBrien                    peso=0.0859 km
+  Catedral de Talca              -- Liceo Abate Molina              peso=0.1618 km
+  Museo OBrien                   -- Universidad Catolica del Maule  peso=0.1836 km
+  Universidad Catolica del Maule -- Plaza Italia                    peso=0.3382 km
+  Plaza Italia                   -- Parque Ibanez                   peso=0.4294 km
+  Parque Ibanez                  -- Parque OHiggins                 peso=0.3625 km
+  Parque Ibanez                  -- Hospital Regional               peso=0.4523 km
+  Plaza de Armas                 -- Terminal de Buses               peso=0.5551 km
+  Terminal de Buses              -- Estacion de Trenes              peso=0.0725 km
+  Estacion de Trenes             -- Feria Modelo                    peso=0.3903 km
+  Feria Modelo                   -- Estadio Fiscal                  peso=0.4874 km
+  Estadio Fiscal                 -- Estadio Bicentenario            peso=0.5539 km
+  Estadio Fiscal                 -- Av. San Miguel                  peso=1.1040 km
+  Av. San Miguel                 -- Casino de Talca                 peso=0.9139 km
+  Casino de Talca                -- Mall Plaza Maule                peso=0.4135 km
+  Mall Plaza Maule               -- Costanera Centro                peso=0.2181 km
+  Feria Modelo                   -- Cerro La Virgen                 peso=1.3047 km
+  Parque OHiggins                -- Cementerio Parque               peso=1.6161 km
+  Estadio Bicentenario           -- Universidad de Talca            peso=2.1027 km
+  Cementerio Parque              -- Camino a San Clemente           peso=2.1264 km
+  Universidad de Talca           -- Aerodromo                       peso=2.3153 km
+  Camino a San Clemente          -- Villa Cultural Huilquilemu      peso=5.4124 km
+Numero de aristas: 24
+Peso total del MST (Prim): 21.7309 km
+
+--- Arbol de Expansion Minima (Kruskal) ---
+  Plaza de Armas                 -- Catedral de Talca               peso=0.0380 km
+  Terminal de Buses              -- Estacion de Trenes              peso=0.0725 km
+  Museo OBrien                   -- Centro Historico                peso=0.0859 km
+  Plaza de Armas                 -- Centro Historico                peso=0.0929 km
+  Liceo Abate Molina             -- Catedral de Talca               peso=0.1618 km
+  Universidad Catolica del Maule -- Museo OBrien                    peso=0.1836 km
+  Mall Plaza Maule               -- Costanera Centro                peso=0.2181 km
+  Universidad Catolica del Maule -- Plaza Italia                    peso=0.3382 km
+  Parque Ibanez                  -- Parque OHiggins                 peso=0.3625 km
+  Estacion de Trenes             -- Feria Modelo                    peso=0.3903 km
+  Mall Plaza Maule               -- Casino de Talca                 peso=0.4135 km
+  Parque Ibanez                  -- Plaza Italia                    peso=0.4294 km
+  Hospital Regional              -- Parque Ibanez                   peso=0.4523 km
+  Estadio Fiscal                 -- Feria Modelo                    peso=0.4874 km
+  Estadio Fiscal                 -- Estadio Bicentenario            peso=0.5539 km
+  Plaza de Armas                 -- Terminal de Buses               peso=0.5551 km
+  Av. San Miguel                 -- Casino de Talca                 peso=0.9139 km
+  Estadio Fiscal                 -- Av. San Miguel                  peso=1.1040 km
+  Feria Modelo                   -- Cerro La Virgen                 peso=1.3047 km
+  Parque OHiggins                -- Cementerio Parque               peso=1.6161 km
+  Universidad de Talca           -- Estadio Bicentenario            peso=2.1027 km
+  Cementerio Parque              -- Camino a San Clemente           peso=2.1264 km
+  Universidad de Talca           -- Aerodromo                       peso=2.3153 km
+  Villa Cultural Huilquilemu     -- Camino a San Clemente           peso=5.4124 km
+Numero de aristas: 24
+Peso total del MST (Kruskal): 21.7309 km
+
+--- Arbol de Expansion Minima (Boruvka) ---
+  Plaza de Armas                 -- Catedral de Talca               peso=0.0380 km
+  Universidad Catolica del Maule -- Museo OBrien                    peso=0.1836 km
+  Universidad de Talca           -- Estadio Bicentenario            peso=2.1027 km
+  Terminal de Buses              -- Estacion de Trenes              peso=0.0725 km
+  Hospital Regional              -- Parque Ibanez                   peso=0.4523 km
+  Mall Plaza Maule               -- Costanera Centro                peso=0.2181 km
+  Estadio Fiscal                 -- Feria Modelo                    peso=0.4874 km
+  Liceo Abate Molina             -- Catedral de Talca               peso=0.1618 km
+  Av. San Miguel                 -- Casino de Talca                 peso=0.9139 km
+  Centro Historico               -- Museo OBrien                    peso=0.0859 km
+  Parque OHiggins                -- Parque Ibanez                   peso=0.3625 km
+  Villa Cultural Huilquilemu     -- Camino a San Clemente           peso=5.4124 km
+  Cementerio Parque              -- Parque OHiggins                 peso=1.6161 km
+  Cerro La Virgen                -- Feria Modelo                    peso=1.3047 km
+  Plaza Italia                   -- Universidad Catolica del Maule  peso=0.3382 km
+  Aerodromo                      -- Universidad de Talca            peso=2.3153 km
+  Plaza de Armas                 -- Centro Historico                peso=0.0929 km
+  Universidad de Talca           -- Estadio Fiscal                  peso=0.5539 km
+  Terminal de Buses              -- Feria Modelo                    peso=0.3903 km
+  Hospital Regional              -- Plaza Italia                    peso=0.4294 km
+  Mall Plaza Maule               -- Casino de Talca                 peso=0.4135 km
+  Villa Cultural Huilquilemu     -- Cementerio Parque               peso=2.1264 km
+  Plaza de Armas                 -- Terminal de Buses               peso=0.5551 km
+  Mall Plaza Maule               -- Estadio Fiscal                  peso=1.1040 km
+Numero de aristas: 24
+Peso total del MST (Boruvka): 21.7309 km
+
+--- Comparacion de pesos totales (Prim vs Kruskal vs Boruvka) ---
+  Prim:    21.7309 km
+  Kruskal: 21.7309 km
+  Boruvka: 21.7309 km
+  Diferencia maxima entre algoritmos: 0.000000 km
+
+=================================================
+ PRUEBA 2: Prim desde distintos nodos iniciales (0, 5, 12)
+=================================================
+  Peso total Prim (inicio en nodo  0 - Plaza de Armas): 21.7309 km
+  Peso total Prim (inicio en nodo  5 - Mall Plaza Maule): 21.7309 km
+  Peso total Prim (inicio en nodo 12 - Catedral de Talca): 21.7309 km
+  Diferencia maxima entre los 3 nodos de inicio: 0.000000 km
+
+=================================================
+ FIN DE LA EJECUCION - EJERCICIO 1
+=================================================
