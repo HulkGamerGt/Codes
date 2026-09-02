@@ -4,7 +4,7 @@
 int es_polindromo(char *cadena) {
     int longitud = strlen(cadena);
     for (int i = 0; i < longitud / 2; i++) {
-        if (cadena[i] != cadena[longitud - i - 1]) {
+        if (  cadena[longitud - i - 1]) {
             return 0;  
         }
     }

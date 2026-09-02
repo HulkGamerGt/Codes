@@ -7,9 +7,10 @@ data class Sol(val idSol: String, val hr: String, val asis: Int, val eqReq: Set<
 data class Asig(val idSol: String, val idSala: String, val hr: String)
 data class Rchz(val idSol: String, val mtv: String)
 
+// Estado acumulado del sistema: guarda la lista de asignaciones exitosas y las rechazadas
 data class Est(val asigs: List<Asig> = emptyList(), val rchzs: List<Rchz> = emptyList())
 
-fun main() {
+fun main(){ 
     val catSalas = listOf(
         Sala("S1", 30, setOf("Proyector", "Pizarra")),
         Sala("S2", 15, setOf("TV")),
@@ -19,7 +20,8 @@ fun main() {
     val flujoSols = listOf(
         Sol("Req1", "10:00", 20, setOf("Proyector")),
         Sol("Req2", "10:00", 10, setOf("TV")),
-        Sol("Req3", "10:00", 40, setOf("MacBook"))
+        Sol("Req3", "10:00", 40, setOf("MacBook")),
+        Sol("Req4", "10:00", 25, setOf("Proyector"))
     )
     
     val resFinal = procFlujo(flujoSols, catSalas)
@@ -32,33 +34,36 @@ fun main() {
 }
 
 fun procFlujo(sols: List<Sol>, cat: List<Sala>): Est {
-    // PUNTO 1 (Clausura): La clausura pasada a 'fold' captura 'cat' del entorno externo.
-    // Esto permite consultar el catálogo iterativamente sin depender de un estado nombrado global.
+    // Recorre la lista de solicitudes y acumula el resultado (asignaciones y rechazos) en cada paso
     return sols.fold(Est()) { estAct, solAct -> 
         
-        // PUNTO 2 (Clausura): La clausura en 'firstOrNull' captura 'solAct' y 'estAct'.
-        // Evalúa las restricciones inyectando el contexto actual sin mutar variables.
+        // Busca la primera sala del catálogo que cumpla requisitos de capacidad/equipamiento y esté desocupada
         val salaOpt = cat.firstOrNull { sl -> 
             cumpleReq(sl, solAct) && isDisp(sl, solAct.hr, estAct.asigs) 
         }
         
         if (salaOpt != null) {
+            // Si encontró sala idónea, la asigna y actualiza el estado
             val nvaAsig = Asig(solAct.idSol, salaOpt.id, solAct.hr)
             Est(estAct.asigs + nvaAsig, estAct.rchzs)
         } else {
-            val nvoRchz = Rchz(solAct.idSol, "Capacidad o equipamiento insuficiente.")
+            // Si no hay sala, averigua el motivo exacto del rechazo y lo registra
+            val cumpleCapEq = cat.any { sl -> cumpleReq(sl, solAct) }
+            val motivo = if (cumpleCapEq) "Sala idónea ocupada en el horario ${solAct.hr}" 
+                         else "Capacidad o equipamiento insuficiente en catálogo"
+            
+            val nvoRchz = Rchz(solAct.idSol, motivo)
             Est(estAct.asigs, estAct.rchzs + nvoRchz)
         }
     }
 }
 
 fun cumpleReq(sl: Sala, sol: Sol): Boolean {
-    // PUNTO 3 (Clausura): La clausura en 'all' captura 'sl.eq'.
-    // Aísla la verificación de subconjuntos manteniendo la pureza y determinismo de la función.
+    // Comprueba si la capacidad alcanza y si la sala tiene todos los equipos pedidos
     return sl.cap >= sol.asis && sol.eqReq.all { req -> sl.eq.contains(req) }
 }
 
 fun isDisp(sl: Sala, hr: String, asigs: List<Asig>): Boolean {
-    // Verifica disponibilidad filtrando colisiones de horario.
+    // Confirma que no exista ya una asignación previa para esta sala en el mismo horario
     return asigs.none { asig -> asig.idSala == sl.id && asig.hr == hr }
 }
